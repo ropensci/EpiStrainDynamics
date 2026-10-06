@@ -49,10 +49,10 @@ data {
   int num_knots;            // num of knots
   vector[num_knots] knots;  // the sequence of knots
   int spline_degree;        // the degree of spline (is equal to order - 1)
-  int Y[num_data];
-  real X[num_data];
+  array[num_data] int Y;
+  array[num_data] real X;
   int week_effect;          // Number of days in day of week effect? 1=none, 2=weekends?, 7=all days
-  int DOW[num_data];        // integer of day of the week
+  array[num_data] int DOW;        // integer of day of the week
   
   int phi_priors_provided;      // 1=priors not provided, 2=priors provided
   real<lower=0> phi_mean;

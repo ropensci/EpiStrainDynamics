@@ -13,9 +13,9 @@
 
 data {
   int num_data;              // number of data points
-  int Y[num_data];           // daily number of 'cases'
+  array[num_data] int Y;           // daily number of 'cases'
   int week_effect;          // Number of days in day of week effect? 1=none, 2=weekends?, 7=all days
-  int DOW[num_data];        // integer of day of the week
+  array[num_data] int DOW;        // integer of day of the week
 
   int phi_priors_provided;      // 1=priors not provided, 2=priors provided
   real<lower=0> phi_mean;

@@ -50,22 +50,22 @@ data {
   int num_path;
   vector[num_knots] knots;  // the sequence of knots
   int spline_degree;        // the degree of spline (is equal to order - 1)
-  int Y[num_data];
-  int P1[num_path-1, num_data];       // daily number of lab tests positive for influenza A (1st entry) and all other pathogens
-  int P2[2, num_data];                // daily number of influenza A H3N2, and influenza A H1N1
-  real X[num_data];
+  array[num_data] int Y;
+  array[num_path-1, num_data] int P1;       // daily number of lab tests positive for influenza A (1st entry) and all other pathogens
+  array[2, num_data] int P2;                // daily number of influenza A H3N2, and influenza A H1N1
+  array[num_data] real X;
   int week_effect;          // Number of days in day of week effect? 1=none, 2=weekends?, 7=all days
-  int DOW[num_data];        // integer of day of the week
+  array[num_data] int DOW;        // integer of day of the week
   int<lower = 0, upper = 2> cov_structure; //0 is tau[1], 1 is tau[num_path], 2 is Sigma[num_path, num_path]
   int<lower = 0, upper = 1> noise_structure; //0 is only includes observation noise (same between pathogens), 1 includes noise in individual pathogens as well
 
   int phi_priors_provided;      // 1=priors not provided, 2=priors provided
   real<lower=0> phi_mean;
   real<lower=0> phi_sd;
-  
+
   int tau_priors_provided;      // 1=priors not provided, 2=priors provided
-  real<lower=0> tau_mean[cov_structure==0 ? 1: cov_structure==1? num_path: 0 ];
-  real<lower=0> tau_sd[cov_structure==0 ? 1: cov_structure==1? num_path: 0 ];
+  array[cov_structure==0 ? 1: cov_structure==1? num_path: 0] real<lower=0> tau_mean;
+  array[cov_structure==0 ? 1: cov_structure==1? num_path: 0] real<lower=0> tau_sd;
 }
 
 transformed data {
@@ -96,11 +96,11 @@ parameters {
   matrix[num_path, num_basis] a;
 
   matrix<lower=0>[cols,rows] c_new;
-  real<lower=0> eta[noise_structure==1 ? 1: 0 ];
+  array[noise_structure==1 ? 1: 0] real<lower=0> eta;
 
   real<lower=0> phi;
 
-  real<lower=0> tau[cov_structure==0 ? 1: cov_structure==1? num_path: 0 ];
+  array[cov_structure==0 ? 1: cov_structure==1? num_path: 0] real<lower=0> tau;
 
   cov_matrix[cov_structure==2? num_path: 0] Sigma;
 
@@ -148,7 +148,7 @@ model {
   // Proportion of each pathogen (influenza A, and others) is multinomially distributed
   // Proportion of influenza A H3N2 and influenza A H1N1 is multinomially distributed
 
-  real total_ILI[num_data];
+  array[num_data] real total_ILI;
   real total_A;
   vector[num_path-1] theta;
 
