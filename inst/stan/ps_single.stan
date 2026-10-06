@@ -14,8 +14,8 @@
 
 
 functions {
-  vector build_b_spline(real[] t, real[] ext_knots, int ind, int order);
-  vector build_b_spline(real[] t, real[] ext_knots, int ind, int order) {
+  vector build_b_spline(array[] real t, array[] real ext_knots, int ind, int order);
+  vector build_b_spline(array[] real t, array[] real ext_knots, int ind, int order) {
     // INPUTS:
       //    t:          the points at which the b_spline is calculated
     //    ext_knots:  the set of extended knots
