@@ -63,8 +63,7 @@ C++).
 
 Alternatively, thanks to
 [R-universe](https://ropensci.r-universe.dev/EpiStrainDynamics), you can
-install a pre-built binary without needing to configure a C++
-toolchain:
+install a pre-built binary without needing to configure a C++ toolchain:
 
 ``` r
 install.packages("EpiStrainDynamics", repos = c('https://ropensci.r-universe.dev', 'https://cloud.r-project.org'))
@@ -104,13 +103,13 @@ data. The `multiple()` pathogen structure allows modelling of different
 component pathogens. In addition to specifying the dataset, total case
 data, and time, the additional pathogens are specified as a vector of
 column names. The `subtyped()` pathogen structure enables additional
-complexity for a scenario where the user has a combined, unsubtyped
-pathogen timeseries alongside data on some of the underlying subtypes —
-most commonly an influenza modelling scenario with testing data for
-different influenza A subtypes. The user specifies columns containing
-the unsubtyped case count as well as the subtyped cases, and any
-additional pathogens to be modelled. See the vignette for further
-detail.
+complexity for a scenario where the user has a total timeseries for a
+parent pathogen alongside data on some of its underlying subtypes — most
+commonly an influenza modelling scenario with testing data for different
+influenza A subtypes. The user specifies columns containing the total
+case count for the parent pathogen, including cases that were
+subsequently subtyped, as well as the subtyped cases, and any additional
+pathogens to be modelled. See the vignette for further detail.
 
 Each of these functions returns a pathogen structure object, which is
 then passed into `construct_model()` in Phase 2.
@@ -286,9 +285,8 @@ cases and improvements are especially welcome.
 ## Code of Conduct
 
 Please note that the `EpiStrainDynamics` project is released with a
-[Contributor Code of
-Conduct](https://ropensci.org/code-of-conduct/).
-By contributing to this project, you agree to abide by its terms.
+[Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By
+contributing to this project, you agree to abide by its terms.
 
 ## Support
 
