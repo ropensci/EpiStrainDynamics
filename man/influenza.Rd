@@ -9,13 +9,18 @@
 
 A data frame with 426 rows and 7 columns:
 \describe{
-\item{ili}{Integer, daily total number of cases of influenza-like illness}
-\item{week}{Date, between 1 January 2012 to week starting 1 March 2020}
-\item{inf_A}{Integer, daily number of cases of unsubtyped influenza A}
-\item{inf_B}{Integer, daily number of cases of influenza B}
-\item{inf_H3N2}{Integer, daily number of cases of influenza A subtype H3N2}
-\item{inf_H1N1}{Integer, daily number of cases of influenza A subtype H1N1}
-\item{other}{Integer, number of cases of unspecified influenza-like illness}
+\item{ili}{Integer, weekly number of cases of influenza-like illness}
+\item{week}{Date, start of the week, from 2 January 2012 to 24 February 2020}
+\item{inf_A}{Integer, weekly number of specimens positive for influenza
+A, including those subsequently subtyped as H3N2 or H1N1}
+\item{inf_B}{Integer, weekly number of specimens positive for influenza B}
+\item{inf_H3N2}{Integer, weekly number of specimens positive for
+influenza A subtype H3N2}
+\item{inf_H1N1}{Integer, weekly number of specimens positive for
+influenza A subtype H1N1}
+\item{other}{Integer, weekly number of specimens tested that were not
+positive for influenza, calculated as the number of specimens tested
+minus the number positive for influenza A or B}
 }
 }
 }
@@ -27,14 +32,18 @@ influenza
 }
 \description{
 Influenza-like illness data were retrieved from the World Health
-Organization’s Global Influenza Programme. We collated weekly data for
-Australia from the week starting January 2, 2012 to the week starting
-December 25, 2023 inclusive. The data described: (1) the weekly number
-of cases of influenza-like illness; and (2) the weekly number of specimens
-positive for influenza by subtype. We grouped the influenza specimens into:
-influenza A subtype not determined; influenza A H3N2; influenza A H1N1
-(influenza A H1N1, influenza A H1N1pdm09); influenza B (influenza B Yamagata,
-influenza B Victoria, influenza B lineage not determined); and other (unknown
-causes which we do not have data to determine).
+Organization’s Global Influenza Programme for Australia, and subset to the
+weeks starting January 2, 2012 to February 24, 2020, before the COVID-19
+pandemic disrupted influenza transmission and surveillance. The data
+described: (1) the weekly number of cases of influenza-like illness; and
+(2) the weekly number of laboratory specimens tested, and of those positive
+for influenza by type and subtype. The specimen counts come from laboratory
+surveillance separate from the influenza-like illness counts, and are not
+a subset of them. We grouped the specimens into: influenza A (all
+influenza A positives, whether or not subtyped), of which some were
+subtyped as influenza A H3N2 or influenza A H1N1 (influenza A H1N1,
+influenza A H1N1pdm09); influenza B (influenza B Yamagata, influenza B
+Victoria, influenza B lineage not determined); and other (specimens
+tested that were not positive for influenza).
 }
 \keyword{datasets}
