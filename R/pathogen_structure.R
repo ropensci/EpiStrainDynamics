@@ -258,6 +258,11 @@ subtyped <- function(data,
   #' @srrstats {G2.13, G2.14, G2.14a} check for missing data, error if found
   #' @srrstats {G2.15, BS3.0} Data prep does not assume non-missingness
   validated_tsbl <- create_validated_timeseries(data, ts_cols, time)
+
+  #' @srrstats {BS2.15} checks that the subtyped counts are a subset of the
+  #'   parent total, and provides an informative error message if not
+  validate_parent_timeseries(validated_tsbl, parent_timeseries, subtyped_timeseries)
+
   colnames(validated_tsbl)[colnames(validated_tsbl) == case_timeseries] <-
     "case_timeseries"
 

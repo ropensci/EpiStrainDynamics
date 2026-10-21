@@ -246,12 +246,14 @@ create_subtyped_test_data <- function(class_type = "data.frame") {
   df <- data.frame(
     date = seq.Date(as.Date("2020-01-01"), by = "day", length.out = 100),
     cases = rpois(100, lambda = 50),
-    inf_A = rpois(100, lambda = 20),
     inf_H1N1 = rpois(100, lambda = 10),
     inf_H3N2 = rpois(100, lambda = 8),
     inf_B = rpois(100, lambda = 15),
     other = rpois(100, lambda = 5)
   )
+  # Parent total covers the subtyped counts plus some unsubtyped cases
+  df$inf_A <- df$inf_H1N1 + df$inf_H3N2 + rpois(100, lambda = 2)
+  df <- df[, c("date", "cases", "inf_A", "inf_H1N1", "inf_H3N2", "inf_B", "other")]
 
   # Convert to requested class type
   switch(class_type,

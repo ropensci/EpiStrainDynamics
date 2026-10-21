@@ -282,6 +282,54 @@ test_that("subtyped() validates column existence and types", {
   )
 })
 
+test_that("subtyped() requires parent total to cover the subtyped counts", {
+  check_package_data()
+
+  # Parent total covers the subtypes at every time point
+  expect_no_error(
+    subtyped(
+      data = influenza,
+      case_timeseries = "ili",
+      time = "week",
+      parent_timeseries = "inf_A",
+      subtyped_timeseries = c("inf_H3N2", "inf_H1N1"),
+      other_pathogen_timeseries = c("inf_B", "other")
+    )
+  )
+
+  # Parent total smaller than the subtypes at one time point
+  test_influenza <- influenza
+  test_influenza$inf_A[10] <- test_influenza$inf_H3N2[10] +
+    test_influenza$inf_H1N1[10] - 1
+  expect_error(
+    subtyped(
+      data = test_influenza,
+      case_timeseries = "ili",
+      time = "week",
+      parent_timeseries = "inf_A",
+      subtyped_timeseries = c("inf_H3N2", "inf_H1N1"),
+      other_pathogen_timeseries = c("inf_B", "other")
+    ),
+    "must be at least the sum of .*subtyped_timeseries.* at every time point"
+  )
+
+  # Only the unsubtyped cases passed as the parent
+  test_influenza <- influenza
+  test_influenza$inf_A_unsubtyped <- influenza$inf_A -
+    influenza$inf_H3N2 - influenza$inf_H1N1
+  expect_error(
+    subtyped(
+      data = test_influenza,
+      case_timeseries = "ili",
+      time = "week",
+      parent_timeseries = "inf_A_unsubtyped",
+      subtyped_timeseries = c("inf_H3N2", "inf_H1N1"),
+      other_pathogen_timeseries = c("inf_B", "other")
+    ),
+    "must be at least the sum of .*subtyped_timeseries.* at every time point"
+  )
+})
+
 # Tests for missing data handling
 test_that("all pathogen structure functions handle missing data", {
   check_package_data()
