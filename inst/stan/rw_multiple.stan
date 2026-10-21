@@ -14,20 +14,20 @@
 data {
   int num_data;                       // number of data points
   int num_path;                       // number of pathogens
-  int Y[num_data];                    // daily number of 'cases'
-  int P[num_path, num_data];       // daily number of lab tests positive for influenza A (1st entry) and all other pathogens
+  array[num_data] int Y;                    // daily number of 'cases'
+  array[num_path, num_data] int P;       // daily number of lab tests positive for influenza A (1st entry) and all other pathogens
   int week_effect;          // Number of days in day of week effect? 1=none, 2=weekends?, 7=all days
-  int DOW[num_data];        // integer of day of the week
+  array[num_data] int DOW;        // integer of day of the week
   int<lower = 0, upper = 2> cov_structure; //0 is tau[1], 1 is tau[num_path], 2 is Sigma[num_path, num_path]
   int<lower = 0, upper = 1> noise_structure; //0 is only includes observation noise (same between pathogens), 1 includes noise in individual pathogens as well
 
   int phi_priors_provided;      // 1=priors not provided, 2=priors provided
   real<lower=0> phi_mean;
   real<lower=0> phi_sd;
-  
+
   int tau_priors_provided;      // 1=priors not provided, 2=priors provided
-  real<lower=0> tau_mean[cov_structure==0 ? 1: cov_structure==1? num_path: 0 ];
-  real<lower=0> tau_sd[cov_structure==0 ? 1: cov_structure==1? num_path: 0 ];
+  array[cov_structure==0 ? 1: cov_structure==1? num_path: 0] real<lower=0> tau_mean;
+  array[cov_structure==0 ? 1: cov_structure==1? num_path: 0] real<lower=0> tau_sd;
 }
 
 transformed data {
@@ -49,11 +49,11 @@ parameters {
   matrix[num_path, num_data] a;
 
   matrix<lower=0>[cols,rows] c;
-  real<lower=0> eta[noise_structure==1 ? 1: 0 ];
+  array[noise_structure==1 ? 1: 0] real<lower=0> eta;
 
   real<lower=0> phi;
 
-  real<lower=0> tau[cov_structure==0 ? 1: cov_structure==1? num_path: 0 ];
+  array[cov_structure==0 ? 1: cov_structure==1? num_path: 0] real<lower=0> tau;
   cov_matrix[cov_structure==2? num_path: 0] Sigma;
 
   simplex[week_effect] day_of_week_simplex;
@@ -92,7 +92,7 @@ model {
   //// Likelihood
   // This assumes there is some noise in the number of symptomatic cases for each pathogen individually (with shared parameter eta)
 
-  real total_ILI[num_data];
+  array[num_data] real total_ILI;
 
   if(noise_structure==1){
     for(i in 1:num_path){
