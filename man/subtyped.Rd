@@ -7,7 +7,7 @@
 subtyped(
   data,
   case_timeseries,
-  unsubtyped_timeseries,
+  parent_timeseries,
   subtyped_timeseries,
   other_pathogen_timeseries,
   time = NULL
@@ -20,13 +20,16 @@ series object (ts, xts, zoo, tsibble, etc.)}
 \item{case_timeseries}{Column name containing case counts. Must be numeric
 or a \code{units} object from the \pkg{units} package.}
 
-\item{unsubtyped_timeseries}{vector of column names with additional
-unsubtyped pathogen case count timeseries. Must be numeric or a
+\item{parent_timeseries}{column name with the total case count timeseries
+for the parent pathogen (e.g. all influenza A positives), including
+cases that were subsequently subtyped. Must be numeric or a
 \code{units} object from the \pkg{units} package.}
 
-\item{subtyped_timeseries}{vector of column names with additional
-subtyped pathogen case count timeseries. Must be numeric or a
-\code{units} object from the \pkg{units} package.}
+\item{subtyped_timeseries}{vector of column names with case count
+timeseries for each subtype of the parent pathogen (e.g. influenza A
+H3N2 and H1N1). These are the subset of \code{parent_timeseries} cases that
+were subtyped. Must be numeric or a \code{units} object from the
+\pkg{units} package.}
 
 \item{other_pathogen_timeseries}{vector of column names with additional
 pathogen case count timeseries to model. Must be numeric or a \code{units}
@@ -50,7 +53,7 @@ Subtyped pathogen structure
 subtyped(
   data = influenza,
   case_timeseries = "ili",
-  unsubtyped_timeseries = "inf_A",
+  parent_timeseries = "inf_A",
   subtyped_timeseries = c("inf_H3N2", "inf_H1N1"),
   other_pathogen_timeseries = c("inf_B", "other"),
   time = "week"
@@ -65,7 +68,7 @@ influenza_xts <- xts::xts(
 subtyped(
   data = influenza_xts,
   case_timeseries = "ili",
-  unsubtyped_timeseries = "inf_A",
+  parent_timeseries = "inf_A",
   subtyped_timeseries = c("inf_H3N2", "inf_H1N1"),
   other_pathogen_timeseries = c("inf_B", "other")
 )

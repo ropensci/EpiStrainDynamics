@@ -320,7 +320,7 @@ test_that("subtyped() accepts data.frame-like objects with time argument", {
         data = test_data,
         case_timeseries = "cases",
         time = "date",
-        unsubtyped_timeseries = "inf_A",
+        parent_timeseries = "inf_A",
         subtyped_timeseries = c("inf_H1N1", "inf_H3N2"),
         other_pathogen_timeseries = c("inf_B", "other")
       )
@@ -337,7 +337,7 @@ test_that("subtyped() accepts time series objects with optional time arg", {
       subtyped(
         data = test_data,
         case_timeseries = "cases",
-        unsubtyped_timeseries = "inf_A",
+        parent_timeseries = "inf_A",
         subtyped_timeseries = c("inf_H1N1", "inf_H3N2"),
         other_pathogen_timeseries = c("inf_B", "other")
       )
@@ -354,7 +354,7 @@ test_that("subtyped() requires time argument for data.frame-like objects", {
       subtyped(
         data = test_data,
         case_timeseries = "cases",
-        unsubtyped_timeseries = "inf_A",
+        parent_timeseries = "inf_A",
         subtyped_timeseries = c("inf_H1N1", "inf_H3N2"),
         other_pathogen_timeseries = c("inf_B", "other")
       ),
@@ -370,7 +370,7 @@ test_that("subtyped() returns expected structure with all classes", {
     data = test_df,
     case_timeseries = "cases",
     time = "date",
-    unsubtyped_timeseries = "inf_A",
+    parent_timeseries = "inf_A",
     subtyped_timeseries = c("inf_H1N1", "inf_H3N2"),
     other_pathogen_timeseries = c("inf_B", "other")
   )
@@ -393,7 +393,7 @@ test_that("subtyped() returns expected structure with all classes", {
     result_xts <- subtyped(
       data = test_xts,
       case_timeseries = "cases",
-      unsubtyped_timeseries = "inf_A",
+      parent_timeseries = "inf_A",
       subtyped_timeseries = c("inf_H1N1", "inf_H3N2"),
       other_pathogen_timeseries = c("inf_B", "other")
     )
