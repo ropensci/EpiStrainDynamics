@@ -17,3 +17,6 @@ paper.md
 ^Meta$
 ^\.positai$
 ^\.claude$
+^inst/testfixtures$
+^CLAUDE\.md$
+^\.claude-scratch$

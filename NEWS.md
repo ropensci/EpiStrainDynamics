@@ -10,13 +10,16 @@
   my_pathogen_structure)`) will need to swap the order of these two
   arguments; calls using named arguments are unaffected.
 * `subtyped()`'s `influenzaA_unsubtyped_timeseries` and
-  `influenzaA_subtyped_timeseries` arguments are now `unsubtyped_timeseries`
+  `influenzaA_subtyped_timeseries` arguments are now `parent_timeseries`
   and `subtyped_timeseries`. The `influenzaA_` prefix implied the structure
   only applied to influenza A subtypes, when it applies to any pathogen with
-  a combined, unsubtyped timeseries alongside partial subtype data —
-  influenza A is just the most common example (#73). Any code calling
-  `subtyped()` with these named arguments will need to update the argument
-  names.
+  a total timeseries for a parent pathogen alongside data on some of its
+  subtypes — influenza A is just the most common example (#73). The parent
+  argument is named `parent_timeseries` because it takes the total count
+  for the parent pathogen, covering both subtyped and unsubtyped cases; the
+  previous name suggested it took only the unsubtyped cases (#80). Any code
+  calling `subtyped()` with these named arguments will need to update the
+  argument names.
 
 ## Bug fixes
 
@@ -91,6 +94,10 @@
   spacing) via `styler`, dropped explicit `return()` on final statements,
   converted `sapply()` to `vapply()` for type-safe extraction, and removed
   genuine dead code flagged by unused-variable checks.
+* `subtyped()` now errors if `parent_timeseries` is smaller than the sum of
+  `subtyped_timeseries` at any time point, since the subtyped cases are a
+  subset of the parent total (#80). Previously such data was accepted and
+  would silently underestimate the parent pathogen.
 
 ## Documentation
 
@@ -112,6 +119,14 @@
   from-source instructions, and added citations to the README (#51, #57,
   #58, #59, #60).
 * Corrected documentation of both `sarscov2` and `influenza` datasets (#56).
+* Further corrected the `influenza` dataset documentation: `inf_A` is all
+  influenza A positives, including those subtyped; counts are weekly
+  rather than daily; the date range matches the data included (January
+  2012 to February 2020); the `inf_*` columns are described as positive
+  laboratory specimens; and `other` is described with how it is
+  calculated (#80).
+* The `subtyped()` documentation, vignette and README now describe
+  `parent_timeseries` as the total for the parent pathogen (#80).
 * Added explanations of "pathogen noise" and the day-of-week effect (#61), a
   link to the relevant timeseries class (#62), and a COVID-19 example (#63),
   to the vignette.

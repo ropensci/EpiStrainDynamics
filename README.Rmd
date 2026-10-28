@@ -83,8 +83,8 @@ These functions require the name of the dataset itself and the column names for 
 
 The `single()` pathogen structure is the simplest and models a single pathogen timeseries. The user must specify the dataset name, the name of the column with total case data, and the name of the column of time data.
 The `multiple()` pathogen structure allows modelling of different component pathogens. In addition to specifying the dataset, total case data, and time, the additional pathogens are specified as a vector of column names.
-The `subtyped()` pathogen structure enables additional complexity for a scenario where the user has a combined, unsubtyped pathogen timeseries alongside data on some of the underlying subtypes — most commonly an influenza modelling scenario with testing data for different influenza A subtypes.
-The user specifies columns containing the unsubtyped case count as well as the subtyped cases, and any additional pathogens to be modelled.
+The `subtyped()` pathogen structure enables additional complexity for a scenario where the user has a total timeseries for a parent pathogen alongside data on some of its underlying subtypes — most commonly an influenza modelling scenario with testing data for different influenza A subtypes.
+The user specifies columns containing the total case count for the parent pathogen, including cases that were subsequently subtyped, as well as the subtyped cases, and any additional pathogens to be modelled.
 See the vignette for further detail.
 
 Each of these functions returns a pathogen structure object, which is then passed into `construct_model()` in Phase 2.

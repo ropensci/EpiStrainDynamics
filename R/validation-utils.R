@@ -264,6 +264,39 @@ validate_pathogen_combination <- function(combination, pathogen_names, arg_name)
   invisible(NULL)
 }
 
+#' Validate Parent Timeseries Against Subtyped Timeseries
+#'
+#' Checks that the parent pathogen count is at least the sum of its subtyped
+#' counts at every time point, since the subtyped cases are a subset of the
+#' parent total.
+#'
+#' @param validated_tsbl validated tsibble from `create_validated_timeseries()`
+#' @param parent_timeseries column name of the parent pathogen total
+#' @param subtyped_timeseries column names of the subtyped counts
+#'
+#' @noRd
+#' @srrstats {G1.4} uses `Roxygen2` documentation
+#' @srrstats {G1.4a} internal function specified with `@noRd`
+#' @srrstats {G5.2a} every error statement is unique
+validate_parent_timeseries <- function(validated_tsbl,
+                                       parent_timeseries,
+                                       subtyped_timeseries) {
+  parent <- validated_tsbl[[parent_timeseries]]
+  subtyped_total <- rowSums(as.matrix(validated_tsbl[, subtyped_timeseries]))
+  bad <- which(parent < subtyped_total)
+
+  if (length(bad) > 0) {
+    times <- validated_tsbl[[tsibble::index_var(validated_tsbl)]][bad]
+    cli::cli_abort(c(
+      "{.arg parent_timeseries} must be at least the sum of {.arg subtyped_timeseries} at every time point",
+      "x" = "{.val {parent_timeseries}} is smaller than the sum of {.val {subtyped_timeseries}} at {length(bad)} time point{?s}, starting {.val {format(times[1])}}",
+      "i" = "{.arg parent_timeseries} should be the total count for the parent pathogen, covering both subtyped and unsubtyped cases"
+    ))
+  }
+
+  invisible(NULL)
+}
+
 # Helper: Validate column exists in data
 #' @noRd
 check_column_exists <- function(data, col_name) {

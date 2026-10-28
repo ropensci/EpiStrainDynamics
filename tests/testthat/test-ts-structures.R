@@ -246,12 +246,14 @@ create_subtyped_test_data <- function(class_type = "data.frame") {
   df <- data.frame(
     date = seq.Date(as.Date("2020-01-01"), by = "day", length.out = 100),
     cases = rpois(100, lambda = 50),
-    inf_A = rpois(100, lambda = 20),
     inf_H1N1 = rpois(100, lambda = 10),
     inf_H3N2 = rpois(100, lambda = 8),
     inf_B = rpois(100, lambda = 15),
     other = rpois(100, lambda = 5)
   )
+  # Parent total covers the subtyped counts plus some unsubtyped cases
+  df$inf_A <- df$inf_H1N1 + df$inf_H3N2 + rpois(100, lambda = 2)
+  df <- df[, c("date", "cases", "inf_A", "inf_H1N1", "inf_H3N2", "inf_B", "other")]
 
   # Convert to requested class type
   switch(class_type,
@@ -320,7 +322,7 @@ test_that("subtyped() accepts data.frame-like objects with time argument", {
         data = test_data,
         case_timeseries = "cases",
         time = "date",
-        unsubtyped_timeseries = "inf_A",
+        parent_timeseries = "inf_A",
         subtyped_timeseries = c("inf_H1N1", "inf_H3N2"),
         other_pathogen_timeseries = c("inf_B", "other")
       )
@@ -337,7 +339,7 @@ test_that("subtyped() accepts time series objects with optional time arg", {
       subtyped(
         data = test_data,
         case_timeseries = "cases",
-        unsubtyped_timeseries = "inf_A",
+        parent_timeseries = "inf_A",
         subtyped_timeseries = c("inf_H1N1", "inf_H3N2"),
         other_pathogen_timeseries = c("inf_B", "other")
       )
@@ -354,7 +356,7 @@ test_that("subtyped() requires time argument for data.frame-like objects", {
       subtyped(
         data = test_data,
         case_timeseries = "cases",
-        unsubtyped_timeseries = "inf_A",
+        parent_timeseries = "inf_A",
         subtyped_timeseries = c("inf_H1N1", "inf_H3N2"),
         other_pathogen_timeseries = c("inf_B", "other")
       ),
@@ -370,7 +372,7 @@ test_that("subtyped() returns expected structure with all classes", {
     data = test_df,
     case_timeseries = "cases",
     time = "date",
-    unsubtyped_timeseries = "inf_A",
+    parent_timeseries = "inf_A",
     subtyped_timeseries = c("inf_H1N1", "inf_H3N2"),
     other_pathogen_timeseries = c("inf_B", "other")
   )
@@ -393,7 +395,7 @@ test_that("subtyped() returns expected structure with all classes", {
     result_xts <- subtyped(
       data = test_xts,
       case_timeseries = "cases",
-      unsubtyped_timeseries = "inf_A",
+      parent_timeseries = "inf_A",
       subtyped_timeseries = c("inf_H1N1", "inf_H3N2"),
       other_pathogen_timeseries = c("inf_B", "other")
     )

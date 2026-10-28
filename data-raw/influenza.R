@@ -2,7 +2,8 @@
 ## Loading the influenza data
 df <- read.csv("data-raw/aus_influenza_data.csv")
 
-## Selecting subset of data (2012-2023)
+## Selecting subset of data (January 2012 to February 2020, before the
+## COVID-19 pandemic disrupted influenza transmission and surveillance)
 # Set limits on dates to consider
 min_date <- as.Date("2012-01-01")
 max_date <- as.Date("2020-03-01")
