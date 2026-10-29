@@ -92,9 +92,9 @@ transformed data {
 }
 
 parameters {
-  matrix[num_path, num_basis] a;
+  matrix[num_path, num_basis] b_spline_coef;
 
-  matrix<lower=0>[cols,rows] c_new;
+  matrix<lower=0>[cols,rows] noisy_incidence;
   array[noise_structure==1 ? 1: 0] real<lower=0> eta;
 
   real<lower=0> phi;
@@ -108,10 +108,10 @@ parameters {
 
 
 transformed parameters {
-  matrix[num_path, num_data] a_new;
+  matrix[num_path, num_data] log_incidence;
 
   for (i in 1:num_path)
-    a_new[i,] =  a[i,]*B;
+    log_incidence[i,] =  b_spline_coef[i,]*B;
 
 }
 
@@ -120,17 +120,17 @@ model {
   // Second-order random walk prior on b-spline coefficients
   if(cov_structure==2){
     for(i in 3:num_basis)
-      a[,i] ~ multi_normal(2*a[,(i-1)] - a[,(i-2)], Sigma);
+      b_spline_coef[,i] ~ multi_normal(2*b_spline_coef[,(i-1)] - b_spline_coef[,(i-2)], Sigma);
   }
 
   else if(cov_structure==1){
     for(i in 1:num_path)
-      a[i,3:num_basis] ~ normal(2*a[i,2:(num_basis-1)] - a[i,1:(num_basis-2)], tau[i]);
+      b_spline_coef[i,3:num_basis] ~ normal(2*b_spline_coef[i,2:(num_basis-1)] - b_spline_coef[i,1:(num_basis-2)], tau[i]);
   }
 
   else{
     for(i in 1:num_path)
-      a[i,3:num_basis] ~ normal(2*a[i,2:(num_basis-1)] - a[i,1:(num_basis-2)], tau[1]);
+      b_spline_coef[i,3:num_basis] ~ normal(2*b_spline_coef[i,2:(num_basis-1)] - b_spline_coef[i,1:(num_basis-2)], tau[1]);
   }
 
 
@@ -151,18 +151,18 @@ model {
 
   if(noise_structure==1){
     for(i in 1:num_path){
-      c_new[i,] ~ gamma(exp(a_new[i,])*eta[1], eta[1]);
+      noisy_incidence[i,] ~ gamma(exp(log_incidence[i,])*eta[1], eta[1]);
     }
 
     for(i in 1:num_data){
-      y_model[i] = sum(c_new[,i]);
-      P[,i] ~ multinomial(c_new[,i]/y_model[i]);
+      y_model[i] = sum(noisy_incidence[,i]);
+      P[,i] ~ multinomial(noisy_incidence[,i]/y_model[i]);
     }
   }
   else{
     for(i in 1:num_data){
-      y_model[i] = sum(exp(a_new[,i]));
-      P[,i] ~ multinomial(exp(a_new[,i])/y_model[i]);
+      y_model[i] = sum(exp(log_incidence[,i]));
+      P[,i] ~ multinomial(exp(log_incidence[,i])/y_model[i]);
     }
   }
 

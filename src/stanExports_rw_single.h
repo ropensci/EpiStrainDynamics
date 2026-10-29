@@ -29,29 +29,29 @@ using namespace stan::math;
 stan::math::profile_map profiles__;
 static constexpr std::array<const char*, 32> locations_array__ =
   {" (found before start of program)",
-  " (in 'rw_single', line 25, column 2 to column 25)",
+  " (in 'rw_single', line 25, column 2 to column 37)",
   " (in 'rw_single', line 26, column 2 to column 20)",
   " (in 'rw_single', line 27, column 2 to column 20)",
   " (in 'rw_single', line 28, column 2 to column 43)",
-  " (in 'rw_single', line 33, column 2 to column 71)",
+  " (in 'rw_single', line 33, column 2 to column 107)",
   " (in 'rw_single', line 36, column 4 to column 35)",
   " (in 'rw_single', line 35, column 29 to line 37, column 3)",
   " (in 'rw_single', line 35, column 2 to line 37, column 3)",
   " (in 'rw_single', line 40, column 4 to column 35)",
   " (in 'rw_single', line 39, column 29 to line 41, column 3)",
   " (in 'rw_single', line 39, column 2 to line 41, column 3)",
-  " (in 'rw_single', line 48, column 6 to column 86)",
-  " (in 'rw_single', line 47, column 4 to line 48, column 86)",
+  " (in 'rw_single', line 48, column 6 to column 98)",
+  " (in 'rw_single', line 47, column 4 to line 48, column 98)",
   " (in 'rw_single', line 46, column 6 to line 49, column 3)",
-  " (in 'rw_single', line 44, column 4 to column 38)",
+  " (in 'rw_single', line 44, column 4 to column 50)",
   " (in 'rw_single', line 43, column 20 to line 45, column 3)",
   " (in 'rw_single', line 43, column 2 to line 49, column 3)",
   " (in 'rw_single', line 13, column 2 to column 15)",
   " (in 'rw_single', line 14, column 8 to column 16)",
-  " (in 'rw_single', line 14, column 2 to column 18)",
+  " (in 'rw_single', line 14, column 2 to column 24)",
   " (in 'rw_single', line 15, column 2 to column 18)",
-  " (in 'rw_single', line 16, column 10 to column 18)",
-  " (in 'rw_single', line 16, column 2 to column 20)",
+  " (in 'rw_single', line 16, column 8 to column 16)",
+  " (in 'rw_single', line 16, column 2 to column 26)",
   " (in 'rw_single', line 17, column 2 to column 26)",
   " (in 'rw_single', line 18, column 2 to column 25)",
   " (in 'rw_single', line 19, column 2 to column 23)",
@@ -167,7 +167,8 @@ public:
       current_statement__ = 29;
       stan::math::check_greater_or_equal(function__, "tau_sd", tau_sd, 0);
       current_statement__ = 30;
-      stan::math::validate_non_negative_index("a", "num_data", num_data);
+      stan::math::validate_non_negative_index("log_incidence", "num_data",
+        num_data);
       current_statement__ = 31;
       stan::math::validate_positive_index("day_of_week_simplex",
         "week_effect", week_effect);
@@ -203,10 +204,11 @@ public:
     // suppress unused var warning
     (void) function__;
     try {
-      Eigen::Matrix<local_scalar_t__,1,-1> a =
+      Eigen::Matrix<local_scalar_t__,1,-1> log_incidence =
         Eigen::Matrix<local_scalar_t__,1,-1>::Constant(num_data, DUMMY_VAR__);
       current_statement__ = 1;
-      a = in__.template read<Eigen::Matrix<local_scalar_t__,1,-1>>(num_data);
+      log_incidence = in__.template read<
+                        Eigen::Matrix<local_scalar_t__,1,-1>>(num_data);
       local_scalar_t__ phi = DUMMY_VAR__;
       current_statement__ = 2;
       phi = in__.template read_constrain_lb<local_scalar_t__, jacobian__>(0,
@@ -225,13 +227,15 @@ public:
       {
         current_statement__ = 5;
         lp_accum__.add(stan::math::normal_lpdf<propto__>(
-                         stan::model::rvalue(a, "a",
+                         stan::model::rvalue(log_incidence, "log_incidence",
                            stan::model::index_min_max(3, num_data)),
                          stan::math::subtract(
                            stan::math::multiply(2,
-                             stan::model::rvalue(a, "a",
+                             stan::model::rvalue(log_incidence,
+                               "log_incidence",
                                stan::model::index_min_max(2, (num_data - 1)))),
-                           stan::model::rvalue(a, "a",
+                           stan::model::rvalue(log_incidence,
+                             "log_incidence",
                              stan::model::index_min_max(1, (num_data - 2)))),
                          tau));
         current_statement__ = 8;
@@ -250,7 +254,8 @@ public:
         if (stan::math::logical_eq(week_effect, 1)) {
           current_statement__ = 15;
           lp_accum__.add(stan::math::neg_binomial_lpmf<propto__>(Y,
-                           stan::math::multiply(stan::math::exp(a), phi), phi));
+                           stan::math::multiply(
+                             stan::math::exp(log_incidence), phi), phi));
         } else {
           current_statement__ = 13;
           for (int i = 1; i <= num_data; ++i) {
@@ -259,7 +264,8 @@ public:
                              stan::model::rvalue(Y, "Y",
                                stan::model::index_uni(i)),
                              (((stan::math::exp(
-                                  stan::model::rvalue(a, "a",
+                                  stan::model::rvalue(log_incidence,
+                                    "log_incidence",
                                     stan::model::index_uni(i))) * phi) *
                              week_effect) *
                              stan::model::rvalue(day_of_week_simplex,
@@ -307,11 +313,12 @@ public:
     // suppress unused var warning
     (void) function__;
     try {
-      Eigen::Matrix<double,1,-1> a =
+      Eigen::Matrix<double,1,-1> log_incidence =
         Eigen::Matrix<double,1,-1>::Constant(num_data,
           std::numeric_limits<double>::quiet_NaN());
       current_statement__ = 1;
-      a = in__.template read<Eigen::Matrix<local_scalar_t__,1,-1>>(num_data);
+      log_incidence = in__.template read<
+                        Eigen::Matrix<local_scalar_t__,1,-1>>(num_data);
       double phi = std::numeric_limits<double>::quiet_NaN();
       current_statement__ = 2;
       phi = in__.template read_constrain_lb<local_scalar_t__, jacobian__>(0,
@@ -327,7 +334,7 @@ public:
       day_of_week_simplex = in__.template read_constrain_simplex<
                               Eigen::Matrix<local_scalar_t__,-1,1>,
                               jacobian__>(lp__, week_effect);
-      out__.write(a);
+      out__.write(log_incidence);
       out__.write(phi);
       out__.write(tau);
       out__.write(day_of_week_simplex);
@@ -359,13 +366,13 @@ public:
     try {
       int pos__ = std::numeric_limits<int>::min();
       pos__ = 1;
-      Eigen::Matrix<local_scalar_t__,1,-1> a =
+      Eigen::Matrix<local_scalar_t__,1,-1> log_incidence =
         Eigen::Matrix<local_scalar_t__,1,-1>::Constant(num_data, DUMMY_VAR__);
       current_statement__ = 1;
-      stan::model::assign(a,
+      stan::model::assign(log_incidence,
         in__.read<Eigen::Matrix<local_scalar_t__,1,-1>>(num_data),
-        "assigning variable a");
-      out__.write(a);
+        "assigning variable log_incidence");
+      out__.write(log_incidence);
       local_scalar_t__ phi = DUMMY_VAR__;
       current_statement__ = 2;
       phi = in__.read<local_scalar_t__>();
@@ -398,8 +405,8 @@ public:
     (void) DUMMY_VAR__;
     try {
       current_statement__ = 1;
-      context__.validate_dims("parameter initialization", "a", "double",
-        std::vector<size_t>{static_cast<size_t>(num_data)});
+      context__.validate_dims("parameter initialization", "log_incidence",
+        "double", std::vector<size_t>{static_cast<size_t>(num_data)});
       current_statement__ = 2;
       context__.validate_dims("parameter initialization", "phi", "double",
         std::vector<size_t>{});
@@ -412,24 +419,25 @@ public:
         std::vector<size_t>{static_cast<size_t>(week_effect)});
       int pos__ = std::numeric_limits<int>::min();
       pos__ = 1;
-      Eigen::Matrix<local_scalar_t__,1,-1> a =
+      Eigen::Matrix<local_scalar_t__,1,-1> log_incidence =
         Eigen::Matrix<local_scalar_t__,1,-1>::Constant(num_data, DUMMY_VAR__);
       {
-        std::vector<local_scalar_t__> a_flat__;
+        std::vector<local_scalar_t__> log_incidence_flat__;
         current_statement__ = 1;
-        a_flat__ = context__.vals_r("a");
+        log_incidence_flat__ = context__.vals_r("log_incidence");
         current_statement__ = 1;
         pos__ = 1;
         current_statement__ = 1;
         for (int sym1__ = 1; sym1__ <= num_data; ++sym1__) {
           current_statement__ = 1;
-          stan::model::assign(a, a_flat__[(pos__ - 1)],
-            "assigning variable a", stan::model::index_uni(sym1__));
+          stan::model::assign(log_incidence, log_incidence_flat__[(pos__ -
+            1)], "assigning variable log_incidence",
+            stan::model::index_uni(sym1__));
           current_statement__ = 1;
           pos__ = (pos__ + 1);
         }
       }
-      out__.write(a);
+      out__.write(log_incidence);
       local_scalar_t__ phi = DUMMY_VAR__;
       current_statement__ = 2;
       phi = context__.vals_r("phi")[(1 - 1)];
@@ -467,7 +475,7 @@ public:
   get_param_names(std::vector<std::string>& names__, const bool
                   emit_transformed_parameters__ = true, const bool
                   emit_generated_quantities__ = true) const {
-    names__ = std::vector<std::string>{"a", "phi", "tau",
+    names__ = std::vector<std::string>{"log_incidence", "phi", "tau",
                 "day_of_week_simplex"};
     if (emit_transformed_parameters__) {}
     if (emit_generated_quantities__) {}
@@ -489,7 +497,7 @@ public:
                           emit_transformed_parameters__ = true, bool
                           emit_generated_quantities__ = true) const final {
     for (int sym1__ = 1; sym1__ <= num_data; ++sym1__) {
-      param_names__.emplace_back(std::string() + "a" + '.' +
+      param_names__.emplace_back(std::string() + "log_incidence" + '.' +
         std::to_string(sym1__));
     }
     param_names__.emplace_back(std::string() + "phi");
@@ -506,7 +514,7 @@ public:
                             emit_transformed_parameters__ = true, bool
                             emit_generated_quantities__ = true) const final {
     for (int sym1__ = 1; sym1__ <= num_data; ++sym1__) {
-      param_names__.emplace_back(std::string() + "a" + '.' +
+      param_names__.emplace_back(std::string() + "log_incidence" + '.' +
         std::to_string(sym1__));
     }
     param_names__.emplace_back(std::string() + "phi");
@@ -519,10 +527,10 @@ public:
     if (emit_generated_quantities__) {}
   }
   inline std::string get_constrained_sizedtypes() const {
-    return std::string("[{\"name\":\"a\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(num_data) + "},\"block\":\"parameters\"},{\"name\":\"phi\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"tau\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"day_of_week_simplex\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(week_effect) + "},\"block\":\"parameters\"}]");
+    return std::string("[{\"name\":\"log_incidence\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(num_data) + "},\"block\":\"parameters\"},{\"name\":\"phi\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"tau\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"day_of_week_simplex\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(week_effect) + "},\"block\":\"parameters\"}]");
   }
   inline std::string get_unconstrained_sizedtypes() const {
-    return std::string("[{\"name\":\"a\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(num_data) + "},\"block\":\"parameters\"},{\"name\":\"phi\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"tau\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"day_of_week_simplex\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string((week_effect -1)) + "},\"block\":\"parameters\"}]");
+    return std::string("[{\"name\":\"log_incidence\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(num_data) + "},\"block\":\"parameters\"},{\"name\":\"phi\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"tau\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"day_of_week_simplex\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string((week_effect -1)) + "},\"block\":\"parameters\"}]");
   }
   // Begin method overload boilerplate
   template <typename RNG> inline void

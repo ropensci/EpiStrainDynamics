@@ -75,7 +75,7 @@ transformed data {
 }
 
 parameters {
-  row_vector[num_basis] a;
+  row_vector[num_basis] b_spline_coef;
   
   real<lower=0> phi;
   
@@ -86,15 +86,15 @@ parameters {
 
 
 transformed parameters {
-  row_vector[num_data] a_new;
+  row_vector[num_data] log_incidence;
 
-    a_new =  a*B;
+    log_incidence =  b_spline_coef*B;
 }
 
 model {
   //// Priors
   // Second-order random walk prior on b-spline coefficients
-  a[3:num_basis] ~ normal(2*a[2:(num_basis-1)] - a[1:(num_basis-2)], tau);
+  b_spline_coef[3:num_basis] ~ normal(2*b_spline_coef[2:(num_basis-1)] - b_spline_coef[1:(num_basis-2)], tau);
   
   // Prior on phi
   if(phi_priors_provided ==2){
@@ -108,11 +108,11 @@ model {
   // Uninformative priors on scale parameters?
   
   if(week_effect == 1){
-    Y ~ neg_binomial(exp(a_new)*phi, phi);
+    Y ~ neg_binomial(exp(log_incidence)*phi, phi);
   } 
   else{
     for(i in 1:num_data)
-      Y[i] ~ neg_binomial(exp(a_new[i])*phi*week_effect*day_of_week_simplex[DOW[i]], phi);
+      Y[i] ~ neg_binomial(exp(log_incidence[i])*phi*week_effect*day_of_week_simplex[DOW[i]], phi);
   }
    
 }

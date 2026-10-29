@@ -127,9 +127,9 @@ predict_B_true <- function(time_seq, knots, spline_degree) {
 #' @srrstats {G1.4a} internal function specified with `@noRd`
 #'
 transform_posterior_single <- function(post, B_true, num_days) {
-  a <- array(data = NA, dim = c(nrow(post$a), num_days))
-  for (k in seq_len(nrow(post$a))) {
-    a[k, ] <- as.array(post$a[k, ]) %*% B_true
+  a <- array(data = NA, dim = c(nrow(post$b_spline_coef), num_days))
+  for (k in seq_len(nrow(post$b_spline_coef))) {
+    a[k, ] <- as.array(post$b_spline_coef[k, ]) %*% B_true
   }
   a
 }
@@ -150,10 +150,10 @@ transform_posterior_single <- function(post, B_true, num_days) {
 #' @srrstats {G1.4a} internal function specified with `@noRd`
 #'
 transform_posterior_multi <- function(post, B_true, num_path, num_days) {
-  a <- array(data = NA, dim = c(nrow(post$a), num_path, num_days))
+  a <- array(data = NA, dim = c(nrow(post$b_spline_coef), num_path, num_days))
   for (j in 1:num_path) {
-    for (k in seq_len(nrow(post$a))) {
-      a[k, j, ] <- as.array(post$a[k, j, ]) %*% B_true
+    for (k in seq_len(nrow(post$b_spline_coef))) {
+      a[k, j, ] <- as.array(post$b_spline_coef[k, j, ]) %*% B_true
     }
   }
   a
@@ -197,7 +197,7 @@ compute_multi_pathogen <- function(fitted_model, start_idx, measure,
       components$num_days
     )
   } else {
-    a <- post$a
+    a <- post$log_incidence
   }
 
   selection_index <- start_idx:components$num_days
@@ -285,7 +285,7 @@ compute_single_pathogen <- function(fitted_model, start_idx, measure,
     B_true <- predict_B_true(time_seq, components$knots, components$spline_degree)
     a <- transform_posterior_single(post, B_true, components$num_days)
   } else {
-    a <- post$a
+    a <- post$log_incidence
   }
 
   extra_args <- list(...)

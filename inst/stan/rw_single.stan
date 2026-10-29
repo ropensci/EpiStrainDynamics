@@ -27,7 +27,7 @@ data {
 }
 
 parameters {
-  row_vector[num_data] a;
+  row_vector[num_data] log_incidence;
 
   real<lower=0> phi;
 
@@ -40,7 +40,7 @@ parameters {
 model {
   //// Priors
   // Second-order random walk prior
-  a[3:num_data] ~ normal(2*a[2:(num_data-1)] - a[1:(num_data-2)], tau);
+  log_incidence[3:num_data] ~ normal(2*log_incidence[2:(num_data-1)] - log_incidence[1:(num_data-2)], tau);
 
   // Prior on phi
   if(phi_priors_provided ==2){
@@ -54,11 +54,11 @@ model {
 
   //// Likelihood
   if(week_effect==1){
-    Y ~ neg_binomial(exp(a)*phi, phi);
+    Y ~ neg_binomial(exp(log_incidence)*phi, phi);
   }
   else{
     for(i in 1:num_data)
-      Y[i] ~ neg_binomial(exp(a[i])*phi*week_effect*day_of_week_simplex[DOW[i]], phi);
+      Y[i] ~ neg_binomial(exp(log_incidence[i])*phi*week_effect*day_of_week_simplex[DOW[i]], phi);
   }
 
 }

@@ -29,92 +29,92 @@ using namespace stan::math;
 stan::math::profile_map profiles__;
 static constexpr std::array<const char*, 87> locations_array__ =
   {" (found before start of program)",
-  " (in 'rw_multiple', line 42, column 2 to column 31)",
-  " (in 'rw_multiple', line 43, column 2 to column 31)",
-  " (in 'rw_multiple', line 44, column 2 to column 48)",
-  " (in 'rw_multiple', line 45, column 2 to column 20)",
-  " (in 'rw_multiple', line 46, column 2 to column 74)",
-  " (in 'rw_multiple', line 47, column 2 to column 50)",
-  " (in 'rw_multiple', line 48, column 2 to column 43)",
-  " (in 'rw_multiple', line 63, column 6 to column 84)",
-  " (in 'rw_multiple', line 62, column 4 to line 63, column 84)",
-  " (in 'rw_multiple', line 61, column 6 to line 64, column 3)",
-  " (in 'rw_multiple', line 59, column 6 to column 84)",
-  " (in 'rw_multiple', line 58, column 4 to line 59, column 84)",
-  " (in 'rw_multiple', line 57, column 27 to line 60, column 3)",
-  " (in 'rw_multiple', line 57, column 7 to line 64, column 3)",
-  " (in 'rw_multiple', line 55, column 6 to column 59)",
-  " (in 'rw_multiple', line 54, column 4 to line 55, column 59)",
-  " (in 'rw_multiple', line 53, column 22 to line 56, column 3)",
-  " (in 'rw_multiple', line 53, column 2 to line 64, column 3)",
-  " (in 'rw_multiple', line 67, column 4 to column 35)",
-  " (in 'rw_multiple', line 66, column 29 to line 68, column 3)",
-  " (in 'rw_multiple', line 66, column 2 to line 68, column 3)",
-  " (in 'rw_multiple', line 72, column 4 to column 35)",
-  " (in 'rw_multiple', line 71, column 29 to line 73, column 3)",
-  " (in 'rw_multiple', line 71, column 2 to line 73, column 3)",
-  " (in 'rw_multiple', line 76, column 17 to column 25)",
-  " (in 'rw_multiple', line 76, column 2 to column 27)",
-  " (in 'rw_multiple', line 88, column 6 to column 37)",
-  " (in 'rw_multiple', line 89, column 6 to column 51)",
-  " (in 'rw_multiple', line 87, column 24 to line 90, column 5)",
-  " (in 'rw_multiple', line 87, column 4 to line 90, column 5)",
-  " (in 'rw_multiple', line 86, column 6 to line 91, column 3)",
-  " (in 'rw_multiple', line 79, column 6 to column 47)",
-  " (in 'rw_multiple', line 78, column 24 to line 80, column 5)",
-  " (in 'rw_multiple', line 78, column 4 to line 80, column 5)",
-  " (in 'rw_multiple', line 82, column 6 to column 32)",
-  " (in 'rw_multiple', line 83, column 6 to column 46)",
-  " (in 'rw_multiple', line 81, column 24 to line 84, column 5)",
-  " (in 'rw_multiple', line 81, column 4 to line 84, column 5)",
-  " (in 'rw_multiple', line 77, column 24 to line 85, column 3)",
-  " (in 'rw_multiple', line 77, column 2 to line 91, column 3)",
-  " (in 'rw_multiple', line 101, column 6 to column 89)",
-  " (in 'rw_multiple', line 100, column 24 to line 102, column 5)",
-  " (in 'rw_multiple', line 100, column 4 to line 102, column 5)",
-  " (in 'rw_multiple', line 99, column 6 to line 103, column 3)",
-  " (in 'rw_multiple', line 96, column 6 to column 49)",
-  " (in 'rw_multiple', line 95, column 24 to line 97, column 5)",
-  " (in 'rw_multiple', line 95, column 4 to line 97, column 5)",
-  " (in 'rw_multiple', line 94, column 20 to line 98, column 3)",
-  " (in 'rw_multiple', line 94, column 2 to line 103, column 3)",
+  " (in 'rw_multiple', line 41, column 2 to column 43)",
+  " (in 'rw_multiple', line 42, column 2 to column 45)",
+  " (in 'rw_multiple', line 43, column 2 to column 53)",
+  " (in 'rw_multiple', line 44, column 2 to column 20)",
+  " (in 'rw_multiple', line 45, column 2 to column 79)",
+  " (in 'rw_multiple', line 46, column 2 to column 50)",
+  " (in 'rw_multiple', line 47, column 2 to column 43)",
+  " (in 'rw_multiple', line 62, column 6 to column 120)",
+  " (in 'rw_multiple', line 61, column 4 to line 62, column 120)",
+  " (in 'rw_multiple', line 60, column 6 to line 63, column 3)",
+  " (in 'rw_multiple', line 58, column 6 to column 120)",
+  " (in 'rw_multiple', line 57, column 4 to line 58, column 120)",
+  " (in 'rw_multiple', line 56, column 27 to line 59, column 3)",
+  " (in 'rw_multiple', line 56, column 7 to line 63, column 3)",
+  " (in 'rw_multiple', line 54, column 6 to column 95)",
+  " (in 'rw_multiple', line 53, column 4 to line 54, column 95)",
+  " (in 'rw_multiple', line 52, column 22 to line 55, column 3)",
+  " (in 'rw_multiple', line 52, column 2 to line 63, column 3)",
+  " (in 'rw_multiple', line 66, column 4 to column 35)",
+  " (in 'rw_multiple', line 65, column 29 to line 67, column 3)",
+  " (in 'rw_multiple', line 65, column 2 to line 67, column 3)",
+  " (in 'rw_multiple', line 71, column 4 to column 35)",
+  " (in 'rw_multiple', line 70, column 29 to line 72, column 3)",
+  " (in 'rw_multiple', line 70, column 2 to line 72, column 3)",
+  " (in 'rw_multiple', line 75, column 8 to column 16)",
+  " (in 'rw_multiple', line 75, column 2 to column 33)",
+  " (in 'rw_multiple', line 87, column 6 to column 49)",
+  " (in 'rw_multiple', line 88, column 6 to column 63)",
+  " (in 'rw_multiple', line 86, column 24 to line 89, column 5)",
+  " (in 'rw_multiple', line 86, column 4 to line 89, column 5)",
+  " (in 'rw_multiple', line 85, column 6 to line 90, column 3)",
+  " (in 'rw_multiple', line 78, column 6 to column 73)",
+  " (in 'rw_multiple', line 77, column 24 to line 79, column 5)",
+  " (in 'rw_multiple', line 77, column 4 to line 79, column 5)",
+  " (in 'rw_multiple', line 81, column 6 to column 46)",
+  " (in 'rw_multiple', line 82, column 6 to column 60)",
+  " (in 'rw_multiple', line 80, column 24 to line 83, column 5)",
+  " (in 'rw_multiple', line 80, column 4 to line 83, column 5)",
+  " (in 'rw_multiple', line 76, column 24 to line 84, column 3)",
+  " (in 'rw_multiple', line 76, column 2 to line 90, column 3)",
+  " (in 'rw_multiple', line 100, column 6 to column 89)",
+  " (in 'rw_multiple', line 99, column 24 to line 101, column 5)",
+  " (in 'rw_multiple', line 99, column 4 to line 101, column 5)",
+  " (in 'rw_multiple', line 98, column 6 to line 102, column 3)",
+  " (in 'rw_multiple', line 95, column 6 to column 49)",
+  " (in 'rw_multiple', line 94, column 24 to line 96, column 5)",
+  " (in 'rw_multiple', line 94, column 4 to line 96, column 5)",
+  " (in 'rw_multiple', line 93, column 20 to line 97, column 3)",
+  " (in 'rw_multiple', line 93, column 2 to line 102, column 3)",
   " (in 'rw_multiple', line 13, column 2 to column 15)",
   " (in 'rw_multiple', line 14, column 2 to column 15)",
   " (in 'rw_multiple', line 15, column 8 to column 16)",
-  " (in 'rw_multiple', line 15, column 2 to column 18)",
+  " (in 'rw_multiple', line 15, column 2 to column 24)",
   " (in 'rw_multiple', line 16, column 8 to column 16)",
   " (in 'rw_multiple', line 16, column 18 to column 26)",
-  " (in 'rw_multiple', line 16, column 2 to column 28)",
+  " (in 'rw_multiple', line 16, column 2 to column 34)",
   " (in 'rw_multiple', line 17, column 2 to column 18)",
-  " (in 'rw_multiple', line 18, column 10 to column 18)",
-  " (in 'rw_multiple', line 18, column 2 to column 20)",
+  " (in 'rw_multiple', line 18, column 8 to column 16)",
+  " (in 'rw_multiple', line 18, column 2 to column 26)",
   " (in 'rw_multiple', line 19, column 2 to column 42)",
   " (in 'rw_multiple', line 20, column 2 to column 44)",
   " (in 'rw_multiple', line 21, column 2 to column 26)",
   " (in 'rw_multiple', line 22, column 2 to column 25)",
   " (in 'rw_multiple', line 23, column 2 to column 23)",
-  " (in 'rw_multiple', line 25, column 2 to column 26)",
-  " (in 'rw_multiple', line 26, column 25 to column 76)",
-  " (in 'rw_multiple', line 26, column 2 to column 79)",
-  " (in 'rw_multiple', line 27, column 23 to column 74)",
-  " (in 'rw_multiple', line 27, column 2 to column 77)",
+  " (in 'rw_multiple', line 24, column 2 to column 26)",
+  " (in 'rw_multiple', line 25, column 8 to column 59)",
+  " (in 'rw_multiple', line 25, column 2 to column 84)",
+  " (in 'rw_multiple', line 26, column 8 to column 59)",
+  " (in 'rw_multiple', line 26, column 2 to column 82)",
+  " (in 'rw_multiple', line 29, column 2 to column 11)",
   " (in 'rw_multiple', line 30, column 2 to column 11)",
-  " (in 'rw_multiple', line 31, column 2 to column 11)",
+  " (in 'rw_multiple', line 36, column 4 to column 13)",
   " (in 'rw_multiple', line 37, column 4 to column 13)",
-  " (in 'rw_multiple', line 38, column 4 to column 13)",
-  " (in 'rw_multiple', line 36, column 6 to line 39, column 3)",
+  " (in 'rw_multiple', line 35, column 6 to line 38, column 3)",
+  " (in 'rw_multiple', line 32, column 4 to column 20)",
   " (in 'rw_multiple', line 33, column 4 to column 20)",
-  " (in 'rw_multiple', line 34, column 4 to column 20)",
-  " (in 'rw_multiple', line 32, column 24 to line 35, column 3)",
-  " (in 'rw_multiple', line 32, column 2 to line 39, column 3)",
-  " (in 'rw_multiple', line 42, column 9 to column 17)",
-  " (in 'rw_multiple', line 42, column 19 to column 27)",
-  " (in 'rw_multiple', line 43, column 18 to column 22)",
-  " (in 'rw_multiple', line 43, column 23 to column 27)",
-  " (in 'rw_multiple', line 44, column 20 to column 45)",
-  " (in 'rw_multiple', line 46, column 20 to column 71)",
-  " (in 'rw_multiple', line 47, column 13 to column 42)",
-  " (in 'rw_multiple', line 48, column 10 to column 21)"};
+  " (in 'rw_multiple', line 31, column 24 to line 34, column 3)",
+  " (in 'rw_multiple', line 31, column 2 to line 38, column 3)",
+  " (in 'rw_multiple', line 41, column 9 to column 17)",
+  " (in 'rw_multiple', line 41, column 19 to column 27)",
+  " (in 'rw_multiple', line 42, column 18 to column 22)",
+  " (in 'rw_multiple', line 42, column 23 to column 27)",
+  " (in 'rw_multiple', line 43, column 8 to column 33)",
+  " (in 'rw_multiple', line 45, column 8 to column 59)",
+  " (in 'rw_multiple', line 46, column 13 to column 42)",
+  " (in 'rw_multiple', line 47, column 10 to column 21)"};
 #include <stan_meta_header.hpp>
 class model_rw_multiple final : public model_base_crtp<model_rw_multiple> {
 private:
@@ -325,13 +325,15 @@ public:
         rows = 0;
       }
       current_statement__ = 79;
-      stan::math::validate_non_negative_index("a", "num_path", num_path);
+      stan::math::validate_non_negative_index("log_incidence", "num_path",
+        num_path);
       current_statement__ = 80;
-      stan::math::validate_non_negative_index("a", "num_data", num_data);
+      stan::math::validate_non_negative_index("log_incidence", "num_data",
+        num_data);
       current_statement__ = 81;
-      stan::math::validate_non_negative_index("c", "cols", cols);
+      stan::math::validate_non_negative_index("noisy_incidence", "cols", cols);
       current_statement__ = 82;
-      stan::math::validate_non_negative_index("c", "rows", rows);
+      stan::math::validate_non_negative_index("noisy_incidence", "rows", rows);
       current_statement__ = 83;
       eta_1dim__ = std::numeric_limits<int>::min();
       current_statement__ = 83;
@@ -400,19 +402,20 @@ public:
     // suppress unused var warning
     (void) function__;
     try {
-      Eigen::Matrix<local_scalar_t__,-1,-1> a =
+      Eigen::Matrix<local_scalar_t__,-1,-1> log_incidence =
         Eigen::Matrix<local_scalar_t__,-1,-1>::Constant(num_path, num_data,
           DUMMY_VAR__);
       current_statement__ = 1;
-      a = in__.template read<Eigen::Matrix<local_scalar_t__,-1,-1>>(num_path,
-            num_data);
-      Eigen::Matrix<local_scalar_t__,-1,-1> c =
+      log_incidence = in__.template read<
+                        Eigen::Matrix<local_scalar_t__,-1,-1>>(num_path,
+                        num_data);
+      Eigen::Matrix<local_scalar_t__,-1,-1> noisy_incidence =
         Eigen::Matrix<local_scalar_t__,-1,-1>::Constant(cols, rows,
           DUMMY_VAR__);
       current_statement__ = 2;
-      c = in__.template read_constrain_lb<
-            Eigen::Matrix<local_scalar_t__,-1,-1>, jacobian__>(0, lp__, cols,
-            rows);
+      noisy_incidence = in__.template read_constrain_lb<
+                          Eigen::Matrix<local_scalar_t__,-1,-1>,
+                          jacobian__>(0, lp__, cols, rows);
       std::vector<local_scalar_t__> eta =
         std::vector<local_scalar_t__>(eta_1dim__, DUMMY_VAR__);
       current_statement__ = 3;
@@ -448,16 +451,17 @@ public:
           for (int i = 3; i <= num_data; ++i) {
             current_statement__ = 15;
             lp_accum__.add(stan::math::multi_normal_lpdf<propto__>(
-                             stan::model::rvalue(a, "a",
-                               stan::model::index_omni(),
+                             stan::model::rvalue(log_incidence,
+                               "log_incidence", stan::model::index_omni(),
                                stan::model::index_uni(i)),
                              stan::math::subtract(
                                stan::math::multiply(2,
-                                 stan::model::rvalue(a, "a",
+                                 stan::model::rvalue(log_incidence,
+                                   "log_incidence",
                                    stan::model::index_omni(),
                                    stan::model::index_uni((i - 1)))),
-                               stan::model::rvalue(a, "a",
-                                 stan::model::index_omni(),
+                               stan::model::rvalue(log_incidence,
+                                 "log_incidence", stan::model::index_omni(),
                                  stan::model::index_uni((i - 2)))), Sigma));
           }
         } else {
@@ -467,16 +471,18 @@ public:
             for (int i = 1; i <= num_path; ++i) {
               current_statement__ = 11;
               lp_accum__.add(stan::math::normal_lpdf<propto__>(
-                               stan::model::rvalue(a, "a",
-                                 stan::model::index_uni(i),
+                               stan::model::rvalue(log_incidence,
+                                 "log_incidence", stan::model::index_uni(i),
                                  stan::model::index_min_max(3, num_data)),
                                stan::math::subtract(
                                  stan::math::multiply(2,
-                                   stan::model::rvalue(a, "a",
+                                   stan::model::rvalue(log_incidence,
+                                     "log_incidence",
                                      stan::model::index_uni(i),
                                      stan::model::index_min_max(2, (num_data
                                        - 1)))),
-                                 stan::model::rvalue(a, "a",
+                                 stan::model::rvalue(log_incidence,
+                                   "log_incidence",
                                    stan::model::index_uni(i),
                                    stan::model::index_min_max(1, (num_data -
                                      2)))),
@@ -488,16 +494,18 @@ public:
             for (int i = 1; i <= num_path; ++i) {
               current_statement__ = 8;
               lp_accum__.add(stan::math::normal_lpdf<propto__>(
-                               stan::model::rvalue(a, "a",
-                                 stan::model::index_uni(i),
+                               stan::model::rvalue(log_incidence,
+                                 "log_incidence", stan::model::index_uni(i),
                                  stan::model::index_min_max(3, num_data)),
                                stan::math::subtract(
                                  stan::math::multiply(2,
-                                   stan::model::rvalue(a, "a",
+                                   stan::model::rvalue(log_incidence,
+                                     "log_incidence",
                                      stan::model::index_uni(i),
                                      stan::model::index_min_max(2, (num_data
                                        - 1)))),
-                                 stan::model::rvalue(a, "a",
+                                 stan::model::rvalue(log_incidence,
+                                   "log_incidence",
                                    stan::model::index_uni(i),
                                    stan::model::index_min_max(1, (num_data -
                                      2)))),
@@ -529,12 +537,13 @@ public:
           for (int i = 1; i <= num_path; ++i) {
             current_statement__ = 32;
             lp_accum__.add(stan::math::gamma_lpdf<propto__>(
-                             stan::model::rvalue(c, "c",
-                               stan::model::index_uni(i),
+                             stan::model::rvalue(noisy_incidence,
+                               "noisy_incidence", stan::model::index_uni(i),
                                stan::model::index_omni()),
                              stan::math::multiply(
                                stan::math::exp(
-                                 stan::model::rvalue(a, "a",
+                                 stan::model::rvalue(log_incidence,
+                                   "log_incidence",
                                    stan::model::index_uni(i),
                                    stan::model::index_omni())),
                                stan::model::rvalue(eta, "eta",
@@ -547,8 +556,8 @@ public:
             current_statement__ = 35;
             stan::model::assign(total_ILI,
               stan::math::sum(
-                stan::model::rvalue(c, "c", stan::model::index_omni(),
-                  stan::model::index_uni(i))),
+                stan::model::rvalue(noisy_incidence, "noisy_incidence",
+                  stan::model::index_omni(), stan::model::index_uni(i))),
               "assigning variable total_ILI", stan::model::index_uni(i));
             current_statement__ = 36;
             lp_accum__.add(stan::math::multinomial_lpmf<propto__>(
@@ -556,7 +565,8 @@ public:
                                stan::model::index_omni(),
                                stan::model::index_uni(i)),
                              stan::math::divide(
-                               stan::model::rvalue(c, "c",
+                               stan::model::rvalue(noisy_incidence,
+                                 "noisy_incidence",
                                  stan::model::index_omni(),
                                  stan::model::index_uni(i)),
                                stan::model::rvalue(total_ILI, "total_ILI",
@@ -569,8 +579,8 @@ public:
             stan::model::assign(total_ILI,
               stan::math::sum(
                 stan::math::exp(
-                  stan::model::rvalue(a, "a", stan::model::index_omni(),
-                    stan::model::index_uni(i)))),
+                  stan::model::rvalue(log_incidence, "log_incidence",
+                    stan::model::index_omni(), stan::model::index_uni(i)))),
               "assigning variable total_ILI", stan::model::index_uni(i));
             current_statement__ = 28;
             lp_accum__.add(stan::math::multinomial_lpmf<propto__>(
@@ -579,7 +589,8 @@ public:
                                stan::model::index_uni(i)),
                              stan::math::divide(
                                stan::math::exp(
-                                 stan::model::rvalue(a, "a",
+                                 stan::model::rvalue(log_incidence,
+                                   "log_incidence",
                                    stan::model::index_omni(),
                                    stan::model::index_uni(i))),
                                stan::model::rvalue(total_ILI, "total_ILI",
@@ -652,19 +663,20 @@ public:
     // suppress unused var warning
     (void) function__;
     try {
-      Eigen::Matrix<double,-1,-1> a =
+      Eigen::Matrix<double,-1,-1> log_incidence =
         Eigen::Matrix<double,-1,-1>::Constant(num_path, num_data,
           std::numeric_limits<double>::quiet_NaN());
       current_statement__ = 1;
-      a = in__.template read<Eigen::Matrix<local_scalar_t__,-1,-1>>(num_path,
-            num_data);
-      Eigen::Matrix<double,-1,-1> c =
+      log_incidence = in__.template read<
+                        Eigen::Matrix<local_scalar_t__,-1,-1>>(num_path,
+                        num_data);
+      Eigen::Matrix<double,-1,-1> noisy_incidence =
         Eigen::Matrix<double,-1,-1>::Constant(cols, rows,
           std::numeric_limits<double>::quiet_NaN());
       current_statement__ = 2;
-      c = in__.template read_constrain_lb<
-            Eigen::Matrix<local_scalar_t__,-1,-1>, jacobian__>(0, lp__, cols,
-            rows);
+      noisy_incidence = in__.template read_constrain_lb<
+                          Eigen::Matrix<local_scalar_t__,-1,-1>,
+                          jacobian__>(0, lp__, cols, rows);
       std::vector<double> eta =
         std::vector<double>(eta_1dim__,
           std::numeric_limits<double>::quiet_NaN());
@@ -695,8 +707,8 @@ public:
       day_of_week_simplex = in__.template read_constrain_simplex<
                               Eigen::Matrix<local_scalar_t__,-1,1>,
                               jacobian__>(lp__, week_effect);
-      out__.write(a);
-      out__.write(c);
+      out__.write(log_incidence);
+      out__.write(noisy_incidence);
       out__.write(eta);
       out__.write(phi);
       out__.write(tau);
@@ -730,22 +742,22 @@ public:
     try {
       int pos__ = std::numeric_limits<int>::min();
       pos__ = 1;
-      Eigen::Matrix<local_scalar_t__,-1,-1> a =
+      Eigen::Matrix<local_scalar_t__,-1,-1> log_incidence =
         Eigen::Matrix<local_scalar_t__,-1,-1>::Constant(num_path, num_data,
           DUMMY_VAR__);
       current_statement__ = 1;
-      stan::model::assign(a,
+      stan::model::assign(log_incidence,
         in__.read<Eigen::Matrix<local_scalar_t__,-1,-1>>(num_path, num_data),
-        "assigning variable a");
-      out__.write(a);
-      Eigen::Matrix<local_scalar_t__,-1,-1> c =
+        "assigning variable log_incidence");
+      out__.write(log_incidence);
+      Eigen::Matrix<local_scalar_t__,-1,-1> noisy_incidence =
         Eigen::Matrix<local_scalar_t__,-1,-1>::Constant(cols, rows,
           DUMMY_VAR__);
       current_statement__ = 2;
-      stan::model::assign(c,
+      stan::model::assign(noisy_incidence,
         in__.read<Eigen::Matrix<local_scalar_t__,-1,-1>>(cols, rows),
-        "assigning variable c");
-      out__.write_free_lb(0, c);
+        "assigning variable noisy_incidence");
+      out__.write_free_lb(0, noisy_incidence);
       std::vector<local_scalar_t__> eta =
         std::vector<local_scalar_t__>(eta_1dim__, DUMMY_VAR__);
       current_statement__ = 3;
@@ -796,11 +808,13 @@ public:
     (void) DUMMY_VAR__;
     try {
       current_statement__ = 1;
-      context__.validate_dims("parameter initialization", "a", "double",
+      context__.validate_dims("parameter initialization", "log_incidence",
+        "double",
         std::vector<size_t>{static_cast<size_t>(num_path),
           static_cast<size_t>(num_data)});
       current_statement__ = 2;
-      context__.validate_dims("parameter initialization", "c", "double",
+      context__.validate_dims("parameter initialization", "noisy_incidence",
+        "double",
         std::vector<size_t>{static_cast<size_t>(cols),
           static_cast<size_t>(rows)});
       current_statement__ = 3;
@@ -822,13 +836,13 @@ public:
         std::vector<size_t>{static_cast<size_t>(week_effect)});
       int pos__ = std::numeric_limits<int>::min();
       pos__ = 1;
-      Eigen::Matrix<local_scalar_t__,-1,-1> a =
+      Eigen::Matrix<local_scalar_t__,-1,-1> log_incidence =
         Eigen::Matrix<local_scalar_t__,-1,-1>::Constant(num_path, num_data,
           DUMMY_VAR__);
       {
-        std::vector<local_scalar_t__> a_flat__;
+        std::vector<local_scalar_t__> log_incidence_flat__;
         current_statement__ = 1;
-        a_flat__ = context__.vals_r("a");
+        log_incidence_flat__ = context__.vals_r("log_incidence");
         current_statement__ = 1;
         pos__ = 1;
         current_statement__ = 1;
@@ -836,22 +850,22 @@ public:
           current_statement__ = 1;
           for (int sym2__ = 1; sym2__ <= num_path; ++sym2__) {
             current_statement__ = 1;
-            stan::model::assign(a, a_flat__[(pos__ - 1)],
-              "assigning variable a", stan::model::index_uni(sym2__),
-              stan::model::index_uni(sym1__));
+            stan::model::assign(log_incidence, log_incidence_flat__[(pos__ -
+              1)], "assigning variable log_incidence",
+              stan::model::index_uni(sym2__), stan::model::index_uni(sym1__));
             current_statement__ = 1;
             pos__ = (pos__ + 1);
           }
         }
       }
-      out__.write(a);
-      Eigen::Matrix<local_scalar_t__,-1,-1> c =
+      out__.write(log_incidence);
+      Eigen::Matrix<local_scalar_t__,-1,-1> noisy_incidence =
         Eigen::Matrix<local_scalar_t__,-1,-1>::Constant(cols, rows,
           DUMMY_VAR__);
       {
-        std::vector<local_scalar_t__> c_flat__;
+        std::vector<local_scalar_t__> noisy_incidence_flat__;
         current_statement__ = 2;
-        c_flat__ = context__.vals_r("c");
+        noisy_incidence_flat__ = context__.vals_r("noisy_incidence");
         current_statement__ = 2;
         pos__ = 1;
         current_statement__ = 2;
@@ -859,15 +873,16 @@ public:
           current_statement__ = 2;
           for (int sym2__ = 1; sym2__ <= cols; ++sym2__) {
             current_statement__ = 2;
-            stan::model::assign(c, c_flat__[(pos__ - 1)],
-              "assigning variable c", stan::model::index_uni(sym2__),
-              stan::model::index_uni(sym1__));
+            stan::model::assign(noisy_incidence,
+              noisy_incidence_flat__[(pos__ - 1)],
+              "assigning variable noisy_incidence",
+              stan::model::index_uni(sym2__), stan::model::index_uni(sym1__));
             current_statement__ = 2;
             pos__ = (pos__ + 1);
           }
         }
       }
-      out__.write_free_lb(0, c);
+      out__.write_free_lb(0, noisy_incidence);
       std::vector<local_scalar_t__> eta =
         std::vector<local_scalar_t__>(eta_1dim__, DUMMY_VAR__);
       current_statement__ = 3;
@@ -934,8 +949,8 @@ public:
   get_param_names(std::vector<std::string>& names__, const bool
                   emit_transformed_parameters__ = true, const bool
                   emit_generated_quantities__ = true) const {
-    names__ = std::vector<std::string>{"a", "c", "eta", "phi", "tau",
-                "Sigma", "day_of_week_simplex"};
+    names__ = std::vector<std::string>{"log_incidence", "noisy_incidence",
+                "eta", "phi", "tau", "Sigma", "day_of_week_simplex"};
     if (emit_transformed_parameters__) {}
     if (emit_generated_quantities__) {}
   }
@@ -964,13 +979,13 @@ public:
                           emit_generated_quantities__ = true) const final {
     for (int sym1__ = 1; sym1__ <= num_data; ++sym1__) {
       for (int sym2__ = 1; sym2__ <= num_path; ++sym2__) {
-        param_names__.emplace_back(std::string() + "a" + '.' +
+        param_names__.emplace_back(std::string() + "log_incidence" + '.' +
           std::to_string(sym2__) + '.' + std::to_string(sym1__));
       }
     }
     for (int sym1__ = 1; sym1__ <= rows; ++sym1__) {
       for (int sym2__ = 1; sym2__ <= cols; ++sym2__) {
-        param_names__.emplace_back(std::string() + "c" + '.' +
+        param_names__.emplace_back(std::string() + "noisy_incidence" + '.' +
           std::to_string(sym2__) + '.' + std::to_string(sym1__));
       }
     }
@@ -1002,13 +1017,13 @@ public:
                             emit_generated_quantities__ = true) const final {
     for (int sym1__ = 1; sym1__ <= num_data; ++sym1__) {
       for (int sym2__ = 1; sym2__ <= num_path; ++sym2__) {
-        param_names__.emplace_back(std::string() + "a" + '.' +
+        param_names__.emplace_back(std::string() + "log_incidence" + '.' +
           std::to_string(sym2__) + '.' + std::to_string(sym1__));
       }
     }
     for (int sym1__ = 1; sym1__ <= rows; ++sym1__) {
       for (int sym2__ = 1; sym2__ <= cols; ++sym2__) {
-        param_names__.emplace_back(std::string() + "c" + '.' +
+        param_names__.emplace_back(std::string() + "noisy_incidence" + '.' +
           std::to_string(sym2__) + '.' + std::to_string(sym1__));
       }
     }
@@ -1034,10 +1049,10 @@ public:
     if (emit_generated_quantities__) {}
   }
   inline std::string get_constrained_sizedtypes() const {
-    return std::string("[{\"name\":\"a\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(num_path) + ",\"cols\":" + std::to_string(num_data) + "},\"block\":\"parameters\"},{\"name\":\"c\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(cols) + ",\"cols\":" + std::to_string(rows) + "},\"block\":\"parameters\"},{\"name\":\"eta\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(eta_1dim__) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"phi\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"tau\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(tau_1dim__) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"Sigma\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(Sigma_1dim__) + ",\"cols\":" + std::to_string(Sigma_2dim__) + "},\"block\":\"parameters\"},{\"name\":\"day_of_week_simplex\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(week_effect) + "},\"block\":\"parameters\"}]");
+    return std::string("[{\"name\":\"log_incidence\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(num_path) + ",\"cols\":" + std::to_string(num_data) + "},\"block\":\"parameters\"},{\"name\":\"noisy_incidence\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(cols) + ",\"cols\":" + std::to_string(rows) + "},\"block\":\"parameters\"},{\"name\":\"eta\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(eta_1dim__) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"phi\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"tau\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(tau_1dim__) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"Sigma\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(Sigma_1dim__) + ",\"cols\":" + std::to_string(Sigma_2dim__) + "},\"block\":\"parameters\"},{\"name\":\"day_of_week_simplex\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(week_effect) + "},\"block\":\"parameters\"}]");
   }
   inline std::string get_unconstrained_sizedtypes() const {
-    return std::string("[{\"name\":\"a\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(num_path) + ",\"cols\":" + std::to_string(num_data) + "},\"block\":\"parameters\"},{\"name\":\"c\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(cols) + ",\"cols\":" + std::to_string(rows) + "},\"block\":\"parameters\"},{\"name\":\"eta\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(eta_1dim__) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"phi\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"tau\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(tau_1dim__) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"Sigma\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string((Sigma_1dim__ + ((Sigma_1dim__ * (Sigma_1dim__ - 1)) /2))) + "},\"block\":\"parameters\"},{\"name\":\"day_of_week_simplex\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string((week_effect -1)) + "},\"block\":\"parameters\"}]");
+    return std::string("[{\"name\":\"log_incidence\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(num_path) + ",\"cols\":" + std::to_string(num_data) + "},\"block\":\"parameters\"},{\"name\":\"noisy_incidence\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(cols) + ",\"cols\":" + std::to_string(rows) + "},\"block\":\"parameters\"},{\"name\":\"eta\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(eta_1dim__) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"phi\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"tau\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(tau_1dim__) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"Sigma\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string((Sigma_1dim__ + ((Sigma_1dim__ * (Sigma_1dim__ - 1)) /2))) + "},\"block\":\"parameters\"},{\"name\":\"day_of_week_simplex\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string((week_effect -1)) + "},\"block\":\"parameters\"}]");
   }
   // Begin method overload boilerplate
   template <typename RNG> inline void

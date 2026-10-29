@@ -47,9 +47,9 @@ transformed data {
 }
 
 parameters {
-  matrix[num_path, num_data] a;           //First two rows/pathogens will be influenza A H3N2 and influenza A H1N1
+  matrix[num_path, num_data] log_incidence;           //First two rows/pathogens will be influenza A H3N2 and influenza A H1N1
 
-  matrix<lower=0>[cols,rows] c;
+  matrix<lower=0>[cols,rows] noisy_incidence;
   array[noise_structure==1 ? 1: 0] real<lower=0> eta;
 
   real<lower=0> phi;
@@ -66,17 +66,17 @@ model {
   // Second-order random walk prior
   if(cov_structure==2){
     for(i in 3:num_data)
-      a[,i] ~ multi_normal(2*a[,(i-1)] - a[,(i-2)], Sigma);
+      log_incidence[,i] ~ multi_normal(2*log_incidence[,(i-1)] - log_incidence[,(i-2)], Sigma);
   }
 
   else if(cov_structure==1){
     for(i in 1:num_path)
-      a[i,3:num_data] ~ normal(2*a[i,2:(num_data-1)] - a[i,1:(num_data-2)], tau[i]);
+      log_incidence[i,3:num_data] ~ normal(2*log_incidence[i,2:(num_data-1)] - log_incidence[i,1:(num_data-2)], tau[i]);
   }
 
   else{
     for(i in 1:num_path)
-      a[i,3:num_data] ~ normal(2*a[i,2:(num_data-1)] - a[i,1:(num_data-2)], tau[1]);
+      log_incidence[i,3:num_data] ~ normal(2*log_incidence[i,2:(num_data-1)] - log_incidence[i,1:(num_data-2)], tau[1]);
   }
 
   // Prior on phi
@@ -96,33 +96,33 @@ model {
 
   if(noise_structure==1){
     for(i in 1:num_path){
-      c[i,] ~ gamma(exp(a[i,])*eta[1], eta[1]);
+      noisy_incidence[i,] ~ gamma(exp(log_incidence[i,])*eta[1], eta[1]);
     }
 
     for(i in 1:num_data){
-      total_ILI[i] = sum(c[,i]);
+      total_ILI[i] = sum(noisy_incidence[,i]);
 
-      total_A   = sum(c[1:2,i]);
+      total_A   = sum(noisy_incidence[1:2,i]);
 
       theta[1]  = total_A;
-      theta[2:(num_path-1)] = c[3:num_path,i];
+      theta[2:(num_path-1)] = noisy_incidence[3:num_path,i];
 
       P1[,i] ~ multinomial(theta/total_ILI[i]);
-      P2[,i] ~ multinomial(c[1:2,i]/total_A);
+      P2[,i] ~ multinomial(noisy_incidence[1:2,i]/total_A);
 
     }
   }
   else{
     for(i in 1:num_data){
-      total_ILI[i] = sum(exp(a[,i]));
+      total_ILI[i] = sum(exp(log_incidence[,i]));
 
-      total_A   = sum(exp(a[1:2,i]));
+      total_A   = sum(exp(log_incidence[1:2,i]));
 
       theta[1]  = total_A;
-      theta[2:(num_path-1)] = exp(a[3:num_path,i]);
+      theta[2:(num_path-1)] = exp(log_incidence[3:num_path,i]);
 
       P1[,i] ~ multinomial(theta/total_ILI[i]);
-      P2[,i] ~ multinomial(exp(a[1:2,i])/total_A);
+      P2[,i] ~ multinomial(exp(log_incidence[1:2,i])/total_A);
     }
   }
 

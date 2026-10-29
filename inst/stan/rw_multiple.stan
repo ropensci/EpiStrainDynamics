@@ -46,9 +46,9 @@ transformed data {
 }
 
 parameters {
-  matrix[num_path, num_data] a;
+  matrix[num_path, num_data] log_incidence;
 
-  matrix<lower=0>[cols,rows] c;
+  matrix<lower=0>[cols,rows] noisy_incidence;
   array[noise_structure==1 ? 1: 0] real<lower=0> eta;
 
   real<lower=0> phi;
@@ -65,17 +65,17 @@ model {
   // Second-order random walk prior
   if(cov_structure==2){
     for(i in 3:num_data)
-      a[,i] ~ multi_normal(2*a[,(i-1)] - a[,(i-2)], Sigma);
+      log_incidence[,i] ~ multi_normal(2*log_incidence[,(i-1)] - log_incidence[,(i-2)], Sigma);
   }
 
   else if(cov_structure==1){
     for(i in 1:num_path)
-      a[i,3:num_data] ~ normal(2*a[i,2:(num_data-1)] - a[i,1:(num_data-2)], tau[i]);
+      log_incidence[i,3:num_data] ~ normal(2*log_incidence[i,2:(num_data-1)] - log_incidence[i,1:(num_data-2)], tau[i]);
   }
 
   else{
     for(i in 1:num_path)
-      a[i,3:num_data] ~ normal(2*a[i,2:(num_data-1)] - a[i,1:(num_data-2)], tau[1]);
+      log_incidence[i,3:num_data] ~ normal(2*log_incidence[i,2:(num_data-1)] - log_incidence[i,1:(num_data-2)], tau[1]);
   }
 
   // Prior on phi
@@ -96,17 +96,17 @@ model {
 
   if(noise_structure==1){
     for(i in 1:num_path){
-      c[i,] ~ gamma(exp(a[i,])*eta[1], eta[1]);
+      noisy_incidence[i,] ~ gamma(exp(log_incidence[i,])*eta[1], eta[1]);
     }
     for(i in 1:num_data){
-      total_ILI[i] = sum(c[,i]);
-      P[,i] ~ multinomial(c[,i]/total_ILI[i]);
+      total_ILI[i] = sum(noisy_incidence[,i]);
+      P[,i] ~ multinomial(noisy_incidence[,i]/total_ILI[i]);
     }
   }
   else{
     for(i in 1:num_data){
-      total_ILI[i] = sum(exp(a[,i]));
-      P[,i] ~ multinomial(exp(a[,i])/total_ILI[i]);
+      total_ILI[i] = sum(exp(log_incidence[,i]));
+      P[,i] ~ multinomial(exp(log_incidence[,i])/total_ILI[i]);
     }
   }
 

@@ -93,9 +93,9 @@ transformed data {
 }
 
 parameters {
-  matrix[num_path, num_basis] a;
+  matrix[num_path, num_basis] b_spline_coef;
 
-  matrix<lower=0>[cols,rows] c_new;
+  matrix<lower=0>[cols,rows] noisy_incidence;
   array[noise_structure==1 ? 1: 0] real<lower=0> eta;
 
   real<lower=0> phi;
@@ -109,10 +109,10 @@ parameters {
 
 
 transformed parameters {
-  matrix[num_path, num_data] a_new;
+  matrix[num_path, num_data] log_incidence;
 
   for (i in 1:num_path)
-    a_new[i,] =  a[i,]*B;
+    log_incidence[i,] =  b_spline_coef[i,]*B;
 }
 
 model {
@@ -120,17 +120,17 @@ model {
   // Second-order random walk prior on b-spline coefficients
   if(cov_structure==2){
     for(i in 3:num_basis)
-      a[,i] ~ multi_normal(2*a[,(i-1)] - a[,(i-2)], Sigma);
+      b_spline_coef[,i] ~ multi_normal(2*b_spline_coef[,(i-1)] - b_spline_coef[,(i-2)], Sigma);
   }
 
   else if(cov_structure==1){
     for(i in 1:num_path)
-      a[i,3:num_basis] ~ normal(2*a[i,2:(num_basis-1)] - a[i,1:(num_basis-2)], tau[i]);
+      b_spline_coef[i,3:num_basis] ~ normal(2*b_spline_coef[i,2:(num_basis-1)] - b_spline_coef[i,1:(num_basis-2)], tau[i]);
   }
 
   else{
     for(i in 1:num_path)
-      a[i,3:num_basis] ~ normal(2*a[i,2:(num_basis-1)] - a[i,1:(num_basis-2)], tau[1]);
+      b_spline_coef[i,3:num_basis] ~ normal(2*b_spline_coef[i,2:(num_basis-1)] - b_spline_coef[i,1:(num_basis-2)], tau[1]);
   }
   
   // Prior on phi
@@ -154,33 +154,33 @@ model {
 
   if(noise_structure==1){
     for(i in 1:num_path){
-      c_new[i,] ~ gamma(exp(a_new[i,])*eta[1], eta[1]);
+      noisy_incidence[i,] ~ gamma(exp(log_incidence[i,])*eta[1], eta[1]);
     }
 
     for(i in 1:num_data){
-      total_ILI[i] = sum(c_new[,i]);
+      total_ILI[i] = sum(noisy_incidence[,i]);
 
-      total_A   = sum(c_new[1:2,i]);
+      total_A   = sum(noisy_incidence[1:2,i]);
 
       theta[1]  = total_A;
-      theta[2:(num_path-1)] = c_new[3:num_path,i];
+      theta[2:(num_path-1)] = noisy_incidence[3:num_path,i];
 
       P1[,i] ~ multinomial(theta/total_ILI[i]);
-      P2[,i] ~ multinomial(c_new[1:2,i]/total_A);
+      P2[,i] ~ multinomial(noisy_incidence[1:2,i]/total_A);
 
     }
   }
   else{
     for(i in 1:num_data){
-      total_ILI[i] = sum(exp(a_new[,i]));
+      total_ILI[i] = sum(exp(log_incidence[,i]));
 
-      total_A   = sum(exp(a_new[1:2,i]));
+      total_A   = sum(exp(log_incidence[1:2,i]));
 
       theta[1]  = total_A;
-      theta[2:(num_path-1)] = exp(a_new[3:num_path,i]);
+      theta[2:(num_path-1)] = exp(log_incidence[3:num_path,i]);
 
       P1[,i] ~ multinomial(theta/total_ILI[i]);
-      P2[,i] ~ multinomial(exp(a_new[1:2,i])/total_A);
+      P2[,i] ~ multinomial(exp(log_incidence[1:2,i])/total_A);
     }
   }
 
