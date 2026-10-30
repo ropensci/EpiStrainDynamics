@@ -49,8 +49,8 @@ The `subtyped()` pathogen structure enables additional complexity specifically f
 ```
 pathogen_structure = subtyped(
   data = influenza,                            # dataframe
-  case_timeseries = ili,                       # timeseries of case data
-  time = week,                                 # date or time variable labels
+  case_timeseries = 'ili',                     # timeseries of case data
+  time = 'week',                               # date or time variable labels
 
   parent_timeseries = 'inf_A',                 # total influenza A
   subtyped_timeseries = c(                     # influenza A subtypes
@@ -169,7 +169,7 @@ fit <- fit_model(
 #> Warning: There were 4 chains where the estimated Bayesian Fraction of Missing Information was low. See
 #> https://mc-stan.org/misc/warnings.html#bfmi-low
 #> Warning: Examine the pairs() plot to diagnose sampling problems
-#> Warning: The largest R-hat is 2.54, indicating chains have not mixed.
+#> Warning: The largest R-hat is 2.39, indicating chains have not mixed.
 #> Running the chains for more iterations may help. See
 #> https://mc-stan.org/misc/warnings.html#r-hat
 #> Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
@@ -192,8 +192,8 @@ diagnose_model(fit)
 #> Model Convergence Diagnostics
 #> =============================
 #> Overall convergence: ISSUES DETECTED 
-#> Maximum R-hat: 3.45 
-#> Minimum n_eff: 2
+#> Maximum R-hat: 3.756 
+#> Minimum n_eff: 3
 ```
 
 Beyond this summary, the stan fit object can be interrogated with any package that works with stan outputs. For example, one could visualise posteriors with the package `bayesplot`:
@@ -209,7 +209,7 @@ The `bayesplot` package can also be used to evaluate convergence:
 
 
 ``` r
-bayesplot::mcmc_trace(rstan::extract(fit$fit, permuted = FALSE), pars = c("a[1,1]"))
+bayesplot::mcmc_trace(rstan::extract(fit$fit, permuted = FALSE), pars = c("log_incidence[1,1]"))
 ```
 
 ![plot of chunk unnamed-chunk-6](figures/Using-EpiStrainDynamics-unnamed-chunk-6-1.png)
@@ -238,14 +238,14 @@ gr <- growth_rate(fit)
 head(gr$measure)
 #> # A tsibble: 6 x 9 [7D]
 #> # Key:       pathogen [1]
-#>   pathogen pathogen_idx        y   lb_50  ub_50   lb_95 ub_95  prop
-#>   <chr>           <int>    <dbl>   <dbl>  <dbl>   <dbl> <dbl> <dbl>
-#> 1 Total              NA  0.220    0.161  0.275   0.0570 0.599 0.975
-#> 2 Total              NA  0.163    0.0725 0.236  -0.115  0.477 0.925
-#> 3 Total              NA  0.113    0.0294 0.177  -0.164  0.272 0.825
-#> 4 Total              NA  0.0546  -0.0242 0.130  -0.180  0.239 0.675
-#> 5 Total              NA  0.00562 -0.0626 0.116  -0.220  0.230 0.5  
-#> 6 Total              NA -0.0289  -0.0776 0.0615 -0.168  0.150 0.4  
+#>   pathogen pathogen_idx      y     lb_50  ub_50   lb_95 ub_95  prop
+#>   <chr>           <int>  <dbl>     <dbl>  <dbl>   <dbl> <dbl> <dbl>
+#> 1 Total              NA 0.0839  0.0370   0.211  -0.0493 0.483 0.85 
+#> 2 Total              NA 0.0615  0.0202   0.173  -0.0584 0.394 0.775
+#> 3 Total              NA 0.0386 -0.00857  0.165  -0.0585 0.383 0.725
+#> 4 Total              NA 0.0328  0.000180 0.139  -0.166  0.463 0.75 
+#> 5 Total              NA 0.0364 -0.0143   0.101  -0.227  0.508 0.675
+#> 6 Total              NA 0.0192 -0.0273   0.0840 -0.213  0.245 0.625
 #> # ℹ 1 more variable: time <date>
 plot(gr)
 ```
@@ -320,12 +320,12 @@ fit_covid <- fit_model(
 #> ℹ With `n_iter` = 20, `n_warmup` = 10, `thin` = 1, and `n_chain` = 4
 #> ℹ Only 40 samples will be retained
 #> ℹ Consider reducing `thin` or increasing `n_iter`
-#> Warning: There were 9 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 10. See
+#> Warning: There were 4 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 10. See
 #> https://mc-stan.org/misc/warnings.html#maximum-treedepth-exceeded
 #> Warning: There were 4 chains where the estimated Bayesian Fraction of Missing Information was low. See
 #> https://mc-stan.org/misc/warnings.html#bfmi-low
 #> Warning: Examine the pairs() plot to diagnose sampling problems
-#> Warning: The largest R-hat is 4.08, indicating chains have not mixed.
+#> Warning: The largest R-hat is 4.6, indicating chains have not mixed.
 #> Running the chains for more iterations may help. See
 #> https://mc-stan.org/misc/warnings.html#r-hat
 #> Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.

@@ -146,7 +146,23 @@ maximum integer supported by R.}
 }
 \value{
 fit model of class \code{EpiStrainDynamics.fit}, or if fitting fails,
-an error is raised that can be caught and inspected.
+an error is raised that can be caught and inspected. Its \code{fit} element is
+the \code{stanfit} object, whose main parameters are:
+\itemize{
+\item \code{log_incidence}: the latent log-incidence trend, indexed \verb{[time]} for
+single pathogen models and \verb{[pathogen, time]} otherwise. In p-spline
+models it is derived from \code{b_spline_coef}.
+\item \code{b_spline_coef}: the B-spline coefficients (p-spline models only).
+\item \code{noisy_incidence}: per-pathogen incidence with gamma noise around
+\code{exp(log_incidence)}, and \code{eta}, the shared inverse dispersion of that
+noise (only when \code{pathogen_noise = TRUE}).
+\item \code{phi}: the inverse dispersion of the negative binomial observation
+model.
+\item \code{tau} or \code{Sigma}: the smoothing standard deviation(s) or covariance
+matrix, depending on the smoothing structure.
+\item \code{day_of_week_simplex}: the day-of-week effect (only when
+\code{dow_effect = TRUE}).
+}
 }
 \description{
 S3 generic for fitted models from constructed model object
