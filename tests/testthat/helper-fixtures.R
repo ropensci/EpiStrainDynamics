@@ -1,6 +1,6 @@
 # tests/testthat/helper-fixtures.R
 # Downloads pre-fitted model fixtures from GitHub Release via piggyback.
-# Files that use these: test-diagnose-model.R, test-metrics.R,
+# Files that use these: test-diagnose_model.R, test-metrics.R,
 # test-plot.R, test-extended-regression.R
 
 skip_if_no_extended_fixtures <- function() {
@@ -28,7 +28,7 @@ download_ok <- tryCatch(
   {
     piggyback::pb_download(
       repo      = "ropensci/epistraindynamics",
-      tag       = "test-fixtures-v1",
+      tag       = "test-fixtures-v2",
       dest      = fixture_dir,
       overwrite = TRUE
     )

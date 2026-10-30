@@ -20,6 +20,15 @@
   previous name suggested it took only the unsubtyped cases (#80). Any code
   calling `subtyped()` with these named arguments will need to update the
   argument names.
+* The Stan model parameters have descriptive names (#82). `a` is now
+  `log_incidence` in random walk models and `b_spline_coef` in p-spline
+  models, where the trajectory `a_new` is now `log_incidence`; `c` and
+  `c_new` are now `noisy_incidence`. Previously `a` meant the trajectory in
+  one method and the spline coefficients in the other; now
+  `log_incidence` is the latent log-incidence trend in every model. Code
+  that reads the `stanfit` object in `fit$fit` directly (e.g. with
+  `bayesplot` or `rstan::summary()`) will need to use the new names;
+  `incidence()`, `growth_rate()`, `Rt()` and `proportion()` are unaffected.
 
 ## Bug fixes
 

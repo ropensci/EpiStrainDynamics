@@ -63,8 +63,8 @@ The `subtyped()` pathogen structure enables additional complexity specifically f
 ```
 pathogen_structure = subtyped(
   data = influenza,                            # dataframe
-  case_timeseries = ili,                       # timeseries of case data
-  time = week,                                 # date or time variable labels
+  case_timeseries = 'ili',                     # timeseries of case data
+  time = 'week',                               # date or time variable labels
 
   parent_timeseries = 'inf_A',                 # total influenza A
   subtyped_timeseries = c(                     # influenza A subtypes
@@ -195,7 +195,7 @@ bayesplot::mcmc_areas(as.matrix(fit$fit), pars = "tau[1]", prob = 0.8)
 The `bayesplot` package can also be used to evaluate convergence:
 
 ```{r}
-bayesplot::mcmc_trace(rstan::extract(fit$fit, permuted = FALSE), pars = c("a[1,1]"))
+bayesplot::mcmc_trace(rstan::extract(fit$fit, permuted = FALSE), pars = c("log_incidence[1,1]"))
 ```
 
 Or else the application `shinystan` is a great tool to visualise the fit and diagnose issues:

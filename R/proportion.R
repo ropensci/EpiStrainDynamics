@@ -173,7 +173,7 @@ compute_proportion <- function(fitted_model,
       components$num_days
     )
   } else {
-    a <- post$a
+    a <- post$log_incidence
   }
 
   extra_args <- list(...)

@@ -29,23 +29,23 @@ using namespace stan::math;
 stan::math::profile_map profiles__;
 static constexpr std::array<const char*, 70> locations_array__ =
   {" (found before start of program)",
-  " (in 'ps_single', line 71, column 2 to column 26)",
+  " (in 'ps_single', line 71, column 2 to column 38)",
   " (in 'ps_single', line 73, column 2 to column 20)",
   " (in 'ps_single', line 75, column 2 to column 20)",
   " (in 'ps_single', line 77, column 2 to column 43)",
-  " (in 'ps_single', line 80, column 2 to column 29)",
-  " (in 'ps_single', line 81, column 4 to column 17)",
-  " (in 'ps_single', line 86, column 2 to column 74)",
+  " (in 'ps_single', line 80, column 2 to column 37)",
+  " (in 'ps_single', line 81, column 4 to column 37)",
+  " (in 'ps_single', line 86, column 2 to column 110)",
   " (in 'ps_single', line 90, column 4 to column 35)",
   " (in 'ps_single', line 89, column 29 to line 91, column 3)",
   " (in 'ps_single', line 89, column 2 to line 91, column 3)",
   " (in 'ps_single', line 94, column 4 to column 35)",
   " (in 'ps_single', line 93, column 29 to line 95, column 3)",
   " (in 'ps_single', line 93, column 2 to line 95, column 3)",
-  " (in 'ps_single', line 104, column 6 to column 90)",
-  " (in 'ps_single', line 103, column 4 to line 104, column 90)",
+  " (in 'ps_single', line 104, column 6 to column 98)",
+  " (in 'ps_single', line 103, column 4 to line 104, column 98)",
   " (in 'ps_single', line 102, column 6 to line 105, column 3)",
-  " (in 'ps_single', line 100, column 4 to column 42)",
+  " (in 'ps_single', line 100, column 4 to column 50)",
   " (in 'ps_single', line 99, column 22 to line 101, column 3)",
   " (in 'ps_single', line 99, column 2 to line 105, column 3)",
   " (in 'ps_single', line 43, column 2 to column 15)",
@@ -54,12 +54,12 @@ static constexpr std::array<const char*, 70> locations_array__ =
   " (in 'ps_single', line 45, column 2 to column 26)",
   " (in 'ps_single', line 46, column 2 to column 20)",
   " (in 'ps_single', line 47, column 8 to column 16)",
-  " (in 'ps_single', line 47, column 2 to column 18)",
-  " (in 'ps_single', line 48, column 9 to column 17)",
-  " (in 'ps_single', line 48, column 2 to column 19)",
+  " (in 'ps_single', line 47, column 2 to column 24)",
+  " (in 'ps_single', line 48, column 8 to column 16)",
+  " (in 'ps_single', line 48, column 2 to column 25)",
   " (in 'ps_single', line 49, column 2 to column 18)",
-  " (in 'ps_single', line 50, column 10 to column 18)",
-  " (in 'ps_single', line 50, column 2 to column 20)",
+  " (in 'ps_single', line 50, column 8 to column 16)",
+  " (in 'ps_single', line 50, column 2 to column 26)",
   " (in 'ps_single', line 52, column 2 to column 26)",
   " (in 'ps_single', line 53, column 2 to column 25)",
   " (in 'ps_single', line 54, column 2 to column 23)",
@@ -97,7 +97,7 @@ static constexpr std::array<const char*, 70> locations_array__ =
   " (in 'ps_single', line 26, column 6 to line 27, column 72)",
   " (in 'ps_single', line 25, column 4 to line 38, column 5)",
   " (in 'ps_single', line 39, column 4 to column 20)",
-  " (in 'ps_single', line 16, column 72 to line 40, column 3)"};
+  " (in 'ps_single', line 16, column 84 to line 40, column 3)"};
 template <typename T0__, typename T1__,
           stan::require_all_t<stan::is_stan_scalar<T0__>,
                               stan::is_stan_scalar<T1__>>* = nullptr>
@@ -437,12 +437,14 @@ public:
           stan::model::index_uni(ind), stan::model::index_omni());
       }
       current_statement__ = 50;
-      stan::math::validate_non_negative_index("a", "num_basis", num_basis);
+      stan::math::validate_non_negative_index("b_spline_coef", "num_basis",
+        num_basis);
       current_statement__ = 51;
       stan::math::validate_positive_index("day_of_week_simplex",
         "week_effect", week_effect);
       current_statement__ = 52;
-      stan::math::validate_non_negative_index("a_new", "num_data", num_data);
+      stan::math::validate_non_negative_index("log_incidence", "num_data",
+        num_data);
     } catch (const std::exception& e) {
       stan::lang::rethrow_located(e, locations_array__[current_statement__]);
     }
@@ -475,11 +477,12 @@ public:
     // suppress unused var warning
     (void) function__;
     try {
-      Eigen::Matrix<local_scalar_t__,1,-1> a =
+      Eigen::Matrix<local_scalar_t__,1,-1> b_spline_coef =
         Eigen::Matrix<local_scalar_t__,1,-1>::Constant(num_basis,
           DUMMY_VAR__);
       current_statement__ = 1;
-      a = in__.template read<Eigen::Matrix<local_scalar_t__,1,-1>>(num_basis);
+      b_spline_coef = in__.template read<
+                        Eigen::Matrix<local_scalar_t__,1,-1>>(num_basis);
       local_scalar_t__ phi = DUMMY_VAR__;
       current_statement__ = 2;
       phi = in__.template read_constrain_lb<local_scalar_t__, jacobian__>(0,
@@ -495,21 +498,24 @@ public:
       day_of_week_simplex = in__.template read_constrain_simplex<
                               Eigen::Matrix<local_scalar_t__,-1,1>,
                               jacobian__>(lp__, week_effect);
-      Eigen::Matrix<local_scalar_t__,1,-1> a_new =
+      Eigen::Matrix<local_scalar_t__,1,-1> log_incidence =
         Eigen::Matrix<local_scalar_t__,1,-1>::Constant(num_data, DUMMY_VAR__);
       current_statement__ = 6;
-      stan::model::assign(a_new, stan::math::multiply(a, B),
-        "assigning variable a_new");
+      stan::model::assign(log_incidence,
+        stan::math::multiply(b_spline_coef, B),
+        "assigning variable log_incidence");
       {
         current_statement__ = 7;
         lp_accum__.add(stan::math::normal_lpdf<propto__>(
-                         stan::model::rvalue(a, "a",
+                         stan::model::rvalue(b_spline_coef, "b_spline_coef",
                            stan::model::index_min_max(3, num_basis)),
                          stan::math::subtract(
                            stan::math::multiply(2,
-                             stan::model::rvalue(a, "a",
+                             stan::model::rvalue(b_spline_coef,
+                               "b_spline_coef",
                                stan::model::index_min_max(2, (num_basis - 1)))),
-                           stan::model::rvalue(a, "a",
+                           stan::model::rvalue(b_spline_coef,
+                             "b_spline_coef",
                              stan::model::index_min_max(1, (num_basis - 2)))),
                          tau));
         current_statement__ = 10;
@@ -528,8 +534,8 @@ public:
         if (stan::math::logical_eq(week_effect, 1)) {
           current_statement__ = 17;
           lp_accum__.add(stan::math::neg_binomial_lpmf<propto__>(Y,
-                           stan::math::multiply(stan::math::exp(a_new), phi),
-                           phi));
+                           stan::math::multiply(
+                             stan::math::exp(log_incidence), phi), phi));
         } else {
           current_statement__ = 15;
           for (int i = 1; i <= num_data; ++i) {
@@ -538,7 +544,8 @@ public:
                              stan::model::rvalue(Y, "Y",
                                stan::model::index_uni(i)),
                              (((stan::math::exp(
-                                  stan::model::rvalue(a_new, "a_new",
+                                  stan::model::rvalue(log_incidence,
+                                    "log_incidence",
                                     stan::model::index_uni(i))) * phi) *
                              week_effect) *
                              stan::model::rvalue(day_of_week_simplex,
@@ -586,11 +593,12 @@ public:
     // suppress unused var warning
     (void) function__;
     try {
-      Eigen::Matrix<double,1,-1> a =
+      Eigen::Matrix<double,1,-1> b_spline_coef =
         Eigen::Matrix<double,1,-1>::Constant(num_basis,
           std::numeric_limits<double>::quiet_NaN());
       current_statement__ = 1;
-      a = in__.template read<Eigen::Matrix<local_scalar_t__,1,-1>>(num_basis);
+      b_spline_coef = in__.template read<
+                        Eigen::Matrix<local_scalar_t__,1,-1>>(num_basis);
       double phi = std::numeric_limits<double>::quiet_NaN();
       current_statement__ = 2;
       phi = in__.template read_constrain_lb<local_scalar_t__, jacobian__>(0,
@@ -606,10 +614,10 @@ public:
       day_of_week_simplex = in__.template read_constrain_simplex<
                               Eigen::Matrix<local_scalar_t__,-1,1>,
                               jacobian__>(lp__, week_effect);
-      Eigen::Matrix<double,1,-1> a_new =
+      Eigen::Matrix<double,1,-1> log_incidence =
         Eigen::Matrix<double,1,-1>::Constant(num_data,
           std::numeric_limits<double>::quiet_NaN());
-      out__.write(a);
+      out__.write(b_spline_coef);
       out__.write(phi);
       out__.write(tau);
       out__.write(day_of_week_simplex);
@@ -619,10 +627,11 @@ public:
         return ;
       }
       current_statement__ = 6;
-      stan::model::assign(a_new, stan::math::multiply(a, B),
-        "assigning variable a_new");
+      stan::model::assign(log_incidence,
+        stan::math::multiply(b_spline_coef, B),
+        "assigning variable log_incidence");
       if (emit_transformed_parameters__) {
-        out__.write(a_new);
+        out__.write(log_incidence);
       }
       if (stan::math::logical_negation(emit_generated_quantities__)) {
         return ;
@@ -647,14 +656,14 @@ public:
     try {
       int pos__ = std::numeric_limits<int>::min();
       pos__ = 1;
-      Eigen::Matrix<local_scalar_t__,1,-1> a =
+      Eigen::Matrix<local_scalar_t__,1,-1> b_spline_coef =
         Eigen::Matrix<local_scalar_t__,1,-1>::Constant(num_basis,
           DUMMY_VAR__);
       current_statement__ = 1;
-      stan::model::assign(a,
+      stan::model::assign(b_spline_coef,
         in__.read<Eigen::Matrix<local_scalar_t__,1,-1>>(num_basis),
-        "assigning variable a");
-      out__.write(a);
+        "assigning variable b_spline_coef");
+      out__.write(b_spline_coef);
       local_scalar_t__ phi = DUMMY_VAR__;
       current_statement__ = 2;
       phi = in__.read<local_scalar_t__>();
@@ -687,8 +696,8 @@ public:
     (void) DUMMY_VAR__;
     try {
       current_statement__ = 1;
-      context__.validate_dims("parameter initialization", "a", "double",
-        std::vector<size_t>{static_cast<size_t>(num_basis)});
+      context__.validate_dims("parameter initialization", "b_spline_coef",
+        "double", std::vector<size_t>{static_cast<size_t>(num_basis)});
       current_statement__ = 2;
       context__.validate_dims("parameter initialization", "phi", "double",
         std::vector<size_t>{});
@@ -701,25 +710,26 @@ public:
         std::vector<size_t>{static_cast<size_t>(week_effect)});
       int pos__ = std::numeric_limits<int>::min();
       pos__ = 1;
-      Eigen::Matrix<local_scalar_t__,1,-1> a =
+      Eigen::Matrix<local_scalar_t__,1,-1> b_spline_coef =
         Eigen::Matrix<local_scalar_t__,1,-1>::Constant(num_basis,
           DUMMY_VAR__);
       {
-        std::vector<local_scalar_t__> a_flat__;
+        std::vector<local_scalar_t__> b_spline_coef_flat__;
         current_statement__ = 1;
-        a_flat__ = context__.vals_r("a");
+        b_spline_coef_flat__ = context__.vals_r("b_spline_coef");
         current_statement__ = 1;
         pos__ = 1;
         current_statement__ = 1;
         for (int sym1__ = 1; sym1__ <= num_basis; ++sym1__) {
           current_statement__ = 1;
-          stan::model::assign(a, a_flat__[(pos__ - 1)],
-            "assigning variable a", stan::model::index_uni(sym1__));
+          stan::model::assign(b_spline_coef, b_spline_coef_flat__[(pos__ -
+            1)], "assigning variable b_spline_coef",
+            stan::model::index_uni(sym1__));
           current_statement__ = 1;
           pos__ = (pos__ + 1);
         }
       }
-      out__.write(a);
+      out__.write(b_spline_coef);
       local_scalar_t__ phi = DUMMY_VAR__;
       current_statement__ = 2;
       phi = context__.vals_r("phi")[(1 - 1)];
@@ -757,10 +767,10 @@ public:
   get_param_names(std::vector<std::string>& names__, const bool
                   emit_transformed_parameters__ = true, const bool
                   emit_generated_quantities__ = true) const {
-    names__ = std::vector<std::string>{"a", "phi", "tau",
+    names__ = std::vector<std::string>{"b_spline_coef", "phi", "tau",
                 "day_of_week_simplex"};
     if (emit_transformed_parameters__) {
-      std::vector<std::string> temp{"a_new"};
+      std::vector<std::string> temp{"log_incidence"};
       names__.reserve(names__.size() + temp.size());
       names__.insert(names__.end(), temp.begin(), temp.end());
     }
@@ -788,7 +798,7 @@ public:
                           emit_transformed_parameters__ = true, bool
                           emit_generated_quantities__ = true) const final {
     for (int sym1__ = 1; sym1__ <= num_basis; ++sym1__) {
-      param_names__.emplace_back(std::string() + "a" + '.' +
+      param_names__.emplace_back(std::string() + "b_spline_coef" + '.' +
         std::to_string(sym1__));
     }
     param_names__.emplace_back(std::string() + "phi");
@@ -799,7 +809,7 @@ public:
     }
     if (emit_transformed_parameters__) {
       for (int sym1__ = 1; sym1__ <= num_data; ++sym1__) {
-        param_names__.emplace_back(std::string() + "a_new" + '.' +
+        param_names__.emplace_back(std::string() + "log_incidence" + '.' +
           std::to_string(sym1__));
       }
     }
@@ -810,7 +820,7 @@ public:
                             emit_transformed_parameters__ = true, bool
                             emit_generated_quantities__ = true) const final {
     for (int sym1__ = 1; sym1__ <= num_basis; ++sym1__) {
-      param_names__.emplace_back(std::string() + "a" + '.' +
+      param_names__.emplace_back(std::string() + "b_spline_coef" + '.' +
         std::to_string(sym1__));
     }
     param_names__.emplace_back(std::string() + "phi");
@@ -821,17 +831,17 @@ public:
     }
     if (emit_transformed_parameters__) {
       for (int sym1__ = 1; sym1__ <= num_data; ++sym1__) {
-        param_names__.emplace_back(std::string() + "a_new" + '.' +
+        param_names__.emplace_back(std::string() + "log_incidence" + '.' +
           std::to_string(sym1__));
       }
     }
     if (emit_generated_quantities__) {}
   }
   inline std::string get_constrained_sizedtypes() const {
-    return std::string("[{\"name\":\"a\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(num_basis) + "},\"block\":\"parameters\"},{\"name\":\"phi\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"tau\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"day_of_week_simplex\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(week_effect) + "},\"block\":\"parameters\"},{\"name\":\"a_new\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(num_data) + "},\"block\":\"transformed_parameters\"}]");
+    return std::string("[{\"name\":\"b_spline_coef\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(num_basis) + "},\"block\":\"parameters\"},{\"name\":\"phi\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"tau\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"day_of_week_simplex\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(week_effect) + "},\"block\":\"parameters\"},{\"name\":\"log_incidence\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(num_data) + "},\"block\":\"transformed_parameters\"}]");
   }
   inline std::string get_unconstrained_sizedtypes() const {
-    return std::string("[{\"name\":\"a\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(num_basis) + "},\"block\":\"parameters\"},{\"name\":\"phi\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"tau\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"day_of_week_simplex\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string((week_effect -1)) + "},\"block\":\"parameters\"},{\"name\":\"a_new\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(num_data) + "},\"block\":\"transformed_parameters\"}]");
+    return std::string("[{\"name\":\"b_spline_coef\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(num_basis) + "},\"block\":\"parameters\"},{\"name\":\"phi\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"tau\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"day_of_week_simplex\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string((week_effect -1)) + "},\"block\":\"parameters\"},{\"name\":\"log_incidence\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(num_data) + "},\"block\":\"transformed_parameters\"}]");
   }
   // Begin method overload boilerplate
   template <typename RNG> inline void

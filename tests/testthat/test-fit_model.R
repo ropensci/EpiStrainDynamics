@@ -298,13 +298,13 @@ test_that("posterior samples have correct dimensions for single pathogen", {
 
   post <- rstan::extract(fit$fit)
 
-  # Check "a" dimension: [samples, time]
-  expect_equal(length(dim(post$a)), 2)
-  expect_equal(ncol(post$a), 30) # n_days
+  # Check "log_incidence" dimension: [samples, time]
+  expect_equal(length(dim(post$log_incidence)), 2)
+  expect_equal(ncol(post$log_incidence), 30) # n_days
 
   # Check we have the right number of posterior samples
   # (n_iter - n_warmup) * n_chain = (600 - 200) * 2 = 800
-  expect_equal(nrow(post$a), 800)
+  expect_equal(nrow(post$log_incidence), 800)
 })
 
 test_that("posterior samples have correct dimensions for multiple pathogens", {
@@ -328,11 +328,11 @@ test_that("posterior samples have correct dimensions for multiple pathogens", {
 
   post <- rstan::extract(fit$fit)
 
-  # Check "a" dimension: [samples, pathogens, time]
-  expect_equal(length(dim(post$a)), 3)
-  expect_equal(dim(post$a)[2], 4) # n_pathogens
-  expect_equal(dim(post$a)[3], 30) # n_days
-  expect_equal(dim(post$a)[1], 800) # posterior samples
+  # Check "log_incidence" dimension: [samples, pathogens, time]
+  expect_equal(length(dim(post$log_incidence)), 3)
+  expect_equal(dim(post$log_incidence)[2], 4) # n_pathogens
+  expect_equal(dim(post$log_incidence)[3], 30) # n_days
+  expect_equal(dim(post$log_incidence)[1], 800) # posterior samples
 })
 
 # ==============================================================================

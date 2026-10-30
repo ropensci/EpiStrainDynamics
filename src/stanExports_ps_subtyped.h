@@ -29,69 +29,69 @@ using namespace stan::math;
 stan::math::profile_map profiles__;
 static constexpr std::array<const char*, 140> locations_array__ =
   {" (found before start of program)",
-  " (in 'ps_subtyped', line 85, column 2 to column 32)",
-  " (in 'ps_subtyped', line 86, column 2 to column 35)",
-  " (in 'ps_subtyped', line 87, column 2 to column 48)",
-  " (in 'ps_subtyped', line 88, column 2 to column 20)",
-  " (in 'ps_subtyped', line 89, column 2 to column 74)",
-  " (in 'ps_subtyped', line 90, column 2 to column 50)",
-  " (in 'ps_subtyped', line 91, column 2 to column 43)",
-  " (in 'ps_subtyped', line 94, column 2 to column 35)",
-  " (in 'ps_subtyped', line 96, column 4 to column 25)",
-  " (in 'ps_subtyped', line 95, column 2 to line 96, column 25)",
-  " (in 'ps_subtyped', line 111, column 6 to column 87)",
-  " (in 'ps_subtyped', line 110, column 4 to line 111, column 87)",
-  " (in 'ps_subtyped', line 109, column 6 to line 112, column 3)",
-  " (in 'ps_subtyped', line 107, column 6 to column 87)",
-  " (in 'ps_subtyped', line 106, column 4 to line 107, column 87)",
-  " (in 'ps_subtyped', line 105, column 27 to line 108, column 3)",
-  " (in 'ps_subtyped', line 105, column 7 to line 112, column 3)",
-  " (in 'ps_subtyped', line 103, column 6 to column 59)",
-  " (in 'ps_subtyped', line 102, column 4 to line 103, column 59)",
-  " (in 'ps_subtyped', line 101, column 22 to line 104, column 3)",
-  " (in 'ps_subtyped', line 101, column 2 to line 112, column 3)",
-  " (in 'ps_subtyped', line 116, column 4 to column 35)",
-  " (in 'ps_subtyped', line 115, column 29 to line 117, column 3)",
-  " (in 'ps_subtyped', line 115, column 2 to line 117, column 3)",
-  " (in 'ps_subtyped', line 121, column 4 to column 35)",
-  " (in 'ps_subtyped', line 120, column 29 to line 122, column 3)",
-  " (in 'ps_subtyped', line 120, column 2 to line 122, column 3)",
-  " (in 'ps_subtyped', line 127, column 17 to column 25)",
-  " (in 'ps_subtyped', line 127, column 2 to column 27)",
-  " (in 'ps_subtyped', line 128, column 2 to column 15)",
-  " (in 'ps_subtyped', line 129, column 9 to column 19)",
-  " (in 'ps_subtyped', line 129, column 2 to column 27)",
-  " (in 'ps_subtyped', line 145, column 6 to column 41)",
-  " (in 'ps_subtyped', line 146, column 6 to column 41)",
-  " (in 'ps_subtyped', line 147, column 6 to column 26)",
-  " (in 'ps_subtyped', line 148, column 6 to column 55)",
-  " (in 'ps_subtyped', line 149, column 6 to column 47)",
-  " (in 'ps_subtyped', line 150, column 6 to column 54)",
-  " (in 'ps_subtyped', line 144, column 24 to line 151, column 5)",
-  " (in 'ps_subtyped', line 144, column 4 to line 151, column 5)",
-  " (in 'ps_subtyped', line 143, column 6 to line 152, column 3)",
-  " (in 'ps_subtyped', line 132, column 6 to column 55)",
-  " (in 'ps_subtyped', line 131, column 24 to line 133, column 5)",
-  " (in 'ps_subtyped', line 131, column 4 to line 133, column 5)",
-  " (in 'ps_subtyped', line 135, column 6 to column 36)",
-  " (in 'ps_subtyped', line 136, column 6 to column 36)",
-  " (in 'ps_subtyped', line 137, column 6 to column 26)",
-  " (in 'ps_subtyped', line 138, column 6 to column 50)",
-  " (in 'ps_subtyped', line 139, column 6 to column 47)",
-  " (in 'ps_subtyped', line 140, column 6 to column 49)",
-  " (in 'ps_subtyped', line 134, column 24 to line 141, column 5)",
-  " (in 'ps_subtyped', line 134, column 4 to line 141, column 5)",
-  " (in 'ps_subtyped', line 130, column 24 to line 142, column 3)",
-  " (in 'ps_subtyped', line 130, column 2 to line 152, column 3)",
-  " (in 'ps_subtyped', line 160, column 6 to column 89)",
-  " (in 'ps_subtyped', line 159, column 24 to line 161, column 7)",
-  " (in 'ps_subtyped', line 159, column 4 to line 161, column 7)",
-  " (in 'ps_subtyped', line 158, column 6 to line 162, column 3)",
-  " (in 'ps_subtyped', line 155, column 6 to column 49)",
-  " (in 'ps_subtyped', line 154, column 24 to line 156, column 7)",
-  " (in 'ps_subtyped', line 154, column 4 to line 156, column 7)",
-  " (in 'ps_subtyped', line 153, column 20 to line 157, column 3)",
-  " (in 'ps_subtyped', line 153, column 2 to line 162, column 3)",
+  " (in 'ps_subtyped', line 84, column 2 to column 44)",
+  " (in 'ps_subtyped', line 85, column 2 to column 45)",
+  " (in 'ps_subtyped', line 86, column 2 to column 53)",
+  " (in 'ps_subtyped', line 87, column 2 to column 20)",
+  " (in 'ps_subtyped', line 88, column 2 to column 79)",
+  " (in 'ps_subtyped', line 89, column 2 to column 50)",
+  " (in 'ps_subtyped', line 90, column 2 to column 43)",
+  " (in 'ps_subtyped', line 93, column 2 to column 43)",
+  " (in 'ps_subtyped', line 95, column 4 to column 45)",
+  " (in 'ps_subtyped', line 94, column 2 to line 95, column 45)",
+  " (in 'ps_subtyped', line 110, column 6 to column 123)",
+  " (in 'ps_subtyped', line 109, column 4 to line 110, column 123)",
+  " (in 'ps_subtyped', line 108, column 6 to line 111, column 3)",
+  " (in 'ps_subtyped', line 106, column 6 to column 123)",
+  " (in 'ps_subtyped', line 105, column 4 to line 106, column 123)",
+  " (in 'ps_subtyped', line 104, column 27 to line 107, column 3)",
+  " (in 'ps_subtyped', line 104, column 7 to line 111, column 3)",
+  " (in 'ps_subtyped', line 102, column 6 to column 95)",
+  " (in 'ps_subtyped', line 101, column 4 to line 102, column 95)",
+  " (in 'ps_subtyped', line 100, column 22 to line 103, column 3)",
+  " (in 'ps_subtyped', line 100, column 2 to line 111, column 3)",
+  " (in 'ps_subtyped', line 115, column 4 to column 35)",
+  " (in 'ps_subtyped', line 114, column 29 to line 116, column 3)",
+  " (in 'ps_subtyped', line 114, column 2 to line 116, column 3)",
+  " (in 'ps_subtyped', line 120, column 4 to column 35)",
+  " (in 'ps_subtyped', line 119, column 29 to line 121, column 3)",
+  " (in 'ps_subtyped', line 119, column 2 to line 121, column 3)",
+  " (in 'ps_subtyped', line 126, column 8 to column 16)",
+  " (in 'ps_subtyped', line 126, column 2 to column 33)",
+  " (in 'ps_subtyped', line 127, column 2 to column 15)",
+  " (in 'ps_subtyped', line 128, column 9 to column 19)",
+  " (in 'ps_subtyped', line 128, column 2 to column 27)",
+  " (in 'ps_subtyped', line 144, column 6 to column 49)",
+  " (in 'ps_subtyped', line 145, column 6 to column 49)",
+  " (in 'ps_subtyped', line 146, column 6 to column 26)",
+  " (in 'ps_subtyped', line 147, column 6 to column 63)",
+  " (in 'ps_subtyped', line 148, column 6 to column 47)",
+  " (in 'ps_subtyped', line 149, column 6 to column 62)",
+  " (in 'ps_subtyped', line 143, column 24 to line 150, column 5)",
+  " (in 'ps_subtyped', line 143, column 4 to line 150, column 5)",
+  " (in 'ps_subtyped', line 142, column 6 to line 151, column 3)",
+  " (in 'ps_subtyped', line 131, column 6 to column 73)",
+  " (in 'ps_subtyped', line 130, column 24 to line 132, column 5)",
+  " (in 'ps_subtyped', line 130, column 4 to line 132, column 5)",
+  " (in 'ps_subtyped', line 134, column 6 to column 46)",
+  " (in 'ps_subtyped', line 135, column 6 to column 46)",
+  " (in 'ps_subtyped', line 136, column 6 to column 26)",
+  " (in 'ps_subtyped', line 137, column 6 to column 60)",
+  " (in 'ps_subtyped', line 138, column 6 to column 47)",
+  " (in 'ps_subtyped', line 139, column 6 to column 59)",
+  " (in 'ps_subtyped', line 133, column 24 to line 140, column 5)",
+  " (in 'ps_subtyped', line 133, column 4 to line 140, column 5)",
+  " (in 'ps_subtyped', line 129, column 24 to line 141, column 3)",
+  " (in 'ps_subtyped', line 129, column 2 to line 151, column 3)",
+  " (in 'ps_subtyped', line 159, column 6 to column 89)",
+  " (in 'ps_subtyped', line 158, column 24 to line 160, column 7)",
+  " (in 'ps_subtyped', line 158, column 4 to line 160, column 7)",
+  " (in 'ps_subtyped', line 157, column 6 to line 161, column 3)",
+  " (in 'ps_subtyped', line 154, column 6 to column 49)",
+  " (in 'ps_subtyped', line 153, column 24 to line 155, column 7)",
+  " (in 'ps_subtyped', line 153, column 4 to line 155, column 7)",
+  " (in 'ps_subtyped', line 152, column 20 to line 156, column 3)",
+  " (in 'ps_subtyped', line 152, column 2 to line 161, column 3)",
   " (in 'ps_subtyped', line 43, column 2 to column 15)",
   " (in 'ps_subtyped', line 44, column 2 to column 16)",
   " (in 'ps_subtyped', line 45, column 2 to column 15)",
@@ -99,58 +99,58 @@ static constexpr std::array<const char*, 140> locations_array__ =
   " (in 'ps_subtyped', line 46, column 2 to column 26)",
   " (in 'ps_subtyped', line 47, column 2 to column 20)",
   " (in 'ps_subtyped', line 48, column 8 to column 16)",
-  " (in 'ps_subtyped', line 48, column 2 to column 18)",
-  " (in 'ps_subtyped', line 49, column 9 to column 19)",
-  " (in 'ps_subtyped', line 49, column 21 to column 29)",
-  " (in 'ps_subtyped', line 49, column 2 to column 31)",
-  " (in 'ps_subtyped', line 50, column 12 to column 20)",
-  " (in 'ps_subtyped', line 50, column 2 to column 22)",
-  " (in 'ps_subtyped', line 51, column 9 to column 17)",
-  " (in 'ps_subtyped', line 51, column 2 to column 19)",
+  " (in 'ps_subtyped', line 48, column 2 to column 24)",
+  " (in 'ps_subtyped', line 49, column 8 to column 18)",
+  " (in 'ps_subtyped', line 49, column 20 to column 28)",
+  " (in 'ps_subtyped', line 49, column 2 to column 37)",
+  " (in 'ps_subtyped', line 50, column 11 to column 19)",
+  " (in 'ps_subtyped', line 50, column 2 to column 28)",
+  " (in 'ps_subtyped', line 51, column 8 to column 16)",
+  " (in 'ps_subtyped', line 51, column 2 to column 25)",
   " (in 'ps_subtyped', line 52, column 2 to column 18)",
-  " (in 'ps_subtyped', line 53, column 10 to column 18)",
-  " (in 'ps_subtyped', line 53, column 2 to column 20)",
+  " (in 'ps_subtyped', line 53, column 8 to column 16)",
+  " (in 'ps_subtyped', line 53, column 2 to column 26)",
   " (in 'ps_subtyped', line 54, column 2 to column 42)",
   " (in 'ps_subtyped', line 55, column 2 to column 44)",
   " (in 'ps_subtyped', line 56, column 2 to column 26)",
   " (in 'ps_subtyped', line 57, column 2 to column 25)",
   " (in 'ps_subtyped', line 58, column 2 to column 23)",
-  " (in 'ps_subtyped', line 60, column 2 to column 26)",
-  " (in 'ps_subtyped', line 61, column 25 to column 76)",
-  " (in 'ps_subtyped', line 61, column 2 to column 79)",
-  " (in 'ps_subtyped', line 62, column 23 to column 74)",
-  " (in 'ps_subtyped', line 62, column 2 to column 77)",
-  " (in 'ps_subtyped', line 65, column 2 to column 48)",
-  " (in 'ps_subtyped', line 66, column 9 to column 18)",
-  " (in 'ps_subtyped', line 66, column 20 to column 28)",
-  " (in 'ps_subtyped', line 66, column 2 to column 32)",
-  " (in 'ps_subtyped', line 67, column 9 to column 34)",
-  " (in 'ps_subtyped', line 67, column 2 to column 51)",
-  " (in 'ps_subtyped', line 68, column 9 to column 36)",
-  " (in 'ps_subtyped', line 68, column 2 to column 48)",
-  " (in 'ps_subtyped', line 69, column 2 to column 74)",
-  " (in 'ps_subtyped', line 70, column 2 to column 86)",
-  " (in 'ps_subtyped', line 72, column 4 to column 96)",
-  " (in 'ps_subtyped', line 71, column 2 to line 72, column 96)",
+  " (in 'ps_subtyped', line 59, column 2 to column 26)",
+  " (in 'ps_subtyped', line 60, column 8 to column 59)",
+  " (in 'ps_subtyped', line 60, column 2 to column 84)",
+  " (in 'ps_subtyped', line 61, column 8 to column 59)",
+  " (in 'ps_subtyped', line 61, column 2 to column 82)",
+  " (in 'ps_subtyped', line 64, column 2 to column 48)",
+  " (in 'ps_subtyped', line 65, column 9 to column 18)",
+  " (in 'ps_subtyped', line 65, column 20 to column 28)",
+  " (in 'ps_subtyped', line 65, column 2 to column 32)",
+  " (in 'ps_subtyped', line 66, column 9 to column 34)",
+  " (in 'ps_subtyped', line 66, column 2 to column 51)",
+  " (in 'ps_subtyped', line 67, column 9 to column 36)",
+  " (in 'ps_subtyped', line 67, column 2 to column 48)",
+  " (in 'ps_subtyped', line 68, column 2 to column 74)",
+  " (in 'ps_subtyped', line 69, column 2 to column 86)",
+  " (in 'ps_subtyped', line 71, column 4 to column 96)",
+  " (in 'ps_subtyped', line 70, column 2 to line 71, column 96)",
+  " (in 'ps_subtyped', line 72, column 2 to column 11)",
   " (in 'ps_subtyped', line 73, column 2 to column 11)",
-  " (in 'ps_subtyped', line 74, column 2 to column 11)",
+  " (in 'ps_subtyped', line 79, column 4 to column 13)",
   " (in 'ps_subtyped', line 80, column 4 to column 13)",
-  " (in 'ps_subtyped', line 81, column 4 to column 13)",
-  " (in 'ps_subtyped', line 79, column 6 to line 82, column 3)",
+  " (in 'ps_subtyped', line 78, column 6 to line 81, column 3)",
+  " (in 'ps_subtyped', line 75, column 4 to column 20)",
   " (in 'ps_subtyped', line 76, column 4 to column 20)",
-  " (in 'ps_subtyped', line 77, column 4 to column 20)",
-  " (in 'ps_subtyped', line 75, column 24 to line 78, column 3)",
-  " (in 'ps_subtyped', line 75, column 2 to line 82, column 3)",
-  " (in 'ps_subtyped', line 85, column 9 to column 17)",
-  " (in 'ps_subtyped', line 85, column 19 to column 28)",
-  " (in 'ps_subtyped', line 86, column 18 to column 22)",
-  " (in 'ps_subtyped', line 86, column 23 to column 27)",
-  " (in 'ps_subtyped', line 87, column 20 to column 45)",
-  " (in 'ps_subtyped', line 89, column 20 to column 71)",
-  " (in 'ps_subtyped', line 90, column 13 to column 42)",
-  " (in 'ps_subtyped', line 91, column 10 to column 21)",
-  " (in 'ps_subtyped', line 94, column 9 to column 17)",
-  " (in 'ps_subtyped', line 94, column 19 to column 27)",
+  " (in 'ps_subtyped', line 74, column 24 to line 77, column 3)",
+  " (in 'ps_subtyped', line 74, column 2 to line 81, column 3)",
+  " (in 'ps_subtyped', line 84, column 9 to column 17)",
+  " (in 'ps_subtyped', line 84, column 19 to column 28)",
+  " (in 'ps_subtyped', line 85, column 18 to column 22)",
+  " (in 'ps_subtyped', line 85, column 23 to column 27)",
+  " (in 'ps_subtyped', line 86, column 8 to column 33)",
+  " (in 'ps_subtyped', line 88, column 8 to column 59)",
+  " (in 'ps_subtyped', line 89, column 13 to column 42)",
+  " (in 'ps_subtyped', line 90, column 10 to column 21)",
+  " (in 'ps_subtyped', line 93, column 9 to column 17)",
+  " (in 'ps_subtyped', line 93, column 19 to column 27)",
   " (in 'ps_subtyped', line 22, column 11 to column 18)",
   " (in 'ps_subtyped', line 22, column 4 to column 29)",
   " (in 'ps_subtyped', line 23, column 11 to column 18)",
@@ -167,7 +167,7 @@ static constexpr std::array<const char*, 140> locations_array__ =
   " (in 'ps_subtyped', line 26, column 6 to line 27, column 72)",
   " (in 'ps_subtyped', line 25, column 4 to line 38, column 5)",
   " (in 'ps_subtyped', line 39, column 4 to column 20)",
-  " (in 'ps_subtyped', line 16, column 72 to line 40, column 3)"};
+  " (in 'ps_subtyped', line 16, column 84 to line 40, column 3)"};
 template <typename T0__, typename T1__,
           stan::require_all_t<stan::is_stan_scalar<T0__>,
                               stan::is_stan_scalar<T1__>>* = nullptr>
@@ -639,13 +639,15 @@ public:
         rows = 0;
       }
       current_statement__ = 113;
-      stan::math::validate_non_negative_index("a", "num_path", num_path);
+      stan::math::validate_non_negative_index("b_spline_coef", "num_path",
+        num_path);
       current_statement__ = 114;
-      stan::math::validate_non_negative_index("a", "num_basis", num_basis);
+      stan::math::validate_non_negative_index("b_spline_coef", "num_basis",
+        num_basis);
       current_statement__ = 115;
-      stan::math::validate_non_negative_index("c_new", "cols", cols);
+      stan::math::validate_non_negative_index("noisy_incidence", "cols", cols);
       current_statement__ = 116;
-      stan::math::validate_non_negative_index("c_new", "rows", rows);
+      stan::math::validate_non_negative_index("noisy_incidence", "rows", rows);
       current_statement__ = 117;
       eta_1dim__ = std::numeric_limits<int>::min();
       current_statement__ = 117;
@@ -681,9 +683,11 @@ public:
       stan::math::validate_positive_index("day_of_week_simplex",
         "week_effect", week_effect);
       current_statement__ = 121;
-      stan::math::validate_non_negative_index("a_new", "num_path", num_path);
+      stan::math::validate_non_negative_index("log_incidence", "num_path",
+        num_path);
       current_statement__ = 122;
-      stan::math::validate_non_negative_index("a_new", "num_data", num_data);
+      stan::math::validate_non_negative_index("log_incidence", "num_data",
+        num_data);
     } catch (const std::exception& e) {
       stan::lang::rethrow_located(e, locations_array__[current_statement__]);
     }
@@ -718,19 +722,20 @@ public:
     // suppress unused var warning
     (void) function__;
     try {
-      Eigen::Matrix<local_scalar_t__,-1,-1> a =
+      Eigen::Matrix<local_scalar_t__,-1,-1> b_spline_coef =
         Eigen::Matrix<local_scalar_t__,-1,-1>::Constant(num_path, num_basis,
           DUMMY_VAR__);
       current_statement__ = 1;
-      a = in__.template read<Eigen::Matrix<local_scalar_t__,-1,-1>>(num_path,
-            num_basis);
-      Eigen::Matrix<local_scalar_t__,-1,-1> c_new =
+      b_spline_coef = in__.template read<
+                        Eigen::Matrix<local_scalar_t__,-1,-1>>(num_path,
+                        num_basis);
+      Eigen::Matrix<local_scalar_t__,-1,-1> noisy_incidence =
         Eigen::Matrix<local_scalar_t__,-1,-1>::Constant(cols, rows,
           DUMMY_VAR__);
       current_statement__ = 2;
-      c_new = in__.template read_constrain_lb<
-                Eigen::Matrix<local_scalar_t__,-1,-1>, jacobian__>(0, lp__,
-                cols, rows);
+      noisy_incidence = in__.template read_constrain_lb<
+                          Eigen::Matrix<local_scalar_t__,-1,-1>,
+                          jacobian__>(0, lp__, cols, rows);
       std::vector<local_scalar_t__> eta =
         std::vector<local_scalar_t__>(eta_1dim__, DUMMY_VAR__);
       current_statement__ = 3;
@@ -759,17 +764,18 @@ public:
       day_of_week_simplex = in__.template read_constrain_simplex<
                               Eigen::Matrix<local_scalar_t__,-1,1>,
                               jacobian__>(lp__, week_effect);
-      Eigen::Matrix<local_scalar_t__,-1,-1> a_new =
+      Eigen::Matrix<local_scalar_t__,-1,-1> log_incidence =
         Eigen::Matrix<local_scalar_t__,-1,-1>::Constant(num_path, num_data,
           DUMMY_VAR__);
       current_statement__ = 10;
       for (int i = 1; i <= num_path; ++i) {
         current_statement__ = 9;
-        stan::model::assign(a_new,
+        stan::model::assign(log_incidence,
           stan::math::multiply(
-            stan::model::rvalue(a, "a", stan::model::index_uni(i),
-              stan::model::index_omni()), B), "assigning variable a_new",
-          stan::model::index_uni(i), stan::model::index_omni());
+            stan::model::rvalue(b_spline_coef, "b_spline_coef",
+              stan::model::index_uni(i), stan::model::index_omni()), B),
+          "assigning variable log_incidence", stan::model::index_uni(i),
+          stan::model::index_omni());
       }
       {
         current_statement__ = 21;
@@ -778,16 +784,17 @@ public:
           for (int i = 3; i <= num_basis; ++i) {
             current_statement__ = 18;
             lp_accum__.add(stan::math::multi_normal_lpdf<propto__>(
-                             stan::model::rvalue(a, "a",
-                               stan::model::index_omni(),
+                             stan::model::rvalue(b_spline_coef,
+                               "b_spline_coef", stan::model::index_omni(),
                                stan::model::index_uni(i)),
                              stan::math::subtract(
                                stan::math::multiply(2,
-                                 stan::model::rvalue(a, "a",
+                                 stan::model::rvalue(b_spline_coef,
+                                   "b_spline_coef",
                                    stan::model::index_omni(),
                                    stan::model::index_uni((i - 1)))),
-                               stan::model::rvalue(a, "a",
-                                 stan::model::index_omni(),
+                               stan::model::rvalue(b_spline_coef,
+                                 "b_spline_coef", stan::model::index_omni(),
                                  stan::model::index_uni((i - 2)))), Sigma));
           }
         } else {
@@ -797,16 +804,18 @@ public:
             for (int i = 1; i <= num_path; ++i) {
               current_statement__ = 14;
               lp_accum__.add(stan::math::normal_lpdf<propto__>(
-                               stan::model::rvalue(a, "a",
-                                 stan::model::index_uni(i),
+                               stan::model::rvalue(b_spline_coef,
+                                 "b_spline_coef", stan::model::index_uni(i),
                                  stan::model::index_min_max(3, num_basis)),
                                stan::math::subtract(
                                  stan::math::multiply(2,
-                                   stan::model::rvalue(a, "a",
+                                   stan::model::rvalue(b_spline_coef,
+                                     "b_spline_coef",
                                      stan::model::index_uni(i),
                                      stan::model::index_min_max(2, (num_basis
                                        - 1)))),
-                                 stan::model::rvalue(a, "a",
+                                 stan::model::rvalue(b_spline_coef,
+                                   "b_spline_coef",
                                    stan::model::index_uni(i),
                                    stan::model::index_min_max(1, (num_basis -
                                      2)))),
@@ -818,16 +827,18 @@ public:
             for (int i = 1; i <= num_path; ++i) {
               current_statement__ = 11;
               lp_accum__.add(stan::math::normal_lpdf<propto__>(
-                               stan::model::rvalue(a, "a",
-                                 stan::model::index_uni(i),
+                               stan::model::rvalue(b_spline_coef,
+                                 "b_spline_coef", stan::model::index_uni(i),
                                  stan::model::index_min_max(3, num_basis)),
                                stan::math::subtract(
                                  stan::math::multiply(2,
-                                   stan::model::rvalue(a, "a",
+                                   stan::model::rvalue(b_spline_coef,
+                                     "b_spline_coef",
                                      stan::model::index_uni(i),
                                      stan::model::index_min_max(2, (num_basis
                                        - 1)))),
-                                 stan::model::rvalue(a, "a",
+                                 stan::model::rvalue(b_spline_coef,
+                                   "b_spline_coef",
                                    stan::model::index_uni(i),
                                    stan::model::index_min_max(1, (num_basis -
                                      2)))),
@@ -866,12 +877,13 @@ public:
           for (int i = 1; i <= num_path; ++i) {
             current_statement__ = 42;
             lp_accum__.add(stan::math::gamma_lpdf<propto__>(
-                             stan::model::rvalue(c_new, "c_new",
-                               stan::model::index_uni(i),
+                             stan::model::rvalue(noisy_incidence,
+                               "noisy_incidence", stan::model::index_uni(i),
                                stan::model::index_omni()),
                              stan::math::multiply(
                                stan::math::exp(
-                                 stan::model::rvalue(a_new, "a_new",
+                                 stan::model::rvalue(log_incidence,
+                                   "log_incidence",
                                    stan::model::index_uni(i),
                                    stan::model::index_omni())),
                                stan::model::rvalue(eta, "eta",
@@ -884,12 +896,13 @@ public:
             current_statement__ = 45;
             stan::model::assign(total_ILI,
               stan::math::sum(
-                stan::model::rvalue(c_new, "c_new",
+                stan::model::rvalue(noisy_incidence, "noisy_incidence",
                   stan::model::index_omni(), stan::model::index_uni(i))),
               "assigning variable total_ILI", stan::model::index_uni(i));
             current_statement__ = 46;
             total_A = stan::math::sum(
-                        stan::model::rvalue(c_new, "c_new",
+                        stan::model::rvalue(noisy_incidence,
+                          "noisy_incidence",
                           stan::model::index_min_max(1, 2),
                           stan::model::index_uni(i)));
             current_statement__ = 47;
@@ -897,7 +910,7 @@ public:
               stan::model::index_uni(1));
             current_statement__ = 48;
             stan::model::assign(theta,
-              stan::model::rvalue(c_new, "c_new",
+              stan::model::rvalue(noisy_incidence, "noisy_incidence",
                 stan::model::index_min_max(3, num_path),
                 stan::model::index_uni(i)), "assigning variable theta",
               stan::model::index_min_max(2, (num_path - 1)));
@@ -915,7 +928,8 @@ public:
                                stan::model::index_omni(),
                                stan::model::index_uni(i)),
                              stan::math::divide(
-                               stan::model::rvalue(c_new, "c_new",
+                               stan::model::rvalue(noisy_incidence,
+                                 "noisy_incidence",
                                  stan::model::index_min_max(1, 2),
                                  stan::model::index_uni(i)), total_A)));
           }
@@ -926,13 +940,13 @@ public:
             stan::model::assign(total_ILI,
               stan::math::sum(
                 stan::math::exp(
-                  stan::model::rvalue(a_new, "a_new",
+                  stan::model::rvalue(log_incidence, "log_incidence",
                     stan::model::index_omni(), stan::model::index_uni(i)))),
               "assigning variable total_ILI", stan::model::index_uni(i));
             current_statement__ = 34;
             total_A = stan::math::sum(
                         stan::math::exp(
-                          stan::model::rvalue(a_new, "a_new",
+                          stan::model::rvalue(log_incidence, "log_incidence",
                             stan::model::index_min_max(1, 2),
                             stan::model::index_uni(i))));
             current_statement__ = 35;
@@ -941,7 +955,7 @@ public:
             current_statement__ = 36;
             stan::model::assign(theta,
               stan::math::exp(
-                stan::model::rvalue(a_new, "a_new",
+                stan::model::rvalue(log_incidence, "log_incidence",
                   stan::model::index_min_max(3, num_path),
                   stan::model::index_uni(i))), "assigning variable theta",
               stan::model::index_min_max(2, (num_path - 1)));
@@ -960,7 +974,8 @@ public:
                                stan::model::index_uni(i)),
                              stan::math::divide(
                                stan::math::exp(
-                                 stan::model::rvalue(a_new, "a_new",
+                                 stan::model::rvalue(log_incidence,
+                                   "log_incidence",
                                    stan::model::index_min_max(1, 2),
                                    stan::model::index_uni(i))), total_A)));
           }
@@ -1031,19 +1046,20 @@ public:
     // suppress unused var warning
     (void) function__;
     try {
-      Eigen::Matrix<double,-1,-1> a =
+      Eigen::Matrix<double,-1,-1> b_spline_coef =
         Eigen::Matrix<double,-1,-1>::Constant(num_path, num_basis,
           std::numeric_limits<double>::quiet_NaN());
       current_statement__ = 1;
-      a = in__.template read<Eigen::Matrix<local_scalar_t__,-1,-1>>(num_path,
-            num_basis);
-      Eigen::Matrix<double,-1,-1> c_new =
+      b_spline_coef = in__.template read<
+                        Eigen::Matrix<local_scalar_t__,-1,-1>>(num_path,
+                        num_basis);
+      Eigen::Matrix<double,-1,-1> noisy_incidence =
         Eigen::Matrix<double,-1,-1>::Constant(cols, rows,
           std::numeric_limits<double>::quiet_NaN());
       current_statement__ = 2;
-      c_new = in__.template read_constrain_lb<
-                Eigen::Matrix<local_scalar_t__,-1,-1>, jacobian__>(0, lp__,
-                cols, rows);
+      noisy_incidence = in__.template read_constrain_lb<
+                          Eigen::Matrix<local_scalar_t__,-1,-1>,
+                          jacobian__>(0, lp__, cols, rows);
       std::vector<double> eta =
         std::vector<double>(eta_1dim__,
           std::numeric_limits<double>::quiet_NaN());
@@ -1074,11 +1090,11 @@ public:
       day_of_week_simplex = in__.template read_constrain_simplex<
                               Eigen::Matrix<local_scalar_t__,-1,1>,
                               jacobian__>(lp__, week_effect);
-      Eigen::Matrix<double,-1,-1> a_new =
+      Eigen::Matrix<double,-1,-1> log_incidence =
         Eigen::Matrix<double,-1,-1>::Constant(num_path, num_data,
           std::numeric_limits<double>::quiet_NaN());
-      out__.write(a);
-      out__.write(c_new);
+      out__.write(b_spline_coef);
+      out__.write(noisy_incidence);
       out__.write(eta);
       out__.write(phi);
       out__.write(tau);
@@ -1092,14 +1108,15 @@ public:
       current_statement__ = 10;
       for (int i = 1; i <= num_path; ++i) {
         current_statement__ = 9;
-        stan::model::assign(a_new,
+        stan::model::assign(log_incidence,
           stan::math::multiply(
-            stan::model::rvalue(a, "a", stan::model::index_uni(i),
-              stan::model::index_omni()), B), "assigning variable a_new",
-          stan::model::index_uni(i), stan::model::index_omni());
+            stan::model::rvalue(b_spline_coef, "b_spline_coef",
+              stan::model::index_uni(i), stan::model::index_omni()), B),
+          "assigning variable log_incidence", stan::model::index_uni(i),
+          stan::model::index_omni());
       }
       if (emit_transformed_parameters__) {
-        out__.write(a_new);
+        out__.write(log_incidence);
       }
       if (stan::math::logical_negation(emit_generated_quantities__)) {
         return ;
@@ -1124,22 +1141,22 @@ public:
     try {
       int pos__ = std::numeric_limits<int>::min();
       pos__ = 1;
-      Eigen::Matrix<local_scalar_t__,-1,-1> a =
+      Eigen::Matrix<local_scalar_t__,-1,-1> b_spline_coef =
         Eigen::Matrix<local_scalar_t__,-1,-1>::Constant(num_path, num_basis,
           DUMMY_VAR__);
       current_statement__ = 1;
-      stan::model::assign(a,
+      stan::model::assign(b_spline_coef,
         in__.read<Eigen::Matrix<local_scalar_t__,-1,-1>>(num_path, num_basis),
-        "assigning variable a");
-      out__.write(a);
-      Eigen::Matrix<local_scalar_t__,-1,-1> c_new =
+        "assigning variable b_spline_coef");
+      out__.write(b_spline_coef);
+      Eigen::Matrix<local_scalar_t__,-1,-1> noisy_incidence =
         Eigen::Matrix<local_scalar_t__,-1,-1>::Constant(cols, rows,
           DUMMY_VAR__);
       current_statement__ = 2;
-      stan::model::assign(c_new,
+      stan::model::assign(noisy_incidence,
         in__.read<Eigen::Matrix<local_scalar_t__,-1,-1>>(cols, rows),
-        "assigning variable c_new");
-      out__.write_free_lb(0, c_new);
+        "assigning variable noisy_incidence");
+      out__.write_free_lb(0, noisy_incidence);
       std::vector<local_scalar_t__> eta =
         std::vector<local_scalar_t__>(eta_1dim__, DUMMY_VAR__);
       current_statement__ = 3;
@@ -1190,11 +1207,13 @@ public:
     (void) DUMMY_VAR__;
     try {
       current_statement__ = 1;
-      context__.validate_dims("parameter initialization", "a", "double",
+      context__.validate_dims("parameter initialization", "b_spline_coef",
+        "double",
         std::vector<size_t>{static_cast<size_t>(num_path),
           static_cast<size_t>(num_basis)});
       current_statement__ = 2;
-      context__.validate_dims("parameter initialization", "c_new", "double",
+      context__.validate_dims("parameter initialization", "noisy_incidence",
+        "double",
         std::vector<size_t>{static_cast<size_t>(cols),
           static_cast<size_t>(rows)});
       current_statement__ = 3;
@@ -1216,13 +1235,13 @@ public:
         std::vector<size_t>{static_cast<size_t>(week_effect)});
       int pos__ = std::numeric_limits<int>::min();
       pos__ = 1;
-      Eigen::Matrix<local_scalar_t__,-1,-1> a =
+      Eigen::Matrix<local_scalar_t__,-1,-1> b_spline_coef =
         Eigen::Matrix<local_scalar_t__,-1,-1>::Constant(num_path, num_basis,
           DUMMY_VAR__);
       {
-        std::vector<local_scalar_t__> a_flat__;
+        std::vector<local_scalar_t__> b_spline_coef_flat__;
         current_statement__ = 1;
-        a_flat__ = context__.vals_r("a");
+        b_spline_coef_flat__ = context__.vals_r("b_spline_coef");
         current_statement__ = 1;
         pos__ = 1;
         current_statement__ = 1;
@@ -1230,22 +1249,22 @@ public:
           current_statement__ = 1;
           for (int sym2__ = 1; sym2__ <= num_path; ++sym2__) {
             current_statement__ = 1;
-            stan::model::assign(a, a_flat__[(pos__ - 1)],
-              "assigning variable a", stan::model::index_uni(sym2__),
-              stan::model::index_uni(sym1__));
+            stan::model::assign(b_spline_coef, b_spline_coef_flat__[(pos__ -
+              1)], "assigning variable b_spline_coef",
+              stan::model::index_uni(sym2__), stan::model::index_uni(sym1__));
             current_statement__ = 1;
             pos__ = (pos__ + 1);
           }
         }
       }
-      out__.write(a);
-      Eigen::Matrix<local_scalar_t__,-1,-1> c_new =
+      out__.write(b_spline_coef);
+      Eigen::Matrix<local_scalar_t__,-1,-1> noisy_incidence =
         Eigen::Matrix<local_scalar_t__,-1,-1>::Constant(cols, rows,
           DUMMY_VAR__);
       {
-        std::vector<local_scalar_t__> c_new_flat__;
+        std::vector<local_scalar_t__> noisy_incidence_flat__;
         current_statement__ = 2;
-        c_new_flat__ = context__.vals_r("c_new");
+        noisy_incidence_flat__ = context__.vals_r("noisy_incidence");
         current_statement__ = 2;
         pos__ = 1;
         current_statement__ = 2;
@@ -1253,15 +1272,16 @@ public:
           current_statement__ = 2;
           for (int sym2__ = 1; sym2__ <= cols; ++sym2__) {
             current_statement__ = 2;
-            stan::model::assign(c_new, c_new_flat__[(pos__ - 1)],
-              "assigning variable c_new", stan::model::index_uni(sym2__),
-              stan::model::index_uni(sym1__));
+            stan::model::assign(noisy_incidence,
+              noisy_incidence_flat__[(pos__ - 1)],
+              "assigning variable noisy_incidence",
+              stan::model::index_uni(sym2__), stan::model::index_uni(sym1__));
             current_statement__ = 2;
             pos__ = (pos__ + 1);
           }
         }
       }
-      out__.write_free_lb(0, c_new);
+      out__.write_free_lb(0, noisy_incidence);
       std::vector<local_scalar_t__> eta =
         std::vector<local_scalar_t__>(eta_1dim__, DUMMY_VAR__);
       current_statement__ = 3;
@@ -1328,10 +1348,10 @@ public:
   get_param_names(std::vector<std::string>& names__, const bool
                   emit_transformed_parameters__ = true, const bool
                   emit_generated_quantities__ = true) const {
-    names__ = std::vector<std::string>{"a", "c_new", "eta", "phi", "tau",
-                "Sigma", "day_of_week_simplex"};
+    names__ = std::vector<std::string>{"b_spline_coef", "noisy_incidence",
+                "eta", "phi", "tau", "Sigma", "day_of_week_simplex"};
     if (emit_transformed_parameters__) {
-      std::vector<std::string> temp{"a_new"};
+      std::vector<std::string> temp{"log_incidence"};
       names__.reserve(names__.size() + temp.size());
       names__.insert(names__.end(), temp.begin(), temp.end());
     }
@@ -1369,13 +1389,13 @@ public:
                           emit_generated_quantities__ = true) const final {
     for (int sym1__ = 1; sym1__ <= num_basis; ++sym1__) {
       for (int sym2__ = 1; sym2__ <= num_path; ++sym2__) {
-        param_names__.emplace_back(std::string() + "a" + '.' +
+        param_names__.emplace_back(std::string() + "b_spline_coef" + '.' +
           std::to_string(sym2__) + '.' + std::to_string(sym1__));
       }
     }
     for (int sym1__ = 1; sym1__ <= rows; ++sym1__) {
       for (int sym2__ = 1; sym2__ <= cols; ++sym2__) {
-        param_names__.emplace_back(std::string() + "c_new" + '.' +
+        param_names__.emplace_back(std::string() + "noisy_incidence" + '.' +
           std::to_string(sym2__) + '.' + std::to_string(sym1__));
       }
     }
@@ -1401,7 +1421,7 @@ public:
     if (emit_transformed_parameters__) {
       for (int sym1__ = 1; sym1__ <= num_data; ++sym1__) {
         for (int sym2__ = 1; sym2__ <= num_path; ++sym2__) {
-          param_names__.emplace_back(std::string() + "a_new" + '.' +
+          param_names__.emplace_back(std::string() + "log_incidence" + '.' +
             std::to_string(sym2__) + '.' + std::to_string(sym1__));
         }
       }
@@ -1414,13 +1434,13 @@ public:
                             emit_generated_quantities__ = true) const final {
     for (int sym1__ = 1; sym1__ <= num_basis; ++sym1__) {
       for (int sym2__ = 1; sym2__ <= num_path; ++sym2__) {
-        param_names__.emplace_back(std::string() + "a" + '.' +
+        param_names__.emplace_back(std::string() + "b_spline_coef" + '.' +
           std::to_string(sym2__) + '.' + std::to_string(sym1__));
       }
     }
     for (int sym1__ = 1; sym1__ <= rows; ++sym1__) {
       for (int sym2__ = 1; sym2__ <= cols; ++sym2__) {
-        param_names__.emplace_back(std::string() + "c_new" + '.' +
+        param_names__.emplace_back(std::string() + "noisy_incidence" + '.' +
           std::to_string(sym2__) + '.' + std::to_string(sym1__));
       }
     }
@@ -1445,7 +1465,7 @@ public:
     if (emit_transformed_parameters__) {
       for (int sym1__ = 1; sym1__ <= num_data; ++sym1__) {
         for (int sym2__ = 1; sym2__ <= num_path; ++sym2__) {
-          param_names__.emplace_back(std::string() + "a_new" + '.' +
+          param_names__.emplace_back(std::string() + "log_incidence" + '.' +
             std::to_string(sym2__) + '.' + std::to_string(sym1__));
         }
       }
@@ -1453,10 +1473,10 @@ public:
     if (emit_generated_quantities__) {}
   }
   inline std::string get_constrained_sizedtypes() const {
-    return std::string("[{\"name\":\"a\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(num_path) + ",\"cols\":" + std::to_string(num_basis) + "},\"block\":\"parameters\"},{\"name\":\"c_new\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(cols) + ",\"cols\":" + std::to_string(rows) + "},\"block\":\"parameters\"},{\"name\":\"eta\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(eta_1dim__) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"phi\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"tau\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(tau_1dim__) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"Sigma\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(Sigma_1dim__) + ",\"cols\":" + std::to_string(Sigma_2dim__) + "},\"block\":\"parameters\"},{\"name\":\"day_of_week_simplex\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(week_effect) + "},\"block\":\"parameters\"},{\"name\":\"a_new\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(num_path) + ",\"cols\":" + std::to_string(num_data) + "},\"block\":\"transformed_parameters\"}]");
+    return std::string("[{\"name\":\"b_spline_coef\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(num_path) + ",\"cols\":" + std::to_string(num_basis) + "},\"block\":\"parameters\"},{\"name\":\"noisy_incidence\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(cols) + ",\"cols\":" + std::to_string(rows) + "},\"block\":\"parameters\"},{\"name\":\"eta\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(eta_1dim__) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"phi\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"tau\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(tau_1dim__) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"Sigma\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(Sigma_1dim__) + ",\"cols\":" + std::to_string(Sigma_2dim__) + "},\"block\":\"parameters\"},{\"name\":\"day_of_week_simplex\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(week_effect) + "},\"block\":\"parameters\"},{\"name\":\"log_incidence\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(num_path) + ",\"cols\":" + std::to_string(num_data) + "},\"block\":\"transformed_parameters\"}]");
   }
   inline std::string get_unconstrained_sizedtypes() const {
-    return std::string("[{\"name\":\"a\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(num_path) + ",\"cols\":" + std::to_string(num_basis) + "},\"block\":\"parameters\"},{\"name\":\"c_new\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(cols) + ",\"cols\":" + std::to_string(rows) + "},\"block\":\"parameters\"},{\"name\":\"eta\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(eta_1dim__) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"phi\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"tau\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(tau_1dim__) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"Sigma\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string((Sigma_1dim__ + ((Sigma_1dim__ * (Sigma_1dim__ - 1)) /2))) + "},\"block\":\"parameters\"},{\"name\":\"day_of_week_simplex\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string((week_effect -1)) + "},\"block\":\"parameters\"},{\"name\":\"a_new\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(num_path) + ",\"cols\":" + std::to_string(num_data) + "},\"block\":\"transformed_parameters\"}]");
+    return std::string("[{\"name\":\"b_spline_coef\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(num_path) + ",\"cols\":" + std::to_string(num_basis) + "},\"block\":\"parameters\"},{\"name\":\"noisy_incidence\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(cols) + ",\"cols\":" + std::to_string(rows) + "},\"block\":\"parameters\"},{\"name\":\"eta\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(eta_1dim__) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"phi\",\"type\":{\"name\":\"real\"},\"block\":\"parameters\"},{\"name\":\"tau\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(tau_1dim__) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"Sigma\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string((Sigma_1dim__ + ((Sigma_1dim__ * (Sigma_1dim__ - 1)) /2))) + "},\"block\":\"parameters\"},{\"name\":\"day_of_week_simplex\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string((week_effect -1)) + "},\"block\":\"parameters\"},{\"name\":\"log_incidence\",\"type\":{\"name\":\"matrix\",\"rows\":" + std::to_string(num_path) + ",\"cols\":" + std::to_string(num_data) + "},\"block\":\"transformed_parameters\"}]");
   }
   // Begin method overload boilerplate
   template <typename RNG> inline void

@@ -28,7 +28,21 @@
 #' @param ... additional arguments to `rstan::sampling()`, such as `init`
 #'
 #' @returns fit model of class `EpiStrainDynamics.fit`, or if fitting fails,
-#'   an error is raised that can be caught and inspected.
+#'   an error is raised that can be caught and inspected. Its `fit` element is
+#'   the `stanfit` object, whose main parameters are:
+#'   * `log_incidence`: the latent log-incidence trend, indexed `[time]` for
+#'     single pathogen models and `[pathogen, time]` otherwise. In p-spline
+#'     models it is derived from `b_spline_coef`.
+#'   * `b_spline_coef`: the B-spline coefficients (p-spline models only).
+#'   * `noisy_incidence`: per-pathogen incidence with gamma noise around
+#'     `exp(log_incidence)`, and `eta`, the shared inverse dispersion of that
+#'     noise (only when `pathogen_noise = TRUE`).
+#'   * `phi`: the inverse dispersion of the negative binomial observation
+#'     model.
+#'   * `tau` or `Sigma`: the smoothing standard deviation(s) or covariance
+#'     matrix, depending on the smoothing structure.
+#'   * `day_of_week_simplex`: the day-of-week effect (only when
+#'     `dow_effect = TRUE`).
 #' @export
 #'
 #' @srrstats {G1.4} uses `Roxygen2` documentation
