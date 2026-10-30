@@ -11,7 +11,9 @@
 #
 # Requirements:
 #   - Run from the package root directory
-#   - Package must be loaded: devtools::load_all()
+#   - Package must be loaded: devtools::load_all(helpers = FALSE)
+#     (helpers = FALSE skips helper-fixtures.R, which would try to download
+#     from the new, still-empty release tag and fail)
 #   - GitHub PAT with repo scope set in environment
 
 library(piggyback)
@@ -26,6 +28,23 @@ if (!dir.exists("inst/testfixtures")) {
 
 if (!exists("sarscov2") || !exists("influenza")) {
   stop("Package data (sarscov2, influenza) not available - run devtools::load_all() first")
+}
+
+# Multi-chain fits run in parallel worker processes, which load the compiled
+# models from the *installed* package rather than the one from load_all(). If
+# the installed copy is out of date, those fixtures silently get the old
+# models. Stop before saving if a fit lacks the current parameter names.
+# Update `expected` if the Stan parameter names change.
+check_fixture_pars <- function(fit, expected = "log_incidence") {
+  missing <- setdiff(expected, fit$fit@model_pars)
+  if (length(missing) > 0) {
+    stop(
+      deparse(substitute(fit)), " is missing parameter(s) ",
+      paste(missing, collapse = ", "), ". The installed package is probably ",
+      "out of date: run devtools::install() and rerun this script."
+    )
+  }
+  invisible(fit)
 }
 
 # ------------------------------------------------------------------------------
@@ -48,6 +67,7 @@ fit_rw_single <- suppressWarnings(fit_model(
   ),
   n_iter = 500, n_chain = 1, verbose = FALSE, seed = 123
 ))
+check_fixture_pars(fit_rw_single)
 saveRDS(fit_rw_single, "inst/testfixtures/fit_rw_single.rds")
 
 message("  Fitting: P-spline, single pathogen...")
@@ -60,6 +80,7 @@ fit_ps_single <- suppressWarnings(fit_model(
   ),
   n_iter = 500, n_chain = 1, verbose = FALSE, seed = 123
 ))
+check_fixture_pars(fit_ps_single)
 saveRDS(fit_ps_single, "inst/testfixtures/fit_ps_single.rds")
 
 message("  Fitting: Random walk, multiple pathogens...")
@@ -73,6 +94,7 @@ fit_rw_multi <- suppressWarnings(fit_model(
   ),
   n_iter = 500, n_chain = 1, verbose = FALSE, seed = 123
 ))
+check_fixture_pars(fit_rw_multi)
 saveRDS(fit_rw_multi, "inst/testfixtures/fit_rw_multi.rds")
 
 message("  Fitting: P-spline, multiple pathogens...")
@@ -86,6 +108,7 @@ fit_ps_multi <- suppressWarnings(fit_model(
   ),
   n_iter = 500, n_chain = 1, verbose = FALSE, seed = 123
 ))
+check_fixture_pars(fit_ps_multi)
 saveRDS(fit_ps_multi, "inst/testfixtures/fit_ps_multi.rds")
 
 message("  Fitting: Random walk, subtyped pathogens...")
@@ -101,6 +124,7 @@ fit_rw_subtyped <- suppressWarnings(fit_model(
   ),
   n_iter = 500, n_chain = 1, verbose = FALSE, seed = 123
 ))
+check_fixture_pars(fit_rw_subtyped)
 saveRDS(fit_rw_subtyped, "inst/testfixtures/fit_rw_subtyped.rds")
 
 message("  Fitting: P-spline, subtyped pathogens...")
@@ -116,6 +140,7 @@ fit_ps_subtyped <- suppressWarnings(fit_model(
   ),
   n_iter = 500, n_chain = 1, verbose = FALSE, seed = 123
 ))
+check_fixture_pars(fit_ps_subtyped)
 saveRDS(fit_ps_subtyped, "inst/testfixtures/fit_ps_subtyped.rds")
 
 message("  Fitting: Random walk, single pathogen, day-of-week...")
@@ -129,6 +154,7 @@ fit_rw_single_dow <- suppressWarnings(fit_model(
   ),
   n_iter = 500, n_chain = 1, verbose = FALSE, seed = 123
 ))
+check_fixture_pars(fit_rw_single_dow)
 saveRDS(fit_rw_single_dow, "inst/testfixtures/fit_rw_single_dow.rds")
 
 message("  Computing metrics...")
@@ -161,6 +187,7 @@ fit_rw_single_ext <- fit_model(
   ),
   n_iter = 2000, n_chain = 4, verbose = FALSE
 )
+check_fixture_pars(fit_rw_single_ext)
 saveRDS(fit_rw_single_ext, "inst/testfixtures/ext_fit_rw_single.rds")
 
 message("  Fitting: P-spline, single pathogen...")
@@ -173,6 +200,7 @@ fit_ps_single_ext <- fit_model(
   ),
   n_iter = 2000, n_chain = 4, verbose = FALSE
 )
+check_fixture_pars(fit_ps_single_ext)
 saveRDS(fit_ps_single_ext, "inst/testfixtures/ext_fit_ps_single.rds")
 
 message("  Fitting: Random walk, multiple pathogens...")
@@ -186,6 +214,7 @@ fit_rw_multi_ext <- fit_model(
   ),
   n_iter = 2000, n_chain = 4, verbose = FALSE
 )
+check_fixture_pars(fit_rw_multi_ext)
 saveRDS(fit_rw_multi_ext, "inst/testfixtures/ext_fit_rw_multi.rds")
 
 message("  Fitting: P-spline, multiple pathogens...")
@@ -199,6 +228,7 @@ fit_ps_multi_ext <- fit_model(
   ),
   n_iter = 2000, n_chain = 4, verbose = FALSE
 )
+check_fixture_pars(fit_ps_multi_ext)
 saveRDS(fit_ps_multi_ext, "inst/testfixtures/ext_fit_ps_multi.rds")
 
 message("  Fitting: Random walk, subtyped pathogens...")
@@ -214,6 +244,7 @@ fit_rw_subtyped_ext <- fit_model(
   ),
   n_iter = 2000, n_chain = 4, verbose = FALSE
 )
+check_fixture_pars(fit_rw_subtyped_ext)
 saveRDS(fit_rw_subtyped_ext, "inst/testfixtures/ext_fit_rw_subtyped.rds")
 
 message("  Fitting: P-spline, subtyped pathogens...")
@@ -229,6 +260,7 @@ fit_ps_subtyped_ext <- fit_model(
   ),
   n_iter = 2000, n_chain = 4, verbose = FALSE
 )
+check_fixture_pars(fit_ps_subtyped_ext)
 saveRDS(fit_ps_subtyped_ext, "inst/testfixtures/ext_fit_ps_subtyped.rds")
 
 message("=== Extended fixtures done ===")
@@ -242,7 +274,7 @@ message("=== Uploading fixtures to GitHub Release ===")
 pb_upload(
   file      = list.files("inst/testfixtures", full.names = TRUE),
   repo      = "ropensci/epistraindynamics",
-  tag       = "test-fixtures-v1"
+  tag       = "test-fixtures-v2"
 )
 
-message("=== All done. Fixtures uploaded to test-fixtures-v1 ===")
+message("=== All done. Fixtures uploaded to test-fixtures-v2 ===")
