@@ -460,3 +460,57 @@ test_that("index_to_time() returns NA with one warning when times cannot be conv
 
   expect_equal(index_to_time(c(1, 2), as.Date("2024-01-01")), as.Date(c(NA, NA)))
 })
+
+# ==============================================================================
+# TESTS: LABELLING SETTINGS THE FIXTURES DON'T COVER
+# ==============================================================================
+# The fixtures all use shared smoothing and no pathogen noise. These tests
+# build a model without fitting it and label a fake summary instead.
+
+fake_fit <- function(smoothing_params, pathogen_noise = FALSE) {
+  list(constructed_model = construct_model(
+    pathogen_structure = multiple(
+      data = sarscov2[1:10, ], case_timeseries = "cases", time = "date",
+      component_pathogen_timeseries = c("alpha", "delta", "omicron", "other")
+    ),
+    method = random_walk(),
+    smoothing_params = smoothing_params,
+    pathogen_noise = pathogen_noise
+  ))
+}
+
+fake_summary <- function(par_names) {
+  matrix(
+    c(rep(1, length(par_names)), rep(500, length(par_names))),
+    ncol = 2,
+    dimnames = list(par_names, c("Rhat", "n_eff"))
+  )
+}
+
+test_that("independent tau and noisy_incidence are labelled by pathogen and time", {
+  fit <- fake_fit(smoothing_structure("independent"), pathogen_noise = TRUE)
+  par_names <- c("noisy_incidence[2,3]", "tau[3]", "eta[1]")
+
+  res <- label_parameter_diagnostics(
+    fit, fake_summary(par_names),
+    rhat_threshold = 1.1, eff_sample_threshold = 100
+  )
+
+  expect_equal(res$pathogen, c("delta", "omicron", NA))
+  expect_equal(res$time, c(sarscov2$date[3], NA, NA))
+})
+
+test_that("shared tau and correlated Sigma are not labelled by pathogen", {
+  shared <- label_parameter_diagnostics(
+    fake_fit(smoothing_structure("shared")), fake_summary("tau[1]"),
+    rhat_threshold = 1.1, eff_sample_threshold = 100
+  )
+  expect_true(is.na(shared$pathogen))
+
+  correlated <- label_parameter_diagnostics(
+    fake_fit(smoothing_structure("correlated")), fake_summary("Sigma[1,2]"),
+    rhat_threshold = 1.1, eff_sample_threshold = 100
+  )
+  expect_true(is.na(correlated$pathogen))
+  expect_true(is.na(correlated$time))
+})
