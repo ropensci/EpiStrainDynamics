@@ -1,6 +1,6 @@
 Package: EpiStrainDynamics
 Title: Infer temporal trends of multiple pathogens
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: 
     c(person("Saras", "Windecker", email = "saras.windecker@gmail.com", 
         role = c("aut", "cre"),
