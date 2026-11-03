@@ -29,6 +29,11 @@
   that reads the `stanfit` object in `fit$fit` directly (e.g. with
   `bayesplot` or `rstan::summary()`) will need to use the new names;
   `incidence()`, `growth_rate()`, `Rt()` and `proportion()` are unaffected.
+* `incidence()` and `proportion()` no longer return a `prop` column in
+  `$measure` (#79). It was the posterior probability that the quantity is
+  above 0, which is always 1 for incidence and proportions. `growth_rate()`
+  and `Rt()` still return `prop`, the posterior probability that the growth
+  rate is above 0 or that Rt is above 1; their documentation now says so.
 
 ## Bug fixes
 

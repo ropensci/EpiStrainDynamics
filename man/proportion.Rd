@@ -35,8 +35,8 @@ separate proportion line (one per pathogen), not summed into a single group
 the way \verb{$denominator_combination} always is. The \code{measure} data frame
 contains the median of the epidemiological quantity (\code{y}), the 50\% credible
 interval of the quantity (\code{lb_50} & \code{ub_50}), the 95\% credible interval
-(\code{lb_95} & \code{ub_95}), the proportion greater than a defined threshold value
-(\code{prop}), the pathogen name (\code{pathogen}), and the time label (\code{time}).
+(\code{lb_95} & \code{ub_95}), the pathogen name (\code{pathogen}), and the time label
+(\code{time}).
 }
 \description{
 Computes epidemiological proportion, defined as the relative fraction of

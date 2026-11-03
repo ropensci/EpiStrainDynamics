@@ -195,7 +195,7 @@ test_that("incidence() works for single pathogen models", {
     result$measure,
     c(
       "time", "y", "lb_50", "ub_50", "lb_95", "ub_95",
-      "prop", "pathogen"
+      "pathogen"
     )
   )
 
@@ -412,4 +412,24 @@ test_that("metrics handle missing values appropriately", {
   expect_false(any(is.na(result$measure$y)))
   expect_false(any(is.na(result$measure$lb_95)))
   expect_false(any(is.na(result$measure$ub_95)))
+})
+
+test_that("calc_stats() omits prop when threshold is NULL", {
+  values <- c(-1, 0.5, 2, 3)
+
+  expect_equal(calc_stats(values, threshold = 0)$prop, 0.75)
+  expect_false("prop" %in% names(calc_stats(values, threshold = NULL)))
+})
+
+test_that("prop is returned for growth_rate() and Rt() only", {
+  skip_if_not(exists("fit_rw_subtyped"), "Cached fitted models not available")
+
+  # Incidence and proportions are always positive, so P(> 0) is always 1
+  expect_false("prop" %in% names(incidence(fit_rw_subtyped)$measure))
+  expect_false("prop" %in% names(proportion(fit_rw_subtyped)$measure))
+
+  expect_true("prop" %in% names(growth_rate(fit_rw_subtyped)$measure))
+  expect_true(
+    "prop" %in% names(Rt(fit_rw_subtyped, gi_dist = gi_simple, tau_max = 7)$measure)
+  )
 })

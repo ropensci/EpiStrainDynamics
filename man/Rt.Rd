@@ -36,7 +36,7 @@ of the calculated metric outcome (\verb{$measure}), the fit object (\verb{$fit})
 constructed model object (\verb{$constructed_model}). The \code{measure} data frame
 contains the median of the epidemiological quantity (\code{y}), the 50\% credible
 interval of the quantity (\code{lb_50} & \code{ub_50}), the 95\% credible interval
-(\code{lb_95} & \code{ub_95}), the proportion greater than a defined threshold value
+(\code{lb_95} & \code{ub_95}), the posterior probability that Rt is above 1
 (\code{prop}), the pathogen name (\code{pathogen}), and the time label (\code{time}).
 }
 \description{
