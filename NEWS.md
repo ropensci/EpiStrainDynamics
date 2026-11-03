@@ -29,6 +29,13 @@
   that reads the `stanfit` object in `fit$fit` directly (e.g. with
   `bayesplot` or `rstan::summary()`) will need to use the new names;
   `incidence()`, `growth_rate()`, `Rt()` and `proportion()` are unaffected.
+* The `prop` column in `$measure` is now `prob_above`, since it is the
+  posterior probability that the quantity is above a threshold, not a
+  proportion (#79). `growth_rate()` and `Rt()` return it for thresholds of 0
+  and 1, giving the probability that the epidemic is growing; their
+  documentation now says so. `incidence()` and `proportion()` no longer
+  return it, as the probability that incidence or a proportion is above 0
+  is always 1.
 
 ## New features
 

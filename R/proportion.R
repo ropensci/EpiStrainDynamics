@@ -55,8 +55,8 @@
 #'  the way `$denominator_combination` always is. The `measure` data frame
 #'  contains the median of the epidemiological quantity (`y`), the 50% credible
 #'  interval of the quantity (`lb_50` & `ub_50`), the 95% credible interval
-#'  (`lb_95` & `ub_95`), the proportion greater than a defined threshold value
-#'  (`prop`), the pathogen name (`pathogen`), and the time label (`time`).
+#'  (`lb_95` & `ub_95`), the pathogen name (`pathogen`), and the time label
+#'  (`time`).
 #' @family metrics
 #' @export
 #'
@@ -188,7 +188,7 @@ compute_proportion <- function(fitted_model,
   results <- calc_wrapper(time_grid, time_grid$time_idx,
     pathogen_idx_col = pathogen_idx_col,
     calc_proportion,
-    a, post, components, extra_args, threshold = 0
+    a, post, components, extra_args, threshold = NULL
   )
 
   measure <- cbind(results,

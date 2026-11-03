@@ -54,7 +54,7 @@ test_that("Rt() works for single pathogen random walk model", {
     result$measure,
     c(
       "time", "y", "lb_50", "ub_50", "lb_95",
-      "ub_95", "prop", "pathogen"
+      "ub_95", "prob_above", "pathogen"
     )
   )
 
@@ -69,8 +69,8 @@ test_that("Rt() works for single pathogen random walk model", {
   expect_true(all(result$measure$ub_50 <= result$measure$ub_95))
   expect_true(all(result$measure$lb_50 >= result$measure$lb_95))
 
-  # Check prop is between 0 and 1
-  expect_true(all(result$measure$prop >= 0 & result$measure$prop <= 1))
+  # Check prob_above is between 0 and 1
+  expect_true(all(result$measure$prob_above >= 0 & result$measure$prob_above <= 1))
 
   # Check pathogen name
   expect_equal(unique(result$measure$pathogen), "cases")
@@ -195,7 +195,7 @@ test_that("incidence() works for single pathogen models", {
     result$measure,
     c(
       "time", "y", "lb_50", "ub_50", "lb_95", "ub_95",
-      "prop", "pathogen"
+      "pathogen"
     )
   )
 
@@ -412,4 +412,24 @@ test_that("metrics handle missing values appropriately", {
   expect_false(any(is.na(result$measure$y)))
   expect_false(any(is.na(result$measure$lb_95)))
   expect_false(any(is.na(result$measure$ub_95)))
+})
+
+test_that("calc_stats() omits prob_above when threshold is NULL", {
+  values <- c(-1, 0.5, 2, 3)
+
+  expect_equal(calc_stats(values, threshold = 0)$prob_above, 0.75)
+  expect_false("prob_above" %in% names(calc_stats(values, threshold = NULL)))
+})
+
+test_that("prob_above is returned for growth_rate() and Rt() only", {
+  skip_if_not(exists("fit_rw_subtyped"), "Cached fitted models not available")
+
+  # Incidence and proportions are always positive, so P(> 0) is always 1
+  expect_false("prob_above" %in% names(incidence(fit_rw_subtyped)$measure))
+  expect_false("prob_above" %in% names(proportion(fit_rw_subtyped)$measure))
+
+  expect_true("prob_above" %in% names(growth_rate(fit_rw_subtyped)$measure))
+  expect_true(
+    "prob_above" %in% names(Rt(fit_rw_subtyped, gi_dist = gi_simple, tau_max = 7)$measure)
+  )
 })

@@ -55,8 +55,9 @@
 #'  constructed model object (`$constructed_model`). The `measure` data frame
 #'  contains the median of the epidemiological quantity (`y`), the 50% credible
 #'  interval of the quantity (`lb_50` & `ub_50`), the 95% credible interval
-#'  (`lb_95` & `ub_95`), the proportion greater than a defined threshold value
-#'  (`prop`), the pathogen name (`pathogen`), and the time label (`time`).
+#'  (`lb_95` & `ub_95`), the posterior probability that Rt is above 1
+#'  (`prob_above`), the pathogen name (`pathogen`), and the time label
+#'  (`time`).
 #' @family metrics
 #' @export
 #'

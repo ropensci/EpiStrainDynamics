@@ -1,14 +1,17 @@
 #' Calculate Summary Statistics for Posterior Samples
 #'
-#' Computes quantiles and proportion above threshold for a vector of posterior samples
+#' Computes quantiles and the posterior probability of exceeding a threshold
+#' for a vector of posterior samples
 #'
 #' @param values Numeric vector of posterior samples
-#' @param threshold Numeric threshold for calculating proportion above (default: 0)
+#' @param threshold Numeric threshold for calculating proportion above
+#'   (default: 0), or `NULL` to omit `prob_above`
 #'
 #' @importFrom stats quantile
 #'
 #' @return Data frame with columns: y (median), lb_50/ub_50 (50% CI),
-#'   lb_95/ub_95 (95% CI), prop (proportion > threshold)
+#'   lb_95/ub_95 (95% CI), and prob_above (proportion > threshold) unless
+#'   `threshold` is `NULL`
 #'
 #' @noRd
 #' @srrstats {G1.4} uses `Roxygen2` documentation
@@ -16,16 +19,18 @@
 #'
 calc_stats <- function(values, threshold = 0) {
   quan <- stats::quantile(values, c(0.5, 0.025, 0.25, 0.75, 0.975))
-  prop <- mean(values > threshold)
 
-  data.frame(
+  stats <- data.frame(
     y = quan[[1]],
     lb_50 = quan[[3]],
     ub_50 = quan[[4]],
     lb_95 = quan[[2]],
-    ub_95 = quan[[5]],
-    prop = prop
+    ub_95 = quan[[5]]
   )
+  if (!is.null(threshold)) {
+    stats$prob_above <- mean(values > threshold)
+  }
+  stats
 }
 
 #' Extract Model Components from Fitted Model
@@ -166,7 +171,8 @@ transform_posterior_multi <- function(post, B_true, num_path, num_days) {
 #' @param fitted_model Fitted model object
 #' @param start_idx Integer starting time index for analysis
 #' @param measure Character string specifying metric ("incidence", "growth_rate", "Rt")
-#' @param threshold Numeric threshold for proportion calculations (default: 0)
+#' @param threshold Numeric threshold for proportion calculations
+#'   (default: 0), or `NULL` to omit `prob_above`
 #' @param use_splines Logical indicating whether to use spline transformation
 #' @param ... Additional arguments passed to calculation functions
 #'  (e.g., tau_max, gi_dist for Rt, and dow for incidence)
@@ -263,7 +269,8 @@ compute_multi_pathogen <- function(fitted_model, start_idx, measure,
 #' @param fitted_model Fitted model object
 #' @param start_idx Integer starting time index for analysis
 #' @param measure Character string specifying metric ("incidence", "growth_rate", "Rt")
-#' @param threshold Numeric threshold for proportion calculations (default: 0)
+#' @param threshold Numeric threshold for proportion calculations
+#'   (default: 0), or `NULL` to omit `prob_above`
 #' @param use_splines Logical indicating whether to use spline transformation
 #' @param ... Additional arguments passed to calculation functions (e.g., tau_max, gi_dist for Rt)
 #'

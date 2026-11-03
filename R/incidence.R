@@ -44,8 +44,8 @@
 #'  constructed model object (`$constructed_model`). The `measure` data frame
 #'  contains the median of the epidemiological quantity (`y`), the 50% credible
 #'  interval of the quantity (`lb_50` & `ub_50`), the 95% credible interval
-#'  (`lb_95` & `ub_95`), the proportion greater than a defined threshold value
-#'  (`prop`), the pathogen name (`pathogen`), and the time label (`time`).
+#'  (`lb_95` & `ub_95`), the pathogen name (`pathogen`), and the time label
+#'  (`time`).
 #'
 #' @family metrics
 #' @export
@@ -84,7 +84,7 @@ incidence.ps <- function(fitted_model, dow = NULL, ...) {
   dow <- resolve_dow(fitted_model, dow)
 
   out <- compute_multi_pathogen(fitted_model, 1, "incidence",
-    threshold = 0, use_splines = TRUE, dow
+    threshold = NULL, use_splines = TRUE, dow
   )
   class(out) <- c("incidence", "EpiStrainDynamics.metric", class(out))
   out
@@ -97,7 +97,7 @@ incidence.rw <- function(fitted_model, dow = NULL, ...) {
   dow <- resolve_dow(fitted_model, dow)
 
   out <- compute_multi_pathogen(fitted_model, 1, "incidence",
-    threshold = 0, use_splines = FALSE, dow
+    threshold = NULL, use_splines = FALSE, dow
   )
   class(out) <- c("incidence", "EpiStrainDynamics.metric", class(out))
   out
@@ -110,7 +110,7 @@ incidence.ps_single <- function(fitted_model, dow = NULL, ...) {
   dow <- resolve_dow(fitted_model, dow)
 
   out <- compute_single_pathogen(fitted_model, 1, "incidence",
-    threshold = 0, use_splines = TRUE, dow
+    threshold = NULL, use_splines = TRUE, dow
   )
   class(out) <- c("incidence", "EpiStrainDynamics.metric", class(out))
   out
@@ -123,7 +123,7 @@ incidence.rw_single <- function(fitted_model, dow = NULL, ...) {
   dow <- resolve_dow(fitted_model, dow)
 
   out <- compute_single_pathogen(fitted_model, 1, "incidence",
-    threshold = 0, use_splines = FALSE, dow
+    threshold = NULL, use_splines = FALSE, dow
   )
   class(out) <- c("incidence", "EpiStrainDynamics.metric", class(out))
   out

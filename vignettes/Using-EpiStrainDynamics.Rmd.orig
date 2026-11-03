@@ -213,7 +213,7 @@ Model not converging? You can find more information about divergent transitions 
 
 # Phase 4: Deriving epidemiological quantities
 
-The package provides helper functions to calculate a number of useful epidemiological quantities. The output of these methods functions are a named list containing a tsibble of the outcome quantity (`$measure`), the fit object (`$fit`), and the constructed model object (`$constructed_model`). `measure` is a tsibble containing the median of the epidemiological quantity (`y`), the 50% credible interval of the quantity (`lb_50` & `ub_50`), the 95% credible interval (`lb_95` & `ub_95`), the proportion greater than a defined threshold value (`prop`), the pathogen name (`pathogen`), and the time index (`time`).
+The package provides helper functions to calculate a number of useful epidemiological quantities. The output of these methods functions are a named list containing a tsibble of the outcome quantity (`$measure`), the fit object (`$fit`), and the constructed model object (`$constructed_model`). `measure` is a tsibble containing the median of the epidemiological quantity (`y`), the 50% credible interval of the quantity (`lb_50` & `ub_50`), the 95% credible interval (`lb_95` & `ub_95`), the pathogen name (`pathogen`), and the time index (`time`). For `growth_rate()` and `Rt()`, it also contains the posterior probability that the quantity indicates growth (`prob_above`): that the growth rate is above 0, or that Rt is above 1.
 
 Calculate epidemic growth rate with `growth_rate()`:
 ```{r growth_rate}
