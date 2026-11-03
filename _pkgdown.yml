@@ -30,6 +30,7 @@ reference:
     contents:
       - fit_model
       - diagnose_model
+      - plot.EpiStrainDynamics.diagnostics
   - title: Post-modelling metrics calculations
     desc: Functions to calculate and plot metrics from fitted models.
     contents:
