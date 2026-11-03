@@ -30,6 +30,13 @@
   `bayesplot` or `rstan::summary()`) will need to use the new names;
   `incidence()`, `growth_rate()`, `Rt()` and `proportion()` are unaffected.
 
+## New features
+
+* `diagnose_model()` now returns a `parameters` table giving each
+  parameter's R-hat and effective sample size, labelled with the pathogen
+  and time it refers to, and a `plot()` method shows R-hat or effective
+  sample size of the log-incidence trajectory over time by pathogen (#85).
+
 ## Bug fixes
 
 * Fixed compilation failing on Windows ARM64 (`R CMD INSTALL` erroring with

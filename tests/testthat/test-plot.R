@@ -404,10 +404,54 @@ test_that("plot.incidence() includes original data points", {
 })
 
 # ==============================================================================
+# TESTS: CONVERGENCE DIAGNOSTICS
+# ==============================================================================
+
+test_that("plot.EpiStrainDynamics.diagnostics() plots the trajectory against time", {
+  invisible(capture.output(diag <- diagnose_model(fit_rw_subtyped)))
+  trajectory <- diag$parameters[diag$parameters$parameter_group == "log_incidence", ]
+
+  p <- plot(diag)
+  expect_s3_class(p, "ggplot")
+  expect_equal(nrow(p$data), nrow(trajectory))
+
+  layers <- vapply(p$layers, function(x) class(x$geom)[1], FUN.VALUE = character(1))
+  expect_true("GeomLine" %in% layers)
+  expect_true("GeomHline" %in% layers)
+
+  built <- ggplot2::ggplot_build(p)
+  expect_equal(length(unique(built$data[[1]]$colour)), 4)
+  expect_equal(built$data[[2]]$yintercept, diag$rhat_threshold)
+})
+
+test_that("plot.EpiStrainDynamics.diagnostics() shows n_eff on a log scale covering the threshold", {
+  invisible(capture.output(
+    diag <- diagnose_model(fit_rw_subtyped, eff_sample_threshold = 500)
+  ))
+
+  p <- plot(diag, metric = "n_eff")
+  expect_gte(max(p$coordinates$limits$y), diag$eff_sample_threshold)
+
+  built <- ggplot2::ggplot_build(p)
+  expect_equal(sort(built$data[[1]]$y), sort(log10(p$data$n_eff)))
+  expect_equal(built$data[[2]]$yintercept, log10(500))
+})
+
+test_that("plot.EpiStrainDynamics.diagnostics() validates its arguments", {
+  invisible(capture.output(diag <- diagnose_model(fit_rw_subtyped)))
+
+  expect_error(plot(diag, metric = "bad"), "must be one of")
+  expect_error(
+    plot.EpiStrainDynamics.diagnostics(list()),
+    "Input must be of class"
+  )
+})
+
+# ==============================================================================
 # OPTIONAL: VISUAL REGRESSION TESTS (requires vdiffr package)
 # ==============================================================================
 
-# Uncomment if you want to use vdiffr for visual regression testing
+# Uncomment to use vdiffr for visual regression testing
 # test_that("plot.incidence() visual appearance", {
 #   skip_if_not_installed("vdiffr")
 #   p <- plot(inc_single)

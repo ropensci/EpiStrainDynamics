@@ -110,8 +110,10 @@ test_that("diagnose_model() returns correct structure", {
   # Should have expected components
   expect_named(diag, c(
     "convergence", "rhat_issues", "eff_sample_issues",
-    "max_rhat", "min_neff", "summary"
+    "max_rhat", "min_neff", "summary", "parameters",
+    "rhat_threshold", "eff_sample_threshold"
   ))
+  expect_s3_class(diag, "EpiStrainDynamics.diagnostics")
 })
 
 test_that("diagnose_model() convergence is logical", {
@@ -347,7 +349,8 @@ test_that("diagnose_model() produces consistent output across model types", {
   # All should have the same structure
   expected_names <- c(
     "convergence", "rhat_issues", "eff_sample_issues",
-    "max_rhat", "min_neff", "summary"
+    "max_rhat", "min_neff", "summary", "parameters",
+    "rhat_threshold", "eff_sample_threshold"
   )
 
   expect_named(diag_rw_single, expected_names)
@@ -399,4 +402,115 @@ test_that("diagnose_model() min_neff matches Stan summary", {
 
   # Should match
   expect_equal(diag$min_neff, stan_min_neff)
+})
+
+# ==============================================================================
+# TESTS: CONVERTING POSITIONS TO DATA TIME
+# ==============================================================================
+
+test_that("index_to_time() steps Date and POSIXct times by the observation spacing", {
+  weekly <- as.Date("2024-01-01") + 7 * 0:4
+  expect_equal(
+    index_to_time(c(-1, 1, 3, 6), weekly),
+    as.Date("2024-01-01") + 7 * c(-2, 0, 2, 5)
+  )
+
+  hourly <- as.POSIXct("2024-01-01 00:00", tz = "UTC") + 3600 * 0:4
+  expect_equal(
+    index_to_time(c(1, 2.5), hourly),
+    as.POSIXct("2024-01-01 00:00", tz = "UTC") + 3600 * c(0, 1.5)
+  )
+})
+
+test_that("index_to_time() rounds yearweek, yearmonth and yearquarter times to whole units", {
+  weeks <- tsibble::yearweek("2024 W01") + 0:4
+  expect_no_warning(res <- index_to_time(c(-1, 1, 2.4, 6), weeks))
+  expect_s3_class(res, "yearweek")
+  expect_equal(res, tsibble::yearweek("2024 W01") + c(-2, 0, 1, 5))
+
+  fortnights <- tsibble::yearweek("2024 W01") + 2 * 0:4
+  expect_equal(
+    index_to_time(c(1, 2.4), fortnights),
+    tsibble::yearweek("2024 W01") + c(0, 3)
+  )
+
+  months <- tsibble::yearmonth("2024 Jan") + 0:4
+  expect_no_warning(res <- index_to_time(c(0.4, 2.4), months))
+  expect_equal(res, tsibble::yearmonth("2024 Jan") + c(-1, 1))
+
+  quarters <- tsibble::yearquarter("2024 Q1") + 0:4
+  expect_no_warning(res <- index_to_time(c(0.4, 2.4), quarters))
+  expect_equal(res, tsibble::yearquarter("2024 Q1") + c(-1, 1))
+})
+
+test_that("index_to_time() keeps integer times as integers", {
+  res <- index_to_time(c(-1.4, 2.4), 1:5)
+  expect_type(res, "integer")
+  expect_equal(res, c(-1L, 2L))
+
+  expect_equal(index_to_time(c(1, 2.5), c(1, 2, 3)), c(1, 2.5))
+})
+
+test_that("index_to_time() returns NA with one warning when times cannot be converted", {
+  expect_warning(
+    res <- index_to_time(c(1, 2), c("a", "b")),
+    "Could not convert spline coefficient positions"
+  )
+  expect_equal(res, c(NA_character_, NA_character_))
+
+  expect_equal(index_to_time(c(1, 2), as.Date("2024-01-01")), as.Date(c(NA, NA)))
+})
+
+# ==============================================================================
+# TESTS: LABELLING SETTINGS THE FIXTURES DON'T COVER
+# ==============================================================================
+# The fixtures all use shared smoothing and no pathogen noise. These tests
+# build a model without fitting it and label a fake summary instead.
+
+fake_fit <- function(smoothing_params, pathogen_noise = FALSE) {
+  list(constructed_model = construct_model(
+    pathogen_structure = multiple(
+      data = sarscov2[1:10, ], case_timeseries = "cases", time = "date",
+      component_pathogen_timeseries = c("alpha", "delta", "omicron", "other")
+    ),
+    method = random_walk(),
+    smoothing_params = smoothing_params,
+    pathogen_noise = pathogen_noise
+  ))
+}
+
+fake_summary <- function(par_names) {
+  matrix(
+    c(rep(1, length(par_names)), rep(500, length(par_names))),
+    ncol = 2,
+    dimnames = list(par_names, c("Rhat", "n_eff"))
+  )
+}
+
+test_that("independent tau and noisy_incidence are labelled by pathogen and time", {
+  fit <- fake_fit(smoothing_structure("independent"), pathogen_noise = TRUE)
+  par_names <- c("noisy_incidence[2,3]", "tau[3]", "eta[1]")
+
+  res <- label_parameter_diagnostics(
+    fit, fake_summary(par_names),
+    rhat_threshold = 1.1, eff_sample_threshold = 100
+  )
+
+  expect_equal(res$pathogen, c("delta", "omicron", NA))
+  expect_equal(res$time, c(sarscov2$date[3], NA, NA))
+})
+
+test_that("shared tau and correlated Sigma are not labelled by pathogen", {
+  shared <- label_parameter_diagnostics(
+    fake_fit(smoothing_structure("shared")), fake_summary("tau[1]"),
+    rhat_threshold = 1.1, eff_sample_threshold = 100
+  )
+  expect_true(is.na(shared$pathogen))
+
+  correlated <- label_parameter_diagnostics(
+    fake_fit(smoothing_structure("correlated")), fake_summary("Sigma[1,2]"),
+    rhat_threshold = 1.1, eff_sample_threshold = 100
+  )
+  expect_true(is.na(correlated$pathogen))
+  expect_true(is.na(correlated$time))
 })

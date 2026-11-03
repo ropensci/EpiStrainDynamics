@@ -18,7 +18,8 @@ Values below this threshold indicate the posterior samples for a
 parameter are too autocorrelated to reliably estimate its distribution.}
 }
 \value{
-An object of class \code{list}, returned invisibly, containing:
+An object of class \code{EpiStrainDynamics.diagnostics} (a list),
+returned invisibly, containing:
 \item{convergence}{Logical; \code{TRUE} if no parameter fails either
 threshold}
 \item{rhat_issues}{Character vector of parameter names with R-hat above
@@ -30,23 +31,67 @@ effective sample size below \code{eff_sample_threshold}}
 parameters}
 \item{summary}{The full \code{rstan::summary()} table the above are derived
 from}
+\item{parameters}{A data frame with one row per parameter and columns
+\code{parameter} (full Stan name), \code{parameter_group} (Stan name without
+indices), \code{pathogen}, \code{time_idx} (position on the observation-index
+scale, where 1 is the first observation; fractional for spline
+coefficients), \code{time} (on the time scale of the input data), \code{rhat},
+\code{n_eff}, and the logical flags \code{rhat_issue} and \code{eff_sample_issue}.
+See Details.}
+\item{rhat_threshold, eff_sample_threshold}{The thresholds the checks
+used}
 }
 \description{
 Checks MCMC convergence diagnostics --- \href{https://mc-stan.org/docs/reference-manual/analysis.html}{R-hat}
 and \href{https://mc-stan.org/docs/reference-manual/analysis.html}{effective sample size} ---
 against user-specified thresholds, and reports any parameters that fail
-either check.
+either check. A per-parameter table is also returned, labelling each
+parameter with the pathogen and time point it refers to, so that
+convergence problems can be located in time and by pathogen.
+}
+\details{
+The \code{parameters} table identifies each parameter by the exact Stan name
+before its brackets (\code{parameter_group}), and converts the bracketed
+indices into a pathogen name and a time:
+\itemize{
+\item \code{log_incidence} is the time-varying log-incidence trajectory. Each
+element is matched to the pathogen and the observation time it belongs
+to.
+\item \code{b_spline_coef}, in penalised spline models, holds the spline
+coefficients. A coefficient does not belong to a single time point, so
+it is placed at its Greville abscissa (the mean of the interior knots its
+basis function spans) and converted to the time scale of the data.
+Coefficients near the edges of the spline can fall before the first or
+after the last observation. Some of these have no weight on any
+observation, so only the smoothing prior informs them; a flag on one of
+them does not mean the fitted trajectory (\code{log_incidence}) has failed to
+converge.
+\item \code{noisy_incidence} is the pathogen-specific incidence with noise, present
+when the model includes noise in individual pathogens. It is matched to
+pathogen and time in the same way as the trajectory.
+\item \code{tau} is matched to a pathogen when each pathogen has its own smoothing
+parameter (\code{"independent"} smoothing, or a single-pathogen model). With
+\code{"shared"} smoothing one \code{tau} applies to all pathogens, so \code{pathogen}
+is \code{NA}. With \code{"correlated"} smoothing there is no \code{tau}; the
+covariance matrix \code{Sigma} is used instead.
+\item All other parameters (e.g. \code{phi}, \code{eta}, \code{Sigma},
+\code{day_of_week_simplex}, \code{lp__}) have \code{NA} for \code{pathogen} and \code{time}.
+}
 }
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 mod <- construct_model(
   pathogen_structure = single(
-    case_timeseries = sarscov2$cases,
-    time = sarscov2$date
+    data = sarscov2,
+    case_timeseries = "cases",
+    time = "date"
   ),
   method = random_walk()
 )
 fit <- fit_model(mod)
-diagnose_model(fit)
+diag <- diagnose_model(fit)
+
+# Parameters that failed either check, with pathogen and time attached
+diag$parameters[diag$parameters$rhat_issue | diag$parameters$eff_sample_issue, ]
 \dontshow{\}) # examplesIf}
 }

@@ -299,3 +299,90 @@ plot.proportion <- function(x, xlab = "Time", ...) {
 
   p
 }
+
+#' Plot convergence diagnostics over time
+#'
+#' Plots the R-hat or effective sample size of the log-incidence trajectory
+#' (`log_incidence`) against time, with one line per pathogen, so that
+#' convergence problems can be located in time and by pathogen. The
+#' threshold used by [diagnose_model()] is shown as a dashed line.
+#'
+#' R-hat is shown between 1 and 1.2, so values far above the threshold run
+#' off the top of the plot. Effective sample size is shown on a log scale,
+#' covering the range of the values and the threshold, so that values near
+#' the threshold stay readable even when others are in the thousands.
+#'
+#' Only the trajectory is plotted. Other parameters, including the spline
+#' coefficients of p-spline models, are listed in the `parameters` table of
+#' the [diagnose_model()] output.
+#'
+#' @param x Output of [diagnose_model()], of class
+#'   `EpiStrainDynamics.diagnostics`
+#' @param metric The diagnostic to plot: `"rhat"` (default) or `"n_eff"`
+#' @param xlab Time label for x axis, defaults to "Time"
+#' @param ... Not used
+#'
+#' @return ggplot2 plot output
+#' @export
+#'
+#' @srrstats {BS6.1} convergence diagnostics can be plotted with a default
+#'   plot function
+#' @srrstats {G1.4} uses `Roxygen2` documentation
+#' @srrstats {TS5.0} default plot methods implemented
+#' @srrstats {TS5.1, TS5.2, TS5.3} Time on x axis with units printed
+#'
+#' @examplesIf interactive()
+#' mod <- construct_model(
+#'   pathogen_structure = single(
+#'     data = sarscov2,
+#'     case_timeseries = "cases",
+#'     time = "date"
+#'   ),
+#'   method = random_walk()
+#' )
+#' fit <- fit_model(mod)
+#' diag <- diagnose_model(fit)
+#' plot(diag)
+#' plot(diag, metric = "n_eff")
+plot.EpiStrainDynamics.diagnostics <- function(x,
+                                               metric = c("rhat", "n_eff"),
+                                               xlab = "Time",
+                                               ...) {
+  validate_class_inherits(x, "EpiStrainDynamics.diagnostics")
+  metric <- rlang::arg_match(metric)
+
+  trajectory <- x$parameters[x$parameters$parameter_group == "log_incidence", ]
+
+  pathogen_levels <- unique(trajectory$pathogen)
+  colors <- setNames(
+    viridis::viridis(length(pathogen_levels), end = 0.9),
+    pathogen_levels
+  )
+
+  if (metric == "rhat") {
+    threshold <- x$rhat_threshold
+    ylim <- c(1, 1.2)
+    ylab <- "R-hat"
+    y_scale <- ggplot2::scale_y_continuous()
+  } else {
+    threshold <- x$eff_sample_threshold
+    ylim <- range(c(trajectory$n_eff, threshold), finite = TRUE)
+    ylab <- "Effective sample size"
+    y_scale <- ggplot2::scale_y_log10()
+  }
+
+  ggplot2::ggplot(trajectory) +
+    ggplot2::geom_line(ggplot2::aes(
+      x = .data$time,
+      y = .data[[metric]],
+      color = .data$pathogen
+    )) +
+    ggplot2::geom_hline(yintercept = threshold, linetype = "dashed") +
+    y_scale +
+    ggplot2::coord_cartesian(ylim = ylim) +
+    ggplot2::theme_bw(base_size = 14) +
+    ggplot2::scale_colour_manual(values = colors) +
+    ggplot2::ylab(ylab) +
+    ggplot2::theme(legend.title = ggplot2::element_blank()) +
+    ggplot2::xlab(xlab)
+}
