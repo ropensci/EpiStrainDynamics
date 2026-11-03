@@ -1,25 +1,13 @@
-# EpiStrainDynamics 0.1.0
+# EpiStrainDynamics 0.2.0
 
 ## Breaking changes
 
-* `construct_model()`'s first two arguments are now `pathogen_structure`
-  then `method` (previously `method` then `pathogen_structure`), to match
-  the logical order in which a model is built: prepare the pathogen
-  structure, then choose how to model it (#70). Any code calling
-  `construct_model()` positionally (e.g. `construct_model(my_method,
-  my_pathogen_structure)`) will need to swap the order of these two
-  arguments; calls using named arguments are unaffected.
-* `subtyped()`'s `influenzaA_unsubtyped_timeseries` and
-  `influenzaA_subtyped_timeseries` arguments are now `parent_timeseries`
-  and `subtyped_timeseries`. The `influenzaA_` prefix implied the structure
-  only applied to influenza A subtypes, when it applies to any pathogen with
-  a total timeseries for a parent pathogen alongside data on some of its
-  subtypes — influenza A is just the most common example (#73). The parent
-  argument is named `parent_timeseries` because it takes the total count
-  for the parent pathogen, covering both subtyped and unsubtyped cases; the
-  previous name suggested it took only the unsubtyped cases (#80). Any code
-  calling `subtyped()` with these named arguments will need to update the
-  argument names.
+* `subtyped()`'s `unsubtyped_timeseries` argument is now
+  `parent_timeseries`, since it takes the total count for the parent
+  pathogen, covering both subtyped and unsubtyped cases; the previous name
+  suggested it took only the unsubtyped cases (#80). Any code calling
+  `subtyped()` with `unsubtyped_timeseries` will need to use
+  `parent_timeseries`.
 * The Stan model parameters have descriptive names (#82). `a` is now
   `log_incidence` in random walk models and `b_spline_coef` in p-spline
   models, where the trajectory `a_new` is now `log_incidence`; `c` and
@@ -43,6 +31,50 @@
   parameter's R-hat and effective sample size, labelled with the pathogen
   and time it refers to, and a `plot()` method shows R-hat or effective
   sample size of the log-incidence trajectory over time by pathogen (#85).
+
+## Bug fixes
+
+* Fixed the Stan models failing to compile with newer versions of stanc3,
+  which reject the old array syntax (e.g. `real[] t`, `int Y[n]`). This
+  broke the R-universe build (@jeroen, #77, #78).
+
+## Minor improvements
+
+* `subtyped()` now errors if `parent_timeseries` is smaller than the sum of
+  `subtyped_timeseries` at any time point, since the subtyped cases are a
+  subset of the parent total (#80). Previously such data was accepted and
+  would silently underestimate the parent pathogen.
+
+## Documentation
+
+* Further corrected the `influenza` dataset documentation: `inf_A` is all
+  influenza A positives, including those subtyped; counts are weekly
+  rather than daily; the date range matches the data included (January
+  2012 to February 2020); the `inf_*` columns are described as positive
+  laboratory specimens; and `other` is described with how it is
+  calculated (#80).
+* The `subtyped()` documentation, vignette and README now describe
+  `parent_timeseries` as the total for the parent pathogen (#80).
+
+# EpiStrainDynamics 0.1.0 (2026-08-24)
+
+## Breaking changes
+
+* `construct_model()`'s first two arguments are now `pathogen_structure`
+  then `method` (previously `method` then `pathogen_structure`), to match
+  the logical order in which a model is built: prepare the pathogen
+  structure, then choose how to model it (#70). Any code calling
+  `construct_model()` positionally (e.g. `construct_model(my_method,
+  my_pathogen_structure)`) will need to swap the order of these two
+  arguments; calls using named arguments are unaffected.
+* `subtyped()`'s `influenzaA_unsubtyped_timeseries` and
+  `influenzaA_subtyped_timeseries` arguments are now `unsubtyped_timeseries`
+  and `subtyped_timeseries`. The `influenzaA_` prefix implied the structure
+  only applied to influenza A subtypes, when it applies to any pathogen with
+  a combined, unsubtyped timeseries alongside partial subtype data —
+  influenza A is just the most common example (#73). Any code calling
+  `subtyped()` with these named arguments will need to update the argument
+  names.
 
 ## Bug fixes
 
@@ -117,10 +149,6 @@
   spacing) via `styler`, dropped explicit `return()` on final statements,
   converted `sapply()` to `vapply()` for type-safe extraction, and removed
   genuine dead code flagged by unused-variable checks.
-* `subtyped()` now errors if `parent_timeseries` is smaller than the sum of
-  `subtyped_timeseries` at any time point, since the subtyped cases are a
-  subset of the parent total (#80). Previously such data was accepted and
-  would silently underestimate the parent pathogen.
 
 ## Documentation
 
@@ -142,14 +170,6 @@
   from-source instructions, and added citations to the README (#51, #57,
   #58, #59, #60).
 * Corrected documentation of both `sarscov2` and `influenza` datasets (#56).
-* Further corrected the `influenza` dataset documentation: `inf_A` is all
-  influenza A positives, including those subtyped; counts are weekly
-  rather than daily; the date range matches the data included (January
-  2012 to February 2020); the `inf_*` columns are described as positive
-  laboratory specimens; and `other` is described with how it is
-  calculated (#80).
-* The `subtyped()` documentation, vignette and README now describe
-  `parent_timeseries` as the total for the parent pathogen (#80).
 * Added explanations of "pathogen noise" and the day-of-week effect (#61), a
   link to the relevant timeseries class (#62), and a COVID-19 example (#63),
   to the vignette.
