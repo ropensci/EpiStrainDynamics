@@ -30,7 +30,7 @@ constructed model object (\verb{$constructed_model}). The \code{measure} data fr
 contains the median of the epidemiological quantity (\code{y}), the 50\% credible
 interval of the quantity (\code{lb_50} & \code{ub_50}), the 95\% credible interval
 (\code{lb_95} & \code{ub_95}), the posterior probability that the growth rate is
-above 0 (\code{prop}), the pathogen name (\code{pathogen}), and the time label
+above 0 (\code{prob_above}), the pathogen name (\code{pathogen}), and the time label
 (\code{time}).
 }
 \description{

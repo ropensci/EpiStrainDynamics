@@ -38,7 +38,7 @@
 #'  contains the median of the epidemiological quantity (`y`), the 50% credible
 #'  interval of the quantity (`lb_50` & `ub_50`), the 95% credible interval
 #'  (`lb_95` & `ub_95`), the posterior probability that the growth rate is
-#'  above 0 (`prop`), the pathogen name (`pathogen`), and the time label
+#'  above 0 (`prob_above`), the pathogen name (`pathogen`), and the time label
 #'  (`time`).
 #' @family metrics
 #' @export

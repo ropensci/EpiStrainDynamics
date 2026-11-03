@@ -1,15 +1,16 @@
 #' Calculate Summary Statistics for Posterior Samples
 #'
-#' Computes quantiles and proportion above threshold for a vector of posterior samples
+#' Computes quantiles and the posterior probability of exceeding a threshold
+#' for a vector of posterior samples
 #'
 #' @param values Numeric vector of posterior samples
 #' @param threshold Numeric threshold for calculating proportion above
-#'   (default: 0), or `NULL` to omit `prop`
+#'   (default: 0), or `NULL` to omit `prob_above`
 #'
 #' @importFrom stats quantile
 #'
 #' @return Data frame with columns: y (median), lb_50/ub_50 (50% CI),
-#'   lb_95/ub_95 (95% CI), and prop (proportion > threshold) unless
+#'   lb_95/ub_95 (95% CI), and prob_above (proportion > threshold) unless
 #'   `threshold` is `NULL`
 #'
 #' @noRd
@@ -27,7 +28,7 @@ calc_stats <- function(values, threshold = 0) {
     ub_95 = quan[[5]]
   )
   if (!is.null(threshold)) {
-    stats$prop <- mean(values > threshold)
+    stats$prob_above <- mean(values > threshold)
   }
   stats
 }
@@ -171,7 +172,7 @@ transform_posterior_multi <- function(post, B_true, num_path, num_days) {
 #' @param start_idx Integer starting time index for analysis
 #' @param measure Character string specifying metric ("incidence", "growth_rate", "Rt")
 #' @param threshold Numeric threshold for proportion calculations
-#'   (default: 0), or `NULL` to omit `prop`
+#'   (default: 0), or `NULL` to omit `prob_above`
 #' @param use_splines Logical indicating whether to use spline transformation
 #' @param ... Additional arguments passed to calculation functions
 #'  (e.g., tau_max, gi_dist for Rt, and dow for incidence)
@@ -269,7 +270,7 @@ compute_multi_pathogen <- function(fitted_model, start_idx, measure,
 #' @param start_idx Integer starting time index for analysis
 #' @param measure Character string specifying metric ("incidence", "growth_rate", "Rt")
 #' @param threshold Numeric threshold for proportion calculations
-#'   (default: 0), or `NULL` to omit `prop`
+#'   (default: 0), or `NULL` to omit `prob_above`
 #' @param use_splines Logical indicating whether to use spline transformation
 #' @param ... Additional arguments passed to calculation functions (e.g., tau_max, gi_dist for Rt)
 #'
